@@ -28,8 +28,8 @@ export default function AboutSection() {
               <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-isclub-blue/10 rounded-lg -z-10"></div>
               <div className="relative z-10 overflow-hidden rounded-lg shadow-tech">
                 <img 
-                  src="https://images.unsplash.com/photo-1519389950473-47ba0277781c" 
-                  alt="Students collaborating on coding projects" 
+                  src="https://i.imgur.com/8jD5qms.jpeg" 
+                  alt="ISC Board 2025" 
                   className="w-full h-auto object-cover"
                   loading="lazy"
                 />

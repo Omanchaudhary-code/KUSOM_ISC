@@ -1,6 +1,7 @@
 
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { url } from 'inspector';
 
 export default function BriefAbout() {
   return (
@@ -49,7 +50,15 @@ export default function BriefAbout() {
               <div className="absolute -inset-1 bg-gradient-to-r from-isclub-teal to-isclub-cyan rounded-2xl blur opacity-30 circuit-animate"></div>
               <div className="relative glass-card rounded-2xl overflow-hidden">
                 <img 
-                  src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80" 
+                  src="https://i.imgur.com/DGHDcSi.jpeg"
+                  style={
+                    {
+                      objectFit: 'cover', // Note camelCase: 'objectFit', not 'object-fit'
+                      width: '700px',
+                      height: '600px',
+                    }
+
+                  }
                   alt="IS Club Team" 
                   className="w-full h-auto rounded-2xl"
                 />
