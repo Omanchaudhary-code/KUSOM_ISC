@@ -150,7 +150,7 @@ export default function TeamSection() {
       name: "Anusha Tuladhar",
       role: "Creative Head",
       bio: "Second year BBIS student with a passion for design and creativity.",
-      imageUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2",
+      imageUrl: "https://i.imgur.com/XhGIrOI.jpeg",
       section: 'creative'
     },
     {
@@ -171,7 +171,7 @@ export default function TeamSection() {
       name: "Binayak Koirala",
       role: "Creative Team Member",
       bio: "First year BBIS student with a strong interest in graphic design and branding.",
-      imageUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
+      imageUrl: "https://i.imgur.com/GHBAT5H.jpeg",
       section: 'creative'
     },
     {
