@@ -1,7 +1,7 @@
+
 import { motion } from 'framer-motion';
 import { ArrowDown, Terminal, Code, CircuitBoard, Cpu, Database } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import EventCountdown from './EventCountdown';
 
 export default function HeroSection() {
   return (
@@ -159,3 +159,4 @@ export default function HeroSection() {
     </section>
   );
 }
+
