@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import Footer from '@/components/Footer';
 import BriefAbout from '@/components/BriefAbout';
+import EventSection from '@/components/EventSection';
 
 const Index = () => {
   return (
@@ -12,6 +13,7 @@ const Index = () => {
       <main>
         <HeroSection />
         <BriefAbout />
+        <EventSection />
       </main>
       <Footer />
     </div>
@@ -19,4 +21,3 @@ const Index = () => {
 };
 
 export default Index;
-
