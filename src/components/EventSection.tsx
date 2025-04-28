@@ -2,6 +2,7 @@
 import { motion } from 'framer-motion';
 import EventCountdown from './EventCountdown';
 import { Calendar } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function EventSection() {
   return (
@@ -39,12 +40,12 @@ export default function EventSection() {
             transition={{ delay: 0.4 }}
             className="mt-8"
           >
-            <a
-              href="/events"
+            <Link
+              to="/events/design-thinking"
               className="inline-flex items-center px-6 py-3 rounded-lg bg-isclub-teal text-white hover:bg-isclub-navy transition-colors duration-300"
             >
               Learn More About The Event
-            </a>
+            </Link>
           </motion.div>
         </motion.div>
       </div>
