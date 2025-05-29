@@ -45,8 +45,11 @@ const EventCountdown = () => {
     { label: 'Seconds', value: timeLeft.seconds },
   ];
 
-  // Code particles for hackathon vibe
-  const codeSnippets = ['</>','{}','[]','()','if','var','let','const','=>','{...}','map()','filter()','async'];
+  // Enhanced code snippets for hackathon vibe
+  const codeSnippets = ['</>','{}','[]','()','if','var','let','const','=>','{...}','map()','filter()','async','npm','git','API','JSON','React','Node','SQL','AI','ML','Web3','()=>','&&','||','===','!==','++','--','typeof','return','import','export','class','function','await'];
+  
+  // Matrix characters for rain effect
+  const matrixChars = ['0','1','ア','カ','サ','タ','ナ','ハ','マ','ヤ','ラ','ワ','$','#','@','%','&','*','+','=','~'];
 
   if (timeLeft.isFinished) {
     return (
@@ -134,49 +137,106 @@ const EventCountdown = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.4 }}
-      className="flex flex-col items-center mt-8 relative"
+      className="flex flex-col items-center mt-8 relative overflow-hidden"
     >
-      {/* Animated Background */}
+      {/* Enhanced Animated Background Layers */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Circuit-like lines */}
+        {/* Matrix Rain Effect */}
+        {[...Array(12)].map((_, i) => (
+          <motion.div
+            key={`matrix-${i}`}
+            className="absolute text-xs font-mono text-isclub-teal/25 select-none"
+            style={{
+              left: `${5 + i * 8}%`,
+              top: "-20%",
+            }}
+            animate={{
+              y: ["0%", "150%"],
+              opacity: [0, 0.8, 0],
+            }}
+            transition={{
+              duration: 4 + Math.random() * 3,
+              repeat: Infinity,
+              delay: i * 0.3,
+              ease: "linear",
+            }}
+          >
+            {matrixChars[Math.floor(Math.random() * matrixChars.length)]}
+          </motion.div>
+        ))}
+
+        {/* Pulsing Grid Lines */}
         <div className="absolute inset-0">
-          {[...Array(8)].map((_, i) => (
+          {[...Array(15)].map((_, i) => (
             <motion.div
-              key={`line-${i}`}
-              className="absolute h-px bg-gradient-to-r from-transparent via-isclub-teal/20 to-transparent"
+              key={`grid-line-${i}`}
+              className="absolute h-px bg-gradient-to-r from-transparent via-isclub-teal/15 to-transparent"
               style={{
-                top: `${20 + i * 10}%`,
+                top: `${10 + i * 6}%`,
                 left: 0,
                 right: 0,
               }}
               animate={{
-                opacity: [0, 0.5, 0],
+                opacity: [0, 0.6, 0],
                 scaleX: [0, 1, 0],
+                background: [
+                  "linear-gradient(to right, transparent, rgba(20, 184, 166, 0.15), transparent)",
+                  "linear-gradient(to right, transparent, rgba(20, 184, 166, 0.3), transparent)",
+                  "linear-gradient(to right, transparent, rgba(20, 184, 166, 0.15), transparent)",
+                ],
               }}
               transition={{
-                duration: 4,
+                duration: 3,
                 repeat: Infinity,
-                delay: i * 0.5,
+                delay: i * 0.2,
                 ease: "easeInOut",
               }}
             />
           ))}
         </div>
 
-        {/* Floating code particles */}
-        {codeSnippets.map((code, index) => (
+        {/* Vertical Grid Lines */}
+        <div className="absolute inset-0">
+          {[...Array(10)].map((_, i) => (
+            <motion.div
+              key={`v-grid-line-${i}`}
+              className="absolute w-px bg-gradient-to-b from-transparent via-isclub-teal/15 to-transparent"
+              style={{
+                left: `${15 + i * 8}%`,
+                top: 0,
+                bottom: 0,
+              }}
+              animate={{
+                opacity: [0, 0.4, 0],
+                scaleY: [0, 1, 0],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                delay: i * 0.4,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Floating Geometric Shapes */}
+        {[...Array(8)].map((_, i) => (
           <motion.div
-            key={`code-${index}`}
-            className="absolute text-xs font-mono text-isclub-teal/30 select-none"
+            key={`shape-${i}`}
+            className="absolute border border-isclub-teal/20"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 90}%`,
+              top: `${Math.random() * 80}%`,
+              width: `${20 + Math.random() * 30}px`,
+              height: `${20 + Math.random() * 30}px`,
             }}
             animate={{
-              y: [0, -100, 0],
-              x: [0, Math.random() * 50 - 25, 0],
-              opacity: [0, 0.6, 0],
               rotate: [0, 360],
+              scale: [0.5, 1, 0.5],
+              opacity: [0, 0.4, 0],
+              x: [0, Math.random() * 100 - 50],
+              y: [0, Math.random() * 100 - 50],
             }}
             transition={{
               duration: 8 + Math.random() * 4,
@@ -184,55 +244,133 @@ const EventCountdown = () => {
               delay: Math.random() * 5,
               ease: "easeInOut",
             }}
+          />
+        ))}
+
+        {/* Enhanced Floating Code Particles */}
+        {codeSnippets.map((code, index) => (
+          <motion.div
+            key={`code-${index}`}
+            className="absolute text-xs font-mono text-isclub-teal/25 select-none"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -150, 0],
+              x: [0, Math.random() * 100 - 50, 0],
+              opacity: [0, 0.7, 0],
+              rotate: [0, 360, 720],
+              scale: [0.8, 1.2, 0.8],
+            }}
+            transition={{
+              duration: 10 + Math.random() * 6,
+              repeat: Infinity,
+              delay: Math.random() * 8,
+              ease: "easeInOut",
+            }}
           >
             {code}
           </motion.div>
         ))}
 
-        {/* Glowing orbs */}
-        {[...Array(5)].map((_, i) => (
+        {/* Glowing Energy Orbs */}
+        {[...Array(12)].map((_, i) => (
           <motion.div
             key={`orb-${i}`}
-            className="absolute w-2 h-2 rounded-full bg-isclub-teal/40"
+            className="absolute rounded-full bg-gradient-to-r from-isclub-teal/30 to-blue-500/30"
             style={{
-              left: `${20 + i * 15}%`,
-              top: `${30 + Math.random() * 40}%`,
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              width: `${8 + Math.random() * 16}px`,
+              height: `${8 + Math.random() * 16}px`,
             }}
             animate={{
-              scale: [0, 1, 0],
+              scale: [0, 1.5, 0],
               opacity: [0, 0.8, 0],
+              boxShadow: [
+                "0 0 0 rgba(20, 184, 166, 0)",
+                "0 0 30px rgba(20, 184, 166, 0.6)",
+                "0 0 0 rgba(20, 184, 166, 0)",
+              ],
             }}
             transition={{
-              duration: 3,
+              duration: 4,
               repeat: Infinity,
-              delay: i * 0.6,
+              delay: i * 0.5,
               ease: "easeInOut",
             }}
           />
         ))}
 
-        {/* Binary rain effect */}
-        {[...Array(6)].map((_, i) => (
+        {/* Scanning Lines Effect */}
+        {[...Array(3)].map((_, i) => (
           <motion.div
-            key={`binary-${i}`}
-            className="absolute text-xs font-mono text-isclub-teal/20 select-none"
+            key={`scan-${i}`}
+            className="absolute h-1 bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent"
             style={{
-              left: `${10 + i * 15}%`,
-              top: "-10%",
+              left: 0,
+              right: 0,
+              top: `${20 + i * 30}%`,
             }}
             animate={{
-              y: ["0%", "120%"],
-              opacity: [0, 0.5, 0],
+              x: ["-100%", "100%"],
+              opacity: [0, 1, 0],
             }}
             transition={{
               duration: 6,
               repeat: Infinity,
-              delay: i * 1.2,
-              ease: "linear",
+              delay: i * 2,
+              ease: "easeInOut",
             }}
-          >
-            {Math.random() > 0.5 ? '1' : '0'}
-          </motion.div>
+          />
+        ))}
+
+        {/* Hexagonal Pattern */}
+        {[...Array(6)].map((_, i) => (
+          <motion.div
+            key={`hex-${i}`}
+            className="absolute w-8 h-8 border border-isclub-teal/20"
+            style={{
+              left: `${20 + i * 12}%`,
+              top: `${40 + Math.random() * 20}%`,
+              clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
+            }}
+            animate={{
+              rotate: [0, 360],
+              scale: [0.5, 1, 0.5],
+              opacity: [0, 0.5, 0],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              delay: i * 1.2,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
+
+        {/* Glitch Lines */}
+        {[...Array(5)].map((_, i) => (
+          <motion.div
+            key={`glitch-${i}`}
+            className="absolute h-px bg-red-400/30"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              width: `${50 + Math.random() * 100}px`,
+            }}
+            animate={{
+              opacity: [0, 1, 0, 1, 0],
+              x: [0, 5, -5, 0],
+            }}
+            transition={{
+              duration: 0.1,
+              repeat: Infinity,
+              delay: Math.random() * 5,
+              repeatDelay: 3 + Math.random() * 7,
+            }}
+          />
         ))}
       </div>
 
