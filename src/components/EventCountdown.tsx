@@ -334,7 +334,7 @@ const EventCountdown = () => {
           <MapPin className="w-4 h-4" />
           <span className="text-sm">Kathmandu University, Dhulikhel</span>
         </motion.div>
-      </div>
+      </motion.div>
     </motion.div>
   );
 };
