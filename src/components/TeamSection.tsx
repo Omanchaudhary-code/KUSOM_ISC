@@ -79,13 +79,7 @@ export default function TeamSection() {
       imageUrl: "https://i.imgur.com/OVGn0Q9.jpeg",
       section: 'technical'
     },
-    {
-      name: "Evan Karmacharya",
-      role: "Technical Team Member",
-      bio: "First year BBIS student who has a strong craving for knowledge.",
-      imageUrl: "https://i.imgur.com/vJpIQn3.jpeg",
-      section: 'technical'
-    },
+   
     
     // Events Team
     {
