@@ -1,94 +1,260 @@
+
 import { motion } from 'framer-motion';
-import { ArrowDown, Terminal, Code, CircuitBoard, Cpu, Database } from 'lucide-react';
+import { ArrowDown, Terminal, Code, CircuitBoard, Cpu, Database, Zap, Rocket, Brain } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export default function HeroSection() {
+  // Tech particles data
+  const techParticles = [
+    { icon: Code, delay: 0 },
+    { icon: Terminal, delay: 0.2 },
+    { icon: CircuitBoard, delay: 0.4 },
+    { icon: Cpu, delay: 0.6 },
+    { icon: Database, delay: 0.8 },
+    { icon: Zap, delay: 1.0 },
+    { icon: Rocket, delay: 1.2 },
+    { icon: Brain, delay: 1.4 },
+  ];
+
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4">
-      {/* Funky tech background elements */}
-      <div className="absolute inset-0 bg-grid-pattern bg-isclub-light -z-10"></div>
+      {/* Enhanced tech background with multiple layers */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50/30 to-teal-50/40 -z-10"></div>
       
-      {/* Animated geometric shapes */}
+      {/* Dynamic animated background elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
-        {/* Circles with gradients */}
+        {/* Floating binary numbers */}
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={`binary-${i}`}
+            className="absolute text-xs font-mono text-isclub-teal/20 select-none"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -200, 0],
+              opacity: [0, 0.6, 0],
+              scale: [0.8, 1.2, 0.8],
+            }}
+            transition={{
+              duration: 8 + Math.random() * 4,
+              repeat: Infinity,
+              delay: Math.random() * 5,
+              ease: "easeInOut",
+            }}
+          >
+            {Math.random() > 0.5 ? '01' : '10'}
+          </motion.div>
+        ))}
+
+        {/* Pulsing circuit lines */}
+        <svg className="absolute inset-0 w-full h-full opacity-10" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="tech-circuit" width="120" height="120" patternUnits="userSpaceOnUse">
+              <motion.path
+                d="M20,20 L60,20 L60,60 L100,60"
+                stroke="currentColor"
+                strokeWidth="2"
+                fill="none"
+                className="text-isclub-teal"
+                animate={{
+                  pathLength: [0, 1, 0],
+                  opacity: [0.3, 0.8, 0.3],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+              <motion.path
+                d="M60,60 L60,100 L100,100"
+                stroke="currentColor"
+                strokeWidth="2"
+                fill="none"
+                className="text-blue-500"
+                animate={{
+                  pathLength: [0, 1, 0],
+                  opacity: [0.3, 0.8, 0.3],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  delay: 1,
+                  ease: "easeInOut",
+                }}
+              />
+              <motion.circle
+                cx="20"
+                cy="20"
+                r="3"
+                className="text-isclub-teal fill-current"
+                animate={{
+                  scale: [1, 1.5, 1],
+                  opacity: [0.5, 1, 0.5],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+              <motion.circle
+                cx="60"
+                cy="60"
+                r="3"
+                className="text-blue-500 fill-current"
+                animate={{
+                  scale: [1, 1.5, 1],
+                  opacity: [0.5, 1, 0.5],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  delay: 0.5,
+                  ease: "easeInOut",
+                }}
+              />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#tech-circuit)" />
+        </svg>
+
+        {/* Animated gradient orbs */}
         <motion.div 
           animate={{ 
-            y: [0, -30, 0],
-            opacity: [0.5, 0.8, 0.5] 
+            y: [0, -40, 0],
+            x: [0, 20, 0],
+            opacity: [0.4, 0.8, 0.4],
+            scale: [1, 1.2, 1],
           }}
           transition={{ 
-            duration: 8, 
+            duration: 12, 
             repeat: Infinity,
             ease: "easeInOut" 
           }}
-          className="absolute top-1/4 right-1/3 w-72 h-72 rounded-full bg-gradient-to-r from-purple-500/20 to-blue-500/20 blur-3xl"
+          className="absolute top-1/4 right-1/4 w-96 h-96 rounded-full bg-gradient-to-r from-purple-500/20 via-blue-500/20 to-teal-500/20 blur-3xl"
         ></motion.div>
         
         <motion.div 
           animate={{ 
-            y: [0, 20, 0],
-            opacity: [0.3, 0.6, 0.3] 
+            y: [0, 30, 0],
+            x: [0, -30, 0],
+            opacity: [0.3, 0.7, 0.3],
+            scale: [1, 1.3, 1],
           }}
           transition={{ 
-            duration: 10, 
+            duration: 15, 
             repeat: Infinity,
             ease: "easeInOut" 
           }}
-          className="absolute bottom-1/4 left-1/3 w-80 h-80 rounded-full bg-gradient-to-r from-teal-500/20 to-cyan-500/20 blur-3xl"
+          className="absolute bottom-1/3 left-1/4 w-80 h-80 rounded-full bg-gradient-to-r from-teal-500/25 to-cyan-500/25 blur-3xl"
         ></motion.div>
 
-        {/* Floating tech icons */}
-        <div className="absolute inset-0 z-0">
-          {[...Array(10)].map((_, i) => (
-            <motion.div
-              key={i}
-              initial={{ 
-                x: Math.random() * 100 - 50 + "%", 
-                y: Math.random() * 100 + "%",
-                opacity: 0.1 + Math.random() * 0.3
-              }}
-              animate={{
-                y: [
-                  `${parseFloat(Math.random() * 100 + "%")}`,
-                  `${parseFloat(Math.random() * 100 + "%")}`,
-                ],
-                x: [
-                  `${parseFloat(Math.random() * 100 - 50 + "%")}`, 
-                  `${parseFloat(Math.random() * 100 - 50 + "%")}`
-                ],
-              }}
-              transition={{
-                duration: 10 + Math.random() * 20,
-                repeat: Infinity,
-                repeatType: "reverse",
-                ease: "easeInOut"
-              }}
-              className="absolute"
-            >
-              {i % 5 === 0 && <Code className="w-8 h-8 text-isclub-teal/10" />}
-              {i % 5 === 1 && <Terminal className="w-8 h-8 text-isclub-cyan/10" />}
-              {i % 5 === 2 && <CircuitBoard className="w-8 h-8 text-isclub-teal/10" />}
-              {i % 5 === 3 && <Cpu className="w-8 h-8 text-isclub-cyan/10" />}
-              {i % 5 === 4 && <Database className="w-8 h-8 text-isclub-teal/10" />}
-            </motion.div>
-          ))}
+        {/* Tech particles orbiting around center */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          {techParticles.map((particle, i) => {
+            const Icon = particle.icon;
+            const angle = (i * 360) / techParticles.length;
+            return (
+              <motion.div
+                key={i}
+                className="absolute"
+                style={{
+                  transformOrigin: '200px 0px',
+                }}
+                animate={{
+                  rotate: [angle, angle + 360],
+                }}
+                transition={{
+                  duration: 20,
+                  repeat: Infinity,
+                  ease: "linear",
+                  delay: particle.delay,
+                }}
+              >
+                <motion.div
+                  animate={{
+                    scale: [0.8, 1.2, 0.8],
+                    opacity: [0.3, 0.7, 0.3],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: particle.delay,
+                  }}
+                >
+                  <Icon className="w-6 h-6 text-isclub-teal/40" />
+                </motion.div>
+              </motion.div>
+            );
+          })}
         </div>
 
-        {/* Animated circuit lines */}
-        <svg className="absolute inset-0 w-full h-full z-0 opacity-5" xmlns="http://www.w3.org/2000/svg">
-          <pattern id="circuit" width="100" height="100" patternUnits="userSpaceOnUse">
-            <path d="M10,10 L50,10 L50,50 L90,50" stroke="currentColor" strokeWidth="1" fill="none" className="text-isclub-teal" />
-            <path d="M50,50 L50,90 L90,90" stroke="currentColor" strokeWidth="1" fill="none" className="text-isclub-teal" />
-            <path d="M50,10 C70,20 70,40 50,50" stroke="currentColor" strokeWidth="1" fill="none" className="text-isclub-cyan" />
-            <circle cx="10" cy="10" r="2" className="text-isclub-teal fill-current" />
-            <circle cx="50" cy="10" r="2" className="text-isclub-teal fill-current" />
-            <circle cx="50" cy="50" r="2" className="text-isclub-cyan fill-current" />
-            <circle cx="90" cy="50" r="2" className="text-isclub-teal fill-current" />
-            <circle cx="50" cy="90" r="2" className="text-isclub-cyan fill-current" />
-            <circle cx="90" cy="90" r="2" className="text-isclub-teal fill-current" />
-          </pattern>
-          <rect width="100%" height="100%" fill="url(#circuit)" />
-        </svg>
+        {/* Scanning beam effect */}
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/10 to-transparent"
+          style={{ width: '2px' }}
+          animate={{
+            x: ['-100px', 'calc(100vw + 100px)'],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
+
+        {/* Grid pattern with animation */}
+        <div className="absolute inset-0 opacity-5">
+          <motion.div
+            className="w-full h-full"
+            style={{
+              backgroundImage: `
+                linear-gradient(to right, rgba(20, 184, 166, 0.3) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(20, 184, 166, 0.3) 1px, transparent 1px)
+              `,
+              backgroundSize: '50px 50px',
+            }}
+            animate={{
+              backgroundPosition: ['0px 0px', '50px 50px'],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+          />
+        </div>
+
+        {/* Floating hexagons */}
+        {[...Array(8)].map((_, i) => (
+          <motion.div
+            key={`hex-${i}`}
+            className="absolute border-2 border-isclub-teal/20"
+            style={{
+              left: `${20 + i * 10}%`,
+              top: `${20 + (i % 3) * 20}%`,
+              width: '40px',
+              height: '40px',
+              clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
+            }}
+            animate={{
+              rotate: [0, 360],
+              scale: [0.8, 1.2, 0.8],
+              opacity: [0.2, 0.6, 0.2],
+              y: [0, -20, 0],
+            }}
+            transition={{
+              duration: 8 + i,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: i * 0.5,
+            }}
+          />
+        ))}
       </div>
       
       <div className="container mx-auto max-w-5xl z-10">
@@ -98,60 +264,131 @@ export default function HeroSection() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-center"
         >
-          <span className="tech-badge mb-6">
+          <motion.span 
+            className="tech-badge mb-6"
+            animate={{
+              boxShadow: [
+                '0 0 0 rgba(20, 184, 166, 0.3)',
+                '0 0 20px rgba(20, 184, 166, 0.6)',
+                '0 0 0 rgba(20, 184, 166, 0.3)',
+              ],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
             KUSOM Information Systems Club
-          </span>
+          </motion.span>
           
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-isclub-dark leading-tight mb-6">
-            <span className="block">Explore. Create.</span>
-            <span className="bg-gradient-to-r from-isclub-teal to-isclub-cyan bg-clip-text text-transparent">Innovate.</span>
+            <motion.span 
+              className="block"
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              Explore. Create.
+            </motion.span>
+            <motion.span 
+              className="bg-gradient-to-r from-isclub-teal to-isclub-cyan bg-clip-text text-transparent"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              whileHover={{
+                scale: 1.05,
+                transition: { type: "spring", stiffness: 300, damping: 10 }
+              }}
+            >
+              Innovate.
+            </motion.span>
           </h1>
           
-          <p className="text-lg md:text-xl text-isclub-gray max-w-2xl mx-auto mb-10">
+          <motion.p 
+            className="text-lg md:text-xl text-isclub-gray max-w-2xl mx-auto mb-10"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+          >
             A hub for students eager to explore the vast world of computing, design, coding, and web development.
-          </p>
+          </motion.p>
           
-          <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-            <a
+          <motion.div 
+            className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1 }}
+          >
+            <motion.a
               href="/about"
               className={cn(
-                "px-6 py-3 rounded-lg tech-gradient text-white font-medium",
-                "transition-all duration-300 transform hover:translate-y-[-2px]",
-                "shadow-tech hover:shadow-lg",
+                "px-8 py-4 rounded-lg tech-gradient text-white font-medium text-lg",
+                "transition-all duration-300 transform relative overflow-hidden",
+                "shadow-lg hover:shadow-xl",
                 "focus:outline-none focus:ring-2 focus:ring-isclub-teal/50"
               )}
+              whileHover={{ 
+                scale: 1.05,
+                y: -2,
+              }}
+              whileTap={{ scale: 0.98 }}
             >
-              Discover More
-            </a>
-            <a
-              href="/focus-areas"
-              className={cn(
-                "px-6 py-3 rounded-lg bg-white text-isclub-dark font-medium",
-                "border border-gray-200 hover:border-isclub-teal",
-                "transition-all duration-300 hover:text-isclub-teal",
-                "focus:outline-none focus:ring-2 focus:ring-gray-200"
-              )}
-            >
-              Our Focus Areas
-            </a>
-          </div>
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                animate={{
+                  x: ['-100%', '100%'],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+              />
+              <span className="relative z-10">Discover More</span>
+            </motion.a>
+          </motion.div>
         </motion.div>
       </div>
       
-      {/* Scroll indicator */}
+      {/* Enhanced scroll indicator */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
         className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
       >
-        <a 
+        <motion.a 
           href="/about" 
-          className="flex flex-col items-center text-sm text-isclub-gray hover:text-isclub-teal transition-colors"
+          className="flex flex-col items-center text-sm text-isclub-gray hover:text-isclub-teal transition-colors group"
+          whileHover={{ y: -5 }}
         >
-          <span className="mb-2">Explore More</span>
-          <ArrowDown className="w-5 h-5 animate-bounce" />
-        </a>
+          <motion.span 
+            className="mb-2 relative"
+            animate={{
+              opacity: [0.7, 1, 0.7],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            Explore More
+          </motion.span>
+          <motion.div
+            animate={{
+              y: [0, 10, 0],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            <ArrowDown className="w-5 h-5 group-hover:text-isclub-teal transition-colors" />
+          </motion.div>
+        </motion.a>
       </motion.div>
     </section>
   );
