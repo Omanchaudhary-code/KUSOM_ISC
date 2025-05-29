@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Timer, MapPin, Calendar } from 'lucide-react';
@@ -133,20 +132,10 @@ const EventCountdown = () => {
       transition={{ duration: 0.8, delay: 0.4 }}
       className="flex flex-col items-center mt-8"
     >
-      <motion.div
-        animate={{
-          rotate: [0, 360],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: "linear",
-        }}
-        className="flex items-center gap-2 mb-6 text-isclub-teal"
-      >
+      <div className="flex items-center gap-2 mb-6 text-isclub-teal">
         <Timer className="w-6 h-6" />
         <span className="text-lg font-medium">Next Major Event</span>
-      </motion.div>
+      </div>
       
       <div className="flex gap-4 sm:gap-6">
         <AnimatePresence mode="wait">
