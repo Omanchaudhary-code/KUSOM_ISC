@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Timer, MapPin, Calendar } from 'lucide-react';
@@ -43,6 +44,9 @@ const EventCountdown = () => {
     { label: 'Minutes', value: timeLeft.minutes },
     { label: 'Seconds', value: timeLeft.seconds },
   ];
+
+  // Code particles for hackathon vibe
+  const codeSnippets = ['</>','{}','[]','()','if','var','let','const','=>','{...}','map()','filter()','async'];
 
   if (timeLeft.isFinished) {
     return (
@@ -130,14 +134,114 @@ const EventCountdown = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.4 }}
-      className="flex flex-col items-center mt-8"
+      className="flex flex-col items-center mt-8 relative"
     >
-      <div className="flex items-center gap-2 mb-6 text-isclub-teal">
+      {/* Animated Background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Circuit-like lines */}
+        <div className="absolute inset-0">
+          {[...Array(8)].map((_, i) => (
+            <motion.div
+              key={`line-${i}`}
+              className="absolute h-px bg-gradient-to-r from-transparent via-isclub-teal/20 to-transparent"
+              style={{
+                top: `${20 + i * 10}%`,
+                left: 0,
+                right: 0,
+              }}
+              animate={{
+                opacity: [0, 0.5, 0],
+                scaleX: [0, 1, 0],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                delay: i * 0.5,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Floating code particles */}
+        {codeSnippets.map((code, index) => (
+          <motion.div
+            key={`code-${index}`}
+            className="absolute text-xs font-mono text-isclub-teal/30 select-none"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -100, 0],
+              x: [0, Math.random() * 50 - 25, 0],
+              opacity: [0, 0.6, 0],
+              rotate: [0, 360],
+            }}
+            transition={{
+              duration: 8 + Math.random() * 4,
+              repeat: Infinity,
+              delay: Math.random() * 5,
+              ease: "easeInOut",
+            }}
+          >
+            {code}
+          </motion.div>
+        ))}
+
+        {/* Glowing orbs */}
+        {[...Array(5)].map((_, i) => (
+          <motion.div
+            key={`orb-${i}`}
+            className="absolute w-2 h-2 rounded-full bg-isclub-teal/40"
+            style={{
+              left: `${20 + i * 15}%`,
+              top: `${30 + Math.random() * 40}%`,
+            }}
+            animate={{
+              scale: [0, 1, 0],
+              opacity: [0, 0.8, 0],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              delay: i * 0.6,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
+
+        {/* Binary rain effect */}
+        {[...Array(6)].map((_, i) => (
+          <motion.div
+            key={`binary-${i}`}
+            className="absolute text-xs font-mono text-isclub-teal/20 select-none"
+            style={{
+              left: `${10 + i * 15}%`,
+              top: "-10%",
+            }}
+            animate={{
+              y: ["0%", "120%"],
+              opacity: [0, 0.5, 0],
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              delay: i * 1.2,
+              ease: "linear",
+            }}
+          >
+            {Math.random() > 0.5 ? '1' : '0'}
+          </motion.div>
+        ))}
+      </div>
+
+      <div className="flex items-center gap-2 mb-6 text-isclub-teal relative z-10">
         <Timer className="w-6 h-6" />
         <span className="text-lg font-medium">Next Major Event</span>
       </div>
       
-      <div className="flex gap-4 sm:gap-6">
+      <div className="flex gap-4 sm:gap-6 relative z-10">
         <AnimatePresence mode="wait">
           {timeUnits.map(({ label, value }, index) => (
             <motion.div
@@ -214,7 +318,7 @@ const EventCountdown = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1 }}
-        className="mt-6 text-center"
+        className="mt-6 text-center relative z-10"
       >
         <motion.div
           animate={{
@@ -230,7 +334,7 @@ const EventCountdown = () => {
           <MapPin className="w-4 h-4" />
           <span className="text-sm">Kathmandu University, Dhulikhel</span>
         </motion.div>
-      </motion.div>
+      </div>
     </motion.div>
   );
 };
