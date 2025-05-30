@@ -1,9 +1,12 @@
 import { motion } from 'framer-motion';
 import { ArrowDown, Terminal, Code, CircuitBoard, Cpu, Database, Zap, Rocket, Brain } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useNavigate } from 'react-router-dom';
 import EventCountdown from './EventCountdown';
 
 export default function HeroSection() {
+  const navigate = useNavigate();
+
   // Tech particles data
   const techParticles = [
     { icon: Code, delay: 0 },
@@ -377,7 +380,7 @@ export default function HeroSection() {
                 boxShadow: "0 20px 40px rgba(20, 184, 166, 0.4)"
               }}
               whileTap={{ scale: 0.98 }}
-              onClick={() => window.open('#', '_blank')}
+              onClick={() => navigate('/register')}
             >
               <motion.div
                 className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
