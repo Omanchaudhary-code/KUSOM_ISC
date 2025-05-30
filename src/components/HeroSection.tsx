@@ -297,7 +297,7 @@ export default function HeroSection() {
           className="text-center"
         >
           <motion.span 
-            className="tech-badge mb-12"
+            className="tech-badge mb-6 mt-8"
             animate={{
               boxShadow: [
                 '0 0 0 rgba(20, 184, 166, 0.3)',
@@ -314,7 +314,7 @@ export default function HeroSection() {
             KUSOM Information Systems Club
           </motion.span>
           
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-isclub-dark leading-tight mb-10">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-isclub-dark leading-tight mb-6">
             <motion.span 
               className="block"
               initial={{ opacity: 0, x: -50 }}
@@ -338,7 +338,7 @@ export default function HeroSection() {
           </h1>
           
           <motion.p 
-            className="text-lg md:text-xl text-isclub-gray max-w-2xl mx-auto mb-16"
+            className="text-lg md:text-xl text-isclub-gray max-w-2xl mx-auto mb-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
@@ -346,7 +346,7 @@ export default function HeroSection() {
             A hub for students eager to explore the vast world of computing, design, coding, and web development.
           </motion.p>
 
-          {/* Integrated Event Countdown with proper spacing */}
+          {/* Event Countdown moved further down */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -355,48 +355,46 @@ export default function HeroSection() {
           >
             <EventCountdown />
           </motion.div>
+
+          {/* Register Here Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.2 }}
+            className="mb-8"
+          >
+            <motion.button
+              className={cn(
+                "px-12 py-4 rounded-lg tech-gradient text-white font-semibold text-lg",
+                "transition-all duration-300 transform relative overflow-hidden",
+                "shadow-2xl hover:shadow-3xl border border-white/20",
+                "focus:outline-none focus:ring-2 focus:ring-isclub-teal/50",
+                "backdrop-blur-sm"
+              )}
+              whileHover={{ 
+                scale: 1.05,
+                y: -3,
+                boxShadow: "0 20px 40px rgba(20, 184, 166, 0.4)"
+              }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => window.open('#', '_blank')}
+            >
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                animate={{
+                  x: ['-100%', '100%'],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+              />
+              <span className="relative z-10 font-bold tracking-wide">Register Here</span>
+            </motion.button>
+          </motion.div>
         </motion.div>
       </div>
-      
-      {/* Enhanced scroll indicator with better positioning */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.8, duration: 1 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-      >
-        <motion.a 
-          href="/about" 
-          className="flex flex-col items-center text-sm text-isclub-gray hover:text-isclub-teal transition-colors group"
-          whileHover={{ y: -5 }}
-        >
-          <motion.span 
-            className="mb-3 relative font-medium"
-            animate={{
-              opacity: [0.7, 1, 0.7],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          >
-            Explore More
-          </motion.span>
-          <motion.div
-            animate={{
-              y: [0, 15, 0],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          >
-            <ArrowDown className="w-5 h-5 group-hover:text-isclub-teal transition-colors" />
-          </motion.div>
-        </motion.a>
-      </motion.div>
     </section>
   );
 }
