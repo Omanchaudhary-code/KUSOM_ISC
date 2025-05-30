@@ -1,4 +1,3 @@
-
 import { motion } from 'framer-motion';
 import { ArrowDown, Terminal, Code, CircuitBoard, Cpu, Database, Zap, Rocket, Brain } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -298,7 +297,7 @@ export default function HeroSection() {
           className="text-center"
         >
           <motion.span 
-            className="tech-badge mb-8"
+            className="tech-badge mb-12"
             animate={{
               boxShadow: [
                 '0 0 0 rgba(20, 184, 166, 0.3)',
@@ -315,7 +314,7 @@ export default function HeroSection() {
             KUSOM Information Systems Club
           </motion.span>
           
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-isclub-dark leading-tight mb-8">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-isclub-dark leading-tight mb-10">
             <motion.span 
               className="block"
               initial={{ opacity: 0, x: -50 }}
@@ -339,7 +338,7 @@ export default function HeroSection() {
           </h1>
           
           <motion.p 
-            className="text-lg md:text-xl text-isclub-gray max-w-2xl mx-auto mb-12"
+            className="text-lg md:text-xl text-isclub-gray max-w-2xl mx-auto mb-16"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
@@ -347,52 +346,14 @@ export default function HeroSection() {
             A hub for students eager to explore the vast world of computing, design, coding, and web development.
           </motion.p>
 
-          {/* Integrated Event Countdown with added spacing */}
+          {/* Integrated Event Countdown with proper spacing */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1 }}
-            className="mb-16"
+            className="mb-12"
           >
             <EventCountdown />
-          </motion.div>
-          
-          {/* Explore More button with better spacing and visibility */}
-          <motion.div 
-            className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 mt-8"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.2 }}
-          >
-            <motion.a
-              href="/about"
-              className={cn(
-                "px-10 py-5 rounded-lg tech-gradient text-white font-medium text-lg",
-                "transition-all duration-300 transform relative overflow-hidden",
-                "shadow-2xl hover:shadow-3xl border border-white/20",
-                "focus:outline-none focus:ring-2 focus:ring-isclub-teal/50",
-                "backdrop-blur-sm"
-              )}
-              whileHover={{ 
-                scale: 1.05,
-                y: -3,
-                boxShadow: "0 20px 40px rgba(20, 184, 166, 0.3)"
-              }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                animate={{
-                  x: ['-100%', '100%'],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-              />
-              <span className="relative z-10 font-semibold tracking-wide">Discover More</span>
-            </motion.a>
           </motion.div>
         </motion.div>
       </div>
