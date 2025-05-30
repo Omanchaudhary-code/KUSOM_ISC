@@ -2,6 +2,7 @@
 import { motion } from 'framer-motion';
 import { ArrowDown, Terminal, Code, CircuitBoard, Cpu, Database, Zap, Rocket, Brain } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import EventCountdown from './EventCountdown';
 
 export default function HeroSection() {
   // Tech particles data
@@ -24,95 +25,100 @@ export default function HeroSection() {
       {/* Dynamic animated background elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         {/* Floating binary numbers */}
-        {[...Array(20)].map((_, i) => (
+        {[...Array(25)].map((_, i) => (
           <motion.div
             key={`binary-${i}`}
-            className="absolute text-xs font-mono text-isclub-teal/20 select-none"
+            className="absolute text-xs font-mono text-isclub-teal/25 select-none"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
             }}
             animate={{
-              y: [0, -200, 0],
-              opacity: [0, 0.6, 0],
-              scale: [0.8, 1.2, 0.8],
+              y: [0, -250, 0],
+              opacity: [0, 0.7, 0],
+              scale: [0.8, 1.3, 0.8],
+              rotate: [0, 360, 720],
             }}
             transition={{
-              duration: 8 + Math.random() * 4,
+              duration: 12 + Math.random() * 6,
               repeat: Infinity,
-              delay: Math.random() * 5,
+              delay: Math.random() * 8,
               ease: "easeInOut",
             }}
           >
-            {Math.random() > 0.5 ? '01' : '10'}
+            {Math.random() > 0.5 ? '01010' : '10101'}
           </motion.div>
         ))}
 
-        {/* Pulsing circuit lines */}
-        <svg className="absolute inset-0 w-full h-full opacity-10" xmlns="http://www.w3.org/2000/svg">
+        {/* Enhanced pulsing circuit lines */}
+        <svg className="absolute inset-0 w-full h-full opacity-15" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <pattern id="tech-circuit" width="120" height="120" patternUnits="userSpaceOnUse">
+            <pattern id="tech-circuit" width="150" height="150" patternUnits="userSpaceOnUse">
               <motion.path
-                d="M20,20 L60,20 L60,60 L100,60"
+                d="M30,30 L80,30 L80,80 L120,80"
                 stroke="currentColor"
-                strokeWidth="2"
+                strokeWidth="3"
                 fill="none"
                 className="text-isclub-teal"
                 animate={{
                   pathLength: [0, 1, 0],
-                  opacity: [0.3, 0.8, 0.3],
+                  opacity: [0.4, 1, 0.4],
+                  strokeWidth: [2, 4, 2],
                 }}
                 transition={{
-                  duration: 4,
+                  duration: 6,
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
               />
               <motion.path
-                d="M60,60 L60,100 L100,100"
+                d="M80,80 L80,120 L120,120"
                 stroke="currentColor"
-                strokeWidth="2"
+                strokeWidth="3"
                 fill="none"
                 className="text-blue-500"
                 animate={{
                   pathLength: [0, 1, 0],
-                  opacity: [0.3, 0.8, 0.3],
+                  opacity: [0.4, 1, 0.4],
+                  strokeWidth: [2, 4, 2],
                 }}
                 transition={{
-                  duration: 4,
+                  duration: 6,
                   repeat: Infinity,
-                  delay: 1,
+                  delay: 2,
                   ease: "easeInOut",
                 }}
               />
               <motion.circle
-                cx="20"
-                cy="20"
-                r="3"
+                cx="30"
+                cy="30"
+                r="4"
                 className="text-isclub-teal fill-current"
                 animate={{
-                  scale: [1, 1.5, 1],
-                  opacity: [0.5, 1, 0.5],
+                  scale: [1, 2, 1],
+                  opacity: [0.6, 1, 0.6],
+                  r: [3, 6, 3],
                 }}
                 transition={{
-                  duration: 2,
+                  duration: 3,
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
               />
               <motion.circle
-                cx="60"
-                cy="60"
-                r="3"
+                cx="80"
+                cy="80"
+                r="4"
                 className="text-blue-500 fill-current"
                 animate={{
-                  scale: [1, 1.5, 1],
-                  opacity: [0.5, 1, 0.5],
+                  scale: [1, 2, 1],
+                  opacity: [0.6, 1, 0.6],
+                  r: [3, 6, 3],
                 }}
                 transition={{
-                  duration: 2,
+                  duration: 3,
                   repeat: Infinity,
-                  delay: 0.5,
+                  delay: 1,
                   ease: "easeInOut",
                 }}
               />
@@ -121,35 +127,35 @@ export default function HeroSection() {
           <rect width="100%" height="100%" fill="url(#tech-circuit)" />
         </svg>
 
-        {/* Animated gradient orbs */}
+        {/* Enhanced animated gradient orbs */}
         <motion.div 
           animate={{ 
-            y: [0, -40, 0],
-            x: [0, 20, 0],
-            opacity: [0.4, 0.8, 0.4],
-            scale: [1, 1.2, 1],
+            y: [0, -60, 0],
+            x: [0, 40, 0],
+            opacity: [0.5, 1, 0.5],
+            scale: [1, 1.4, 1],
           }}
           transition={{ 
-            duration: 12, 
+            duration: 16, 
             repeat: Infinity,
             ease: "easeInOut" 
           }}
-          className="absolute top-1/4 right-1/4 w-96 h-96 rounded-full bg-gradient-to-r from-purple-500/20 via-blue-500/20 to-teal-500/20 blur-3xl"
+          className="absolute top-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-gradient-to-r from-purple-500/25 via-blue-500/25 to-teal-500/25 blur-3xl"
         ></motion.div>
         
         <motion.div 
           animate={{ 
-            y: [0, 30, 0],
-            x: [0, -30, 0],
-            opacity: [0.3, 0.7, 0.3],
-            scale: [1, 1.3, 1],
+            y: [0, 50, 0],
+            x: [0, -50, 0],
+            opacity: [0.4, 0.9, 0.4],
+            scale: [1, 1.5, 1],
           }}
           transition={{ 
-            duration: 15, 
+            duration: 20, 
             repeat: Infinity,
             ease: "easeInOut" 
           }}
-          className="absolute bottom-1/3 left-1/4 w-80 h-80 rounded-full bg-gradient-to-r from-teal-500/25 to-cyan-500/25 blur-3xl"
+          className="absolute bottom-1/3 left-1/4 w-[400px] h-[400px] rounded-full bg-gradient-to-r from-teal-500/30 to-cyan-500/30 blur-3xl"
         ></motion.div>
 
         {/* Tech particles orbiting around center */}
@@ -162,13 +168,13 @@ export default function HeroSection() {
                 key={i}
                 className="absolute"
                 style={{
-                  transformOrigin: '200px 0px',
+                  transformOrigin: '250px 0px',
                 }}
                 animate={{
                   rotate: [angle, angle + 360],
                 }}
                 transition={{
-                  duration: 20,
+                  duration: 25,
                   repeat: Infinity,
                   ease: "linear",
                   delay: particle.delay,
@@ -176,88 +182,115 @@ export default function HeroSection() {
               >
                 <motion.div
                   animate={{
-                    scale: [0.8, 1.2, 0.8],
-                    opacity: [0.3, 0.7, 0.3],
+                    scale: [0.8, 1.4, 0.8],
+                    opacity: [0.4, 0.8, 0.4],
+                    rotate: [0, -360],
                   }}
                   transition={{
-                    duration: 3,
+                    duration: 4,
                     repeat: Infinity,
                     ease: "easeInOut",
                     delay: particle.delay,
                   }}
                 >
-                  <Icon className="w-6 h-6 text-isclub-teal/40" />
+                  <Icon className="w-8 h-8 text-isclub-teal/50" />
                 </motion.div>
               </motion.div>
             );
           })}
         </div>
 
-        {/* Scanning beam effect */}
+        {/* Enhanced scanning beam effect */}
         <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/10 to-transparent"
-          style={{ width: '2px' }}
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/15 to-transparent"
+          style={{ width: '4px' }}
           animate={{
-            x: ['-100px', 'calc(100vw + 100px)'],
+            x: ['-200px', 'calc(100vw + 200px)'],
+            opacity: [0, 1, 0],
           }}
           transition={{
-            duration: 8,
+            duration: 12,
             repeat: Infinity,
             ease: "linear",
           }}
         />
 
-        {/* Grid pattern with animation */}
-        <div className="absolute inset-0 opacity-5">
+        {/* Enhanced grid pattern with animation */}
+        <div className="absolute inset-0 opacity-8">
           <motion.div
             className="w-full h-full"
             style={{
               backgroundImage: `
-                linear-gradient(to right, rgba(20, 184, 166, 0.3) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(20, 184, 166, 0.3) 1px, transparent 1px)
+                linear-gradient(to right, rgba(20, 184, 166, 0.4) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(20, 184, 166, 0.4) 1px, transparent 1px)
               `,
-              backgroundSize: '50px 50px',
+              backgroundSize: '60px 60px',
             }}
             animate={{
-              backgroundPosition: ['0px 0px', '50px 50px'],
+              backgroundPosition: ['0px 0px', '60px 60px'],
+              opacity: [0.6, 1, 0.6],
             }}
             transition={{
-              duration: 10,
+              duration: 15,
               repeat: Infinity,
               ease: "linear",
             }}
           />
         </div>
 
-        {/* Floating hexagons */}
-        {[...Array(8)].map((_, i) => (
+        {/* Enhanced floating hexagons */}
+        {[...Array(12)].map((_, i) => (
           <motion.div
             key={`hex-${i}`}
-            className="absolute border-2 border-isclub-teal/20"
+            className="absolute border-2 border-isclub-teal/30"
             style={{
-              left: `${20 + i * 10}%`,
-              top: `${20 + (i % 3) * 20}%`,
-              width: '40px',
-              height: '40px',
+              left: `${15 + i * 8}%`,
+              top: `${15 + (i % 4) * 20}%`,
+              width: '50px',
+              height: '50px',
               clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
             }}
             animate={{
               rotate: [0, 360],
-              scale: [0.8, 1.2, 0.8],
-              opacity: [0.2, 0.6, 0.2],
-              y: [0, -20, 0],
+              scale: [0.8, 1.4, 0.8],
+              opacity: [0.3, 0.8, 0.3],
+              y: [0, -30, 0],
+              borderWidth: [2, 4, 2],
             }}
             transition={{
-              duration: 8 + i,
+              duration: 10 + i,
               repeat: Infinity,
               ease: "easeInOut",
+              delay: i * 0.8,
+            }}
+          />
+        ))}
+
+        {/* Data stream lines */}
+        {[...Array(8)].map((_, i) => (
+          <motion.div
+            key={`stream-${i}`}
+            className="absolute h-px bg-gradient-to-r from-transparent via-isclub-teal/40 to-transparent"
+            style={{
+              left: 0,
+              right: 0,
+              top: `${20 + i * 10}%`,
+            }}
+            animate={{
+              scaleX: [0, 1, 0],
+              opacity: [0, 0.8, 0],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
               delay: i * 0.5,
+              ease: "easeInOut",
             }}
           />
         ))}
       </div>
       
-      <div className="container mx-auto max-w-5xl z-10">
+      <div className="container mx-auto max-w-6xl z-10">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -269,12 +302,12 @@ export default function HeroSection() {
             animate={{
               boxShadow: [
                 '0 0 0 rgba(20, 184, 166, 0.3)',
-                '0 0 20px rgba(20, 184, 166, 0.6)',
+                '0 0 25px rgba(20, 184, 166, 0.7)',
                 '0 0 0 rgba(20, 184, 166, 0.3)',
               ],
             }}
             transition={{
-              duration: 3,
+              duration: 4,
               repeat: Infinity,
               ease: "easeInOut",
             }}
@@ -313,12 +346,22 @@ export default function HeroSection() {
           >
             A hub for students eager to explore the vast world of computing, design, coding, and web development.
           </motion.p>
+
+          {/* Integrated Event Countdown */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1 }}
+            className="mb-10"
+          >
+            <EventCountdown />
+          </motion.div>
           
           <motion.div 
             className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1 }}
+            transition={{ duration: 0.8, delay: 1.2 }}
           >
             <motion.a
               href="/about"
@@ -340,7 +383,7 @@ export default function HeroSection() {
                   x: ['-100%', '100%'],
                 }}
                 transition={{
-                  duration: 2,
+                  duration: 3,
                   repeat: Infinity,
                   ease: "linear",
                 }}
@@ -355,7 +398,7 @@ export default function HeroSection() {
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
+        transition={{ delay: 1.8, duration: 1 }}
         className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
       >
         <motion.a 
@@ -369,7 +412,7 @@ export default function HeroSection() {
               opacity: [0.7, 1, 0.7],
             }}
             transition={{
-              duration: 2,
+              duration: 3,
               repeat: Infinity,
               ease: "easeInOut",
             }}
@@ -378,10 +421,10 @@ export default function HeroSection() {
           </motion.span>
           <motion.div
             animate={{
-              y: [0, 10, 0],
+              y: [0, 15, 0],
             }}
             transition={{
-              duration: 2,
+              duration: 3,
               repeat: Infinity,
               ease: "easeInOut",
             }}
