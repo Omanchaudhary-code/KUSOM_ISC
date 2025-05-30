@@ -298,7 +298,7 @@ export default function HeroSection() {
           className="text-center"
         >
           <motion.span 
-            className="tech-badge mb-6"
+            className="tech-badge mb-8"
             animate={{
               boxShadow: [
                 '0 0 0 rgba(20, 184, 166, 0.3)',
@@ -315,7 +315,7 @@ export default function HeroSection() {
             KUSOM Information Systems Club
           </motion.span>
           
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-isclub-dark leading-tight mb-6">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-isclub-dark leading-tight mb-8">
             <motion.span 
               className="block"
               initial={{ opacity: 0, x: -50 }}
@@ -339,7 +339,7 @@ export default function HeroSection() {
           </h1>
           
           <motion.p 
-            className="text-lg md:text-xl text-isclub-gray max-w-2xl mx-auto mb-10"
+            className="text-lg md:text-xl text-isclub-gray max-w-2xl mx-auto mb-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
@@ -347,18 +347,19 @@ export default function HeroSection() {
             A hub for students eager to explore the vast world of computing, design, coding, and web development.
           </motion.p>
 
-          {/* Integrated Event Countdown */}
+          {/* Integrated Event Countdown with added spacing */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1 }}
-            className="mb-10"
+            className="mb-16"
           >
             <EventCountdown />
           </motion.div>
           
+          {/* Explore More button with better spacing and visibility */}
           <motion.div 
-            className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6"
+            className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 mt-8"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.2 }}
@@ -366,14 +367,16 @@ export default function HeroSection() {
             <motion.a
               href="/about"
               className={cn(
-                "px-8 py-4 rounded-lg tech-gradient text-white font-medium text-lg",
+                "px-10 py-5 rounded-lg tech-gradient text-white font-medium text-lg",
                 "transition-all duration-300 transform relative overflow-hidden",
-                "shadow-lg hover:shadow-xl",
-                "focus:outline-none focus:ring-2 focus:ring-isclub-teal/50"
+                "shadow-2xl hover:shadow-3xl border border-white/20",
+                "focus:outline-none focus:ring-2 focus:ring-isclub-teal/50",
+                "backdrop-blur-sm"
               )}
               whileHover={{ 
                 scale: 1.05,
-                y: -2,
+                y: -3,
+                boxShadow: "0 20px 40px rgba(20, 184, 166, 0.3)"
               }}
               whileTap={{ scale: 0.98 }}
             >
@@ -388,18 +391,18 @@ export default function HeroSection() {
                   ease: "linear",
                 }}
               />
-              <span className="relative z-10">Discover More</span>
+              <span className="relative z-10 font-semibold tracking-wide">Discover More</span>
             </motion.a>
           </motion.div>
         </motion.div>
       </div>
       
-      {/* Enhanced scroll indicator */}
+      {/* Enhanced scroll indicator with better positioning */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.8, duration: 1 }}
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
       >
         <motion.a 
           href="/about" 
@@ -407,7 +410,7 @@ export default function HeroSection() {
           whileHover={{ y: -5 }}
         >
           <motion.span 
-            className="mb-2 relative"
+            className="mb-3 relative font-medium"
             animate={{
               opacity: [0.7, 1, 0.7],
             }}
