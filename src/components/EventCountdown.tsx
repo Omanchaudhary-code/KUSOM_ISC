@@ -51,7 +51,7 @@ const EventCountdown = () => {
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, type: "spring", bounce: 0.4 }}
-        className="flex flex-col items-center mt-8"
+        className="flex flex-col items-center mt-4 sm:mt-8 px-4"
       >
         <motion.div
           animate={{
@@ -63,9 +63,9 @@ const EventCountdown = () => {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="w-28 h-28 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full flex items-center justify-center mb-8 shadow-2xl"
+          className="w-20 h-20 sm:w-28 sm:h-28 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full flex items-center justify-center mb-4 sm:mb-8 shadow-2xl"
         >
-          <Calendar className="w-14 h-14 text-white" />
+          <Calendar className="w-10 h-10 sm:w-14 sm:h-14 text-white" />
         </motion.div>
         
         <motion.div
@@ -83,7 +83,7 @@ const EventCountdown = () => {
               ],
             }}
             transition={{ duration: 4, repeat: Infinity }}
-            className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-500 to-emerald-600 bg-clip-text text-transparent mb-6"
+            className="text-2xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-500 to-emerald-600 bg-clip-text text-transparent mb-4 sm:mb-6"
           >
             🎉 Event Happening Now! 🎉
           </motion.h3>
@@ -92,9 +92,9 @@ const EventCountdown = () => {
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.8, type: "spring", bounce: 0.6 }}
-            className="flex items-center justify-center gap-3 text-xl text-emerald-700 mb-3"
+            className="flex items-center justify-center gap-2 sm:gap-3 text-lg sm:text-xl text-emerald-700 mb-2 sm:mb-3"
           >
-            <MapPin className="w-7 h-7" />
+            <MapPin className="w-5 h-5 sm:w-7 sm:h-7" />
             <span className="font-semibold">Kathmandu University, Dhulikhel</span>
           </motion.div>
           
@@ -102,7 +102,7 @@ const EventCountdown = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
-            className="text-emerald-600 font-medium text-lg"
+            className="text-emerald-600 font-medium text-base sm:text-lg"
           >
             Venue: Multi-purpose Hall
           </motion.p>
@@ -118,7 +118,7 @@ const EventCountdown = () => {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="mt-6 text-base text-gray-600"
+          className="mt-4 sm:mt-6 text-sm sm:text-base text-gray-600"
         >
           Join us for an amazing experience!
         </motion.div>
@@ -131,10 +131,10 @@ const EventCountdown = () => {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, delay: 0.2 }}
-      className="flex flex-col items-center mt-8 relative"
+      className="flex flex-col items-center mt-4 sm:mt-8 relative px-4"
     >
       <motion.div 
-        className="flex items-center gap-3 mb-8 text-isclub-teal relative z-10"
+        className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-8 text-isclub-teal relative z-10"
         animate={{
           scale: [1, 1.05, 1],
         }}
@@ -154,17 +154,17 @@ const EventCountdown = () => {
             ease: "linear",
           }}
         >
-          <Timer className="w-7 h-7" />
+          <Timer className="w-5 h-5 sm:w-7 sm:h-7" />
         </motion.div>
-        <span className="text-xl font-medium">Business Hackathon 2025</span>
+        <span className="text-base sm:text-xl font-medium text-center">Business Hackathon 2025</span>
       </motion.div>
       
-      <div className="flex gap-6 sm:gap-8 relative z-10">
+      <div className="flex gap-3 sm:gap-6 md:gap-8 relative z-10 w-full max-w-sm sm:max-w-none justify-center">
         <AnimatePresence mode="wait">
           {timeUnits.map(({ label, value }, index) => (
             <motion.div
               key={label}
-              className="flex flex-col items-center"
+              className="flex flex-col items-center flex-1 sm:flex-none"
               initial={{ opacity: 0, y: 30, scale: 0.8 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ 
@@ -181,7 +181,7 @@ const EventCountdown = () => {
             >
               <div className="relative">
                 <motion.div
-                  className="w-20 h-20 sm:w-24 sm:h-24 rounded-xl tech-gradient flex items-center justify-center text-white text-2xl sm:text-3xl font-bold relative overflow-hidden shadow-2xl"
+                  className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-xl tech-gradient flex items-center justify-center text-white text-lg sm:text-2xl md:text-3xl font-bold relative overflow-hidden shadow-2xl"
                   animate={{
                     boxShadow: [
                       "0 0 0 rgba(45, 212, 191, 0.3)",
@@ -224,7 +224,7 @@ const EventCountdown = () => {
 
                   {/* Corner accents */}
                   <motion.div
-                    className="absolute top-1 left-1 w-3 h-3 border-l-2 border-t-2 border-white/30"
+                    className="absolute top-1 left-1 w-2 h-2 sm:w-3 sm:h-3 border-l-2 border-t-2 border-white/30"
                     animate={{
                       opacity: [0.3, 1, 0.3],
                     }}
@@ -235,7 +235,7 @@ const EventCountdown = () => {
                     }}
                   />
                   <motion.div
-                    className="absolute bottom-1 right-1 w-3 h-3 border-r-2 border-b-2 border-white/30"
+                    className="absolute bottom-1 right-1 w-2 h-2 sm:w-3 sm:h-3 border-r-2 border-b-2 border-white/30"
                     animate={{
                       opacity: [0.3, 1, 0.3],
                     }}
@@ -258,7 +258,7 @@ const EventCountdown = () => {
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
-                className="mt-3 text-sm font-semibold tracking-wide"
+                className="mt-2 sm:mt-3 text-xs sm:text-sm font-semibold tracking-wide text-center"
               >
                 {label}
               </motion.span>
@@ -271,7 +271,7 @@ const EventCountdown = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}
-        className="mt-8 text-center relative z-10"
+        className="mt-4 sm:mt-8 text-center relative z-10"
       >
         <motion.div
           animate={{
@@ -282,7 +282,7 @@ const EventCountdown = () => {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="flex items-center justify-center gap-3 text-gray-600"
+          className="flex items-center justify-center gap-2 sm:gap-3 text-gray-600"
         >
           <motion.div
             animate={{
@@ -294,9 +294,9 @@ const EventCountdown = () => {
               ease: "easeInOut",
             }}
           >
-            <MapPin className="w-5 h-5" />
+            <MapPin className="w-4 h-4 sm:w-5 sm:h-5" />
           </motion.div>
-          <span className="text-base font-medium">Kathmandu University, Dhulikhel</span>
+          <span className="text-sm sm:text-base font-medium">Kathmandu University, Dhulikhel</span>
         </motion.div>
       </motion.div>
     </motion.div>
