@@ -4,32 +4,30 @@ import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { motion } from 'framer-motion';
-import { Plus, Minus, Users, Mail, User, GraduationCap } from 'lucide-react';
+import { Users, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 const participantSchema = z.object({
-  fullName: z.string().min(2, 'Full name must be at least 2 characters'),
+  full_name: z.string().min(2, 'Full name must be at least 2 characters'),
   email: z.string().email('Invalid email address'),
   phone: z.string().min(10, 'Phone number must be at least 10 digits'),
   college: z.string().min(2, 'College/University name is required'),
-  yearOfStudy: z.string().min(1, 'Year of study is required'),
-  fieldOfStudy: z.string().min(2, 'Field of study is required'),
-  tshirtSize: z.enum(['XS', 'S', 'M', 'L', 'XL', 'XXL']),
-  dietaryPreference: z.enum(['Vegetarian', 'Non-Vegetarian', 'Vegan', 'Other']),
+  year_of_study: z.string().min(1, 'Year of study is required'),
+  major: z.string().min(2, 'Major/Field of study is required'),
+  dietary_preference: z.enum(['Vegetarian', 'Non-Vegetarian', 'Vegan', 'Other']),
 });
 
 const registrationSchema = z.object({
-  teamName: z.string().min(2, 'Team name must be at least 2 characters'),
-  teamSize: z.number().min(1).max(5, 'Team size must be between 1 and 5'),
+  team_name: z.string().min(2, 'Team name must be at least 2 characters'),
+  team_size: z.number().min(1).max(5, 'Team size must be between 1 and 5'),
   participants: z.array(participantSchema).min(1).max(5),
 });
 
@@ -42,18 +40,17 @@ export default function Register() {
   const form = useForm<RegistrationFormData>({
     resolver: zodResolver(registrationSchema),
     defaultValues: {
-      teamName: '',
-      teamSize: 1,
+      team_name: '',
+      team_size: 1,
       participants: [
         {
-          fullName: '',
+          full_name: '',
           email: '',
           phone: '',
           college: '',
-          yearOfStudy: '',
-          fieldOfStudy: '',
-          tshirtSize: 'M',
-          dietaryPreference: 'Vegetarian',
+          year_of_study: '',
+          major: '',
+          dietary_preference: 'Vegetarian',
         },
       ],
     },
@@ -64,7 +61,7 @@ export default function Register() {
     name: 'participants',
   });
 
-  const teamSize = form.watch('teamSize');
+  const teamSize = form.watch('team_size');
 
   // Adjust participants array when team size changes
   const handleTeamSizeChange = (size: number) => {
@@ -74,14 +71,13 @@ export default function Register() {
       // Add new participants
       for (let i = currentParticipants; i < size; i++) {
         append({
-          fullName: '',
+          full_name: '',
           email: '',
           phone: '',
           college: '',
-          yearOfStudy: '',
-          fieldOfStudy: '',
-          tshirtSize: 'M',
-          dietaryPreference: 'Vegetarian',
+          year_of_study: '',
+          major: '',
+          dietary_preference: 'Vegetarian',
         });
       }
     } else if (size < currentParticipants) {
@@ -97,13 +93,49 @@ export default function Register() {
     console.log('Form Data:', data);
     
     try {
-      // TODO: Replace with actual backend API call
-      // For now, we'll simulate the submission
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // First insert into teams table
+      const { data: team, error: teamError } = await supabase
+        .from('teams')
+        .insert([{ 
+          team_name: data.team_name, 
+          team_size: data.team_size 
+        }])
+        .select()
+        .single();
+
+      if (teamError) {
+        console.error('Team insertion error:', teamError);
+        throw new Error('Failed to create team');
+      }
+
+      console.log('Team created:', team);
+
+      // Insert participants with team_id
+      const participantsWithTeamId = data.participants.map(participant => ({
+        team_id: team.id,
+        full_name: participant.full_name,
+        email: participant.email,
+        phone: participant.phone,
+        college: participant.college,
+        year_of_study: participant.year_of_study,
+        major: participant.major,
+        dietary_preference: participant.dietary_preference,
+      }));
+
+      const { error: participantError } = await supabase
+        .from('participants')
+        .insert(participantsWithTeamId);
+
+      if (participantError) {
+        console.error('Participant insertion error:', participantError);
+        throw new Error('Failed to register participants');
+      }
+
+      console.log('Participants registered successfully');
       
       toast({
         title: "Registration Successful!",
-        description: "Your team has been registered successfully. You'll receive a confirmation email shortly.",
+        description: `Team "${data.team_name}" has been registered successfully with ${data.team_size} member(s).`,
       });
       
       // Reset form after successful submission
@@ -157,7 +189,7 @@ export default function Register() {
                   <div className="grid md:grid-cols-2 gap-6">
                     <FormField
                       control={form.control}
-                      name="teamName"
+                      name="team_name"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Team Name</FormLabel>
@@ -171,7 +203,7 @@ export default function Register() {
 
                     <FormField
                       control={form.control}
-                      name="teamSize"
+                      name="team_size"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Team Size</FormLabel>
@@ -227,7 +259,7 @@ export default function Register() {
                       <div className="grid md:grid-cols-2 gap-4">
                         <FormField
                           control={form.control}
-                          name={`participants.${index}.fullName`}
+                          name={`participants.${index}.full_name`}
                           render={({ field }) => (
                             <FormItem>
                               <FormLabel>Full Name</FormLabel>
@@ -283,7 +315,7 @@ export default function Register() {
 
                         <FormField
                           control={form.control}
-                          name={`participants.${index}.yearOfStudy`}
+                          name={`participants.${index}.year_of_study`}
                           render={({ field }) => (
                             <FormItem>
                               <FormLabel>Year of Study</FormLabel>
@@ -309,7 +341,7 @@ export default function Register() {
 
                         <FormField
                           control={form.control}
-                          name={`participants.${index}.fieldOfStudy`}
+                          name={`participants.${index}.major`}
                           render={({ field }) => (
                             <FormItem>
                               <FormLabel>Field of Study / Major</FormLabel>
@@ -323,35 +355,9 @@ export default function Register() {
 
                         <FormField
                           control={form.control}
-                          name={`participants.${index}.tshirtSize`}
+                          name={`participants.${index}.dietary_preference`}
                           render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>T-Shirt Size</FormLabel>
-                              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                <FormControl>
-                                  <SelectTrigger>
-                                    <SelectValue placeholder="Select size" />
-                                  </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                  <SelectItem value="XS">XS</SelectItem>
-                                  <SelectItem value="S">S</SelectItem>
-                                  <SelectItem value="M">M</SelectItem>
-                                  <SelectItem value="L">L</SelectItem>
-                                  <SelectItem value="XL">XL</SelectItem>
-                                  <SelectItem value="XXL">XXL</SelectItem>
-                                </SelectContent>
-                              </Select>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-
-                        <FormField
-                          control={form.control}
-                          name={`participants.${index}.dietaryPreference`}
-                          render={({ field }) => (
-                            <FormItem>
+                            <FormItem className="md:col-span-2">
                               <FormLabel>Dietary Preference</FormLabel>
                               <FormControl>
                                 <RadioGroup
@@ -361,19 +367,19 @@ export default function Register() {
                                 >
                                   <div className="flex items-center space-x-2">
                                     <RadioGroupItem value="Vegetarian" id={`veg-${index}`} />
-                                    <Label htmlFor={`veg-${index}`}>Vegetarian</Label>
+                                    <label htmlFor={`veg-${index}`}>Vegetarian</label>
                                   </div>
                                   <div className="flex items-center space-x-2">
                                     <RadioGroupItem value="Non-Vegetarian" id={`non-veg-${index}`} />
-                                    <Label htmlFor={`non-veg-${index}`}>Non-Vegetarian</Label>
+                                    <label htmlFor={`non-veg-${index}`}>Non-Vegetarian</label>
                                   </div>
                                   <div className="flex items-center space-x-2">
                                     <RadioGroupItem value="Vegan" id={`vegan-${index}`} />
-                                    <Label htmlFor={`vegan-${index}`}>Vegan</Label>
+                                    <label htmlFor={`vegan-${index}`}>Vegan</label>
                                   </div>
                                   <div className="flex items-center space-x-2">
                                     <RadioGroupItem value="Other" id={`other-${index}`} />
-                                    <Label htmlFor={`other-${index}`}>Other</Label>
+                                    <label htmlFor={`other-${index}`}>Other</label>
                                   </div>
                                 </RadioGroup>
                               </FormControl>
