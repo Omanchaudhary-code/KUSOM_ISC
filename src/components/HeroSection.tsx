@@ -28,7 +28,7 @@ export default function HeroSection() {
       {/* Dynamic animated background elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         {/* Floating binary numbers - responsive count */}
-        {[...Array(window.innerWidth > 768 ? 25 : 15)].map((_, i) => (
+        {[...Array(typeof window !== 'undefined' && window.innerWidth > 768 ? 25 : 15)].map((_, i) => (
           <motion.div
             key={`binary-${i}`}
             className="absolute text-xs sm:text-sm font-mono text-isclub-teal/25 select-none"
@@ -56,13 +56,13 @@ export default function HeroSection() {
         {/* Enhanced pulsing circuit lines - responsive */}
         <svg className="absolute inset-0 w-full h-full opacity-10 sm:opacity-15" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <pattern id="tech-circuit" width="100" height="100" patternUnits="userSpaceOnUse" className="sm:w-150 sm:h-150">
+            <pattern id="tech-circuit" width="100" height="100" patternUnits="userSpaceOnUse">
               <motion.path
                 d="M20,20 L60,20 L60,60 L80,60"
                 stroke="currentColor"
                 strokeWidth="2"
                 fill="none"
-                className="text-isclub-teal sm:stroke-[3]"
+                className="text-isclub-teal"
                 animate={{
                   pathLength: [0, 1, 0],
                   opacity: [0.4, 1, 0.4],
@@ -79,7 +79,7 @@ export default function HeroSection() {
                 stroke="currentColor"
                 strokeWidth="2"
                 fill="none"
-                className="text-blue-500 sm:stroke-[3]"
+                className="text-blue-500"
                 animate={{
                   pathLength: [0, 1, 0],
                   opacity: [0.4, 1, 0.4],
@@ -96,7 +96,7 @@ export default function HeroSection() {
                 cx="20"
                 cy="20"
                 r="3"
-                className="text-isclub-teal fill-current sm:r-4"
+                className="text-isclub-teal fill-current"
                 animate={{
                   scale: [1, 2, 1],
                   opacity: [0.6, 1, 0.6],
@@ -149,7 +149,7 @@ export default function HeroSection() {
           {techParticles.map((particle, i) => {
             const Icon = particle.icon;
             const angle = (i * 360) / techParticles.length;
-            const radius = window.innerWidth > 768 ? 250 : 150;
+            const radius = typeof window !== 'undefined' && window.innerWidth > 768 ? 250 : 150;
             return (
               <motion.div
                 key={i}
@@ -207,20 +207,19 @@ export default function HeroSection() {
               repeat: Infinity,
               ease: "linear",
             }}
-            className="sm:bg-[length:60px_60px]"
           />
         </div>
 
         {/* Enhanced floating hexagons - responsive count and sizing */}
-        {[...Array(window.innerWidth > 768 ? 12 : 6)].map((_, i) => (
+        {[...Array(typeof window !== 'undefined' && window.innerWidth > 768 ? 12 : 6)].map((_, i) => (
           <motion.div
             key={`hex-${i}`}
             className="absolute border-2 border-isclub-teal/30"
             style={{
-              left: `${15 + i * (window.innerWidth > 768 ? 8 : 12)}%`,
+              left: `${15 + i * (typeof window !== 'undefined' && window.innerWidth > 768 ? 8 : 12)}%`,
               top: `${15 + (i % 4) * 20}%`,
-              width: window.innerWidth > 768 ? '50px' : '30px',
-              height: window.innerWidth > 768 ? '50px' : '30px',
+              width: typeof window !== 'undefined' && window.innerWidth > 768 ? '50px' : '30px',
+              height: typeof window !== 'undefined' && window.innerWidth > 768 ? '50px' : '30px',
               clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
             }}
             animate={{
