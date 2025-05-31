@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import Footer from '@/components/Footer';
 import BriefAbout from '@/components/BriefAbout';
+import WorkshopHighlight from '@/components/WorkshopHighlight';
 
 const Index = () => {
   return (
@@ -12,6 +13,7 @@ const Index = () => {
       <main className="flex-1">
         <HeroSection />
         <BriefAbout />
+        <WorkshopHighlight />
       </main>
       <Footer />
     </div>
