@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { Menu, X, Info, Code, Calendar, Users, Mail } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,80 +33,146 @@ export default function Navbar() {
   ];
 
   return (
-    <nav
+    <motion.nav
       className={cn(
-        'fixed top-0 w-full z-50 transition-all duration-300',
+        'fixed top-0 w-full z-50 transition-all duration-500',
         isScrolled 
-          ? 'bg-white/90 backdrop-blur-md shadow-sm py-3' 
-          : 'bg-transparent py-5'
+          ? 'bg-white/95 backdrop-blur-xl shadow-lg border-b border-white/20 py-2' 
+          : 'bg-gradient-to-r from-white/80 via-white/70 to-white/80 backdrop-blur-md py-4'
       )}
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
     >
-      <div className="container px-4 mx-auto flex items-center justify-between">
+      <div className="container px-4 sm:px-6 lg:px-8 mx-auto flex items-center justify-between">
         {/* Logo */}
         <Link 
           to="/" 
-          className="flex items-center space-x-2 transition-opacity hover:opacity-80"
+          className="flex items-center space-x-2 transition-all duration-300 hover:scale-105"
         >
-          <span><img src="https://i.imgur.com/Z9AjSJE.png" alt="Logo" width="32px"/></span>
-          <span className="font-mono text-isclub-teal font-bold text-xl">IS</span>
-          <span className="font-mono font-medium text-xl text-isclub-dark">Club</span>
+          <motion.div
+            className="relative"
+            whileHover={{ rotate: 360 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+          >
+            <img 
+              src="https://i.imgur.com/Z9AjSJE.png" 
+              alt="Logo" 
+              className="w-8 h-8 sm:w-10 sm:h-10" 
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-isclub-teal/20 to-isclub-cyan/20 rounded-full blur-md"></div>
+          </motion.div>
+          <div className="flex items-center">
+            <span className="font-mono text-isclub-teal font-bold text-xl sm:text-2xl">IS</span>
+            <span className="font-mono font-medium text-xl sm:text-2xl text-isclub-dark">Club</span>
+          </div>
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-8">
-          {navItems.map((item) => (
-            <Link
+        <div className="hidden lg:flex items-center space-x-1">
+          {navItems.map((item, index) => (
+            <motion.div
               key={item.name}
-              to={item.href}
-              className="group flex items-center space-x-1 text-sm font-medium text-isclub-gray hover:text-isclub-teal transition-colors"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <span>{item.icon}</span>
-              <span className="inline-block relative">
-                {item.name}
-                <span className="absolute inset-x-0 bottom-0 h-0.5 bg-isclub-teal transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
-              </span>
-            </Link>
+              <Link
+                to={item.href}
+                className="group flex items-center space-x-2 px-4 py-2 text-sm font-medium text-isclub-gray hover:text-isclub-teal transition-all duration-300 rounded-lg hover:bg-isclub-teal/5 relative overflow-hidden"
+              >
+                <motion.span
+                  className="flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-r from-isclub-teal/10 to-isclub-cyan/10 group-hover:from-isclub-teal/20 group-hover:to-isclub-cyan/20 transition-all duration-300"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {item.icon}
+                </motion.span>
+                <span className="relative">
+                  {item.name}
+                  <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-isclub-teal to-isclub-cyan transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full"></span>
+                </span>
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-isclub-teal/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  initial={false}
+                />
+              </Link>
+            </motion.div>
           ))}
         </div>
 
         {/* Mobile Menu Button */}
-        <button
-          className="md:hidden flex items-center"
+        <motion.button
+          className="lg:hidden flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-r from-isclub-teal/10 to-isclub-cyan/10 hover:from-isclub-teal/20 hover:to-isclub-cyan/20 transition-all duration-300"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
         >
-          {isOpen ? (
-            <X className="w-6 h-6 text-isclub-gray" />
-          ) : (
-            <Menu className="w-6 h-6 text-isclub-gray" />
-          )}
-        </button>
+          <AnimatePresence mode="wait">
+            {isOpen ? (
+              <motion.div
+                key="close"
+                initial={{ rotate: -90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: 90, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                <X className="w-5 h-5 text-isclub-gray" />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="menu"
+                initial={{ rotate: 90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: -90, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Menu className="w-5 h-5 text-isclub-gray" />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.button>
       </div>
 
       {/* Mobile Navigation */}
-      {isOpen && (
-        <motion.div 
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: 'auto' }}
-          exit={{ opacity: 0, height: 0 }}
-          transition={{ duration: 0.3 }}
-          className="md:hidden bg-white shadow-lg overflow-hidden"
-        >
-          <div className="container px-4 mx-auto py-4 space-y-4">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                onClick={() => setIsOpen(false)}
-                className="flex items-center space-x-2 text-base font-medium text-isclub-gray hover:text-isclub-teal transition-colors"
-              >
-                <span>{item.icon}</span>
-                <span>{item.name}</span>
-              </Link>
-            ))}
-          </div>
-        </motion.div>
-      )}
-    </nav>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            initial={{ opacity: 0, height: 0, y: -10 }}
+            animate={{ opacity: 1, height: 'auto', y: 0 }}
+            exit={{ opacity: 0, height: 0, y: -10 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="lg:hidden bg-white/95 backdrop-blur-xl border-t border-white/20 shadow-xl overflow-hidden"
+          >
+            <div className="container px-4 sm:px-6 mx-auto py-4 space-y-2">
+              {navItems.map((item, index) => (
+                <motion.div
+                  key={item.name}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3, delay: index * 0.1 }}
+                >
+                  <Link
+                    to={item.href}
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center space-x-3 p-3 text-base font-medium text-isclub-gray hover:text-isclub-teal transition-all duration-300 rounded-lg hover:bg-gradient-to-r hover:from-isclub-teal/5 hover:to-isclub-cyan/5 group"
+                  >
+                    <motion.span
+                      className="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-r from-isclub-teal/10 to-isclub-cyan/10 group-hover:from-isclub-teal/20 group-hover:to-isclub-cyan/20 transition-all duration-300"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      {item.icon}
+                    </motion.span>
+                    <span className="font-medium">{item.name}</span>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.nav>
   );
 }

@@ -88,11 +88,29 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground font-sans overflow-x-hidden;
   }
   
   code, pre {
     @apply font-mono;
+  }
+
+  /* Responsive text sizing */
+  h1 {
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl;
+  }
+  
+  h2 {
+    @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl;
+  }
+  
+  h3 {
+    @apply text-lg sm:text-xl md:text-2xl lg:text-3xl;
+  }
+
+  /* Responsive container padding */
+  .container {
+    @apply px-4 sm:px-6 lg:px-8;
   }
 }
 
@@ -102,7 +120,7 @@
   }
   
   .section-padding {
-    @apply py-16 md:py-24;
+    @apply py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24;
   }
   
   .hover-lift {
@@ -114,7 +132,7 @@
   }
   
   .tech-card {
-    @apply bg-white border border-gray-100 rounded-lg shadow-sm hover:shadow-md transition-all duration-300;
+    @apply bg-white border border-gray-100 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-4 sm:p-6;
   }
   
   .tech-badge {
@@ -140,11 +158,17 @@
   
   .tech-dot-grid {
     background-image: radial-gradient(rgba(20, 184, 166, 0.2) 1px, transparent 1px);
-    background-size: 20px 20px;
+    background-size: 15px 15px;
+  }
+
+  @screen sm {
+    .tech-dot-grid {
+      background-size: 20px 20px;
+    }
   }
   
   .cyber-button {
-    @apply relative inline-flex items-center justify-center px-6 py-3 overflow-hidden font-mono font-medium tracking-tighter text-white bg-gray-800 rounded-lg group;
+    @apply relative inline-flex items-center justify-center px-4 py-2 sm:px-6 sm:py-3 overflow-hidden font-mono font-medium tracking-tighter text-white bg-gray-800 rounded-lg group;
   }
   
   .cyber-button:hover .cyber-button-glitch {
@@ -153,6 +177,25 @@
   
   .cyber-button-glitch {
     @apply absolute inset-0 opacity-0 bg-gradient-to-r from-cyan-400 to-purple-500 transition-opacity flex items-center justify-center rounded-lg;
+  }
+
+  /* Responsive spacing utilities */
+  .space-y-responsive > * + * {
+    @apply mt-4 sm:mt-6 md:mt-8;
+  }
+
+  .space-x-responsive > * + * {
+    @apply ml-4 sm:ml-6 md:ml-8;
+  }
+
+  /* Mobile-first button styles */
+  .btn-responsive {
+    @apply px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-base md:px-8 md:py-4 md:text-lg;
+  }
+
+  /* Responsive grid utilities */
+  .grid-responsive {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8;
   }
 }
 
@@ -166,12 +209,24 @@
 }
 
 .tech-glow {
-  box-shadow: 0 0 25px rgba(20, 184, 166, 0.2);
+  box-shadow: 0 0 15px rgba(20, 184, 166, 0.2);
+}
+
+@screen sm {
+  .tech-glow {
+    box-shadow: 0 0 25px rgba(20, 184, 166, 0.2);
+  }
 }
 
 .tech-pattern {
   background-image: radial-gradient(rgba(20, 184, 166, 0.1) 1px, transparent 1px);
-  background-size: 20px 20px;
+  background-size: 15px 15px;
+}
+
+@screen sm {
+  .tech-pattern {
+    background-size: 20px 20px;
+  }
 }
 
 /* Cyberpunk glitch effect */
@@ -224,4 +279,34 @@
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Mobile optimization */
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Reduce motion for mobile devices */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* Touch targets for mobile */
+@media (pointer: coarse) {
+  button,
+  [role="button"],
+  input[type="submit"],
+  input[type="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
 }

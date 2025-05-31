@@ -7,9 +7,9 @@ import BriefAbout from '@/components/BriefAbout';
 
 const Index = () => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen w-full overflow-x-hidden">
       <Navbar />
-      <main>
+      <main className="flex-1">
         <HeroSection />
         <BriefAbout />
       </main>

@@ -1,3 +1,4 @@
+
 import { motion } from 'framer-motion';
 import { ArrowDown, Terminal, Code, CircuitBoard, Cpu, Database, Zap, Rocket, Brain } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -20,17 +21,17 @@ export default function HeroSection() {
   ];
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4">
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 lg:pt-16">
       {/* Enhanced tech background with multiple layers */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50/30 to-teal-50/40 -z-10"></div>
       
       {/* Dynamic animated background elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
-        {/* Floating binary numbers */}
-        {[...Array(25)].map((_, i) => (
+        {/* Floating binary numbers - responsive count */}
+        {[...Array(window.innerWidth > 768 ? 25 : 15)].map((_, i) => (
           <motion.div
             key={`binary-${i}`}
-            className="absolute text-xs font-mono text-isclub-teal/25 select-none"
+            className="absolute text-xs sm:text-sm font-mono text-isclub-teal/25 select-none"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -52,16 +53,16 @@ export default function HeroSection() {
           </motion.div>
         ))}
 
-        {/* Enhanced pulsing circuit lines */}
-        <svg className="absolute inset-0 w-full h-full opacity-15" xmlns="http://www.w3.org/2000/svg">
+        {/* Enhanced pulsing circuit lines - responsive */}
+        <svg className="absolute inset-0 w-full h-full opacity-10 sm:opacity-15" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <pattern id="tech-circuit" width="150" height="150" patternUnits="userSpaceOnUse">
+            <pattern id="tech-circuit" width="100" height="100" patternUnits="userSpaceOnUse" className="sm:w-150 sm:h-150">
               <motion.path
-                d="M30,30 L80,30 L80,80 L120,80"
+                d="M20,20 L60,20 L60,60 L80,60"
                 stroke="currentColor"
-                strokeWidth="3"
+                strokeWidth="2"
                 fill="none"
-                className="text-isclub-teal"
+                className="text-isclub-teal sm:stroke-[3]"
                 animate={{
                   pathLength: [0, 1, 0],
                   opacity: [0.4, 1, 0.4],
@@ -74,11 +75,11 @@ export default function HeroSection() {
                 }}
               />
               <motion.path
-                d="M80,80 L80,120 L120,120"
+                d="M60,60 L60,80 L80,80"
                 stroke="currentColor"
-                strokeWidth="3"
+                strokeWidth="2"
                 fill="none"
-                className="text-blue-500"
+                className="text-blue-500 sm:stroke-[3]"
                 animate={{
                   pathLength: [0, 1, 0],
                   opacity: [0.4, 1, 0.4],
@@ -92,35 +93,18 @@ export default function HeroSection() {
                 }}
               />
               <motion.circle
-                cx="30"
-                cy="30"
-                r="4"
-                className="text-isclub-teal fill-current"
+                cx="20"
+                cy="20"
+                r="3"
+                className="text-isclub-teal fill-current sm:r-4"
                 animate={{
                   scale: [1, 2, 1],
                   opacity: [0.6, 1, 0.6],
-                  r: [3, 6, 3],
+                  r: [2, 5, 2],
                 }}
                 transition={{
                   duration: 3,
                   repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
-              <motion.circle
-                cx="80"
-                cy="80"
-                r="4"
-                className="text-blue-500 fill-current"
-                animate={{
-                  scale: [1, 2, 1],
-                  opacity: [0.6, 1, 0.6],
-                  r: [3, 6, 3],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  delay: 1,
                   ease: "easeInOut",
                 }}
               />
@@ -129,12 +113,12 @@ export default function HeroSection() {
           <rect width="100%" height="100%" fill="url(#tech-circuit)" />
         </svg>
 
-        {/* Enhanced animated gradient orbs */}
+        {/* Enhanced animated gradient orbs - responsive sizing */}
         <motion.div 
           animate={{ 
             y: [0, -60, 0],
             x: [0, 40, 0],
-            opacity: [0.5, 1, 0.5],
+            opacity: [0.3, 0.7, 0.3],
             scale: [1, 1.4, 1],
           }}
           transition={{ 
@@ -142,14 +126,14 @@ export default function HeroSection() {
             repeat: Infinity,
             ease: "easeInOut" 
           }}
-          className="absolute top-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-gradient-to-r from-purple-500/25 via-blue-500/25 to-teal-500/25 blur-3xl"
+          className="absolute top-1/4 right-1/4 w-64 h-64 sm:w-96 sm:h-96 lg:w-[500px] lg:h-[500px] rounded-full bg-gradient-to-r from-purple-500/15 via-blue-500/15 to-teal-500/15 sm:from-purple-500/25 sm:via-blue-500/25 sm:to-teal-500/25 blur-3xl"
         ></motion.div>
         
         <motion.div 
           animate={{ 
             y: [0, 50, 0],
             x: [0, -50, 0],
-            opacity: [0.4, 0.9, 0.4],
+            opacity: [0.2, 0.6, 0.2],
             scale: [1, 1.5, 1],
           }}
           transition={{ 
@@ -157,20 +141,21 @@ export default function HeroSection() {
             repeat: Infinity,
             ease: "easeInOut" 
           }}
-          className="absolute bottom-1/3 left-1/4 w-[400px] h-[400px] rounded-full bg-gradient-to-r from-teal-500/30 to-cyan-500/30 blur-3xl"
+          className="absolute bottom-1/3 left-1/4 w-48 h-48 sm:w-80 sm:h-80 lg:w-[400px] lg:h-[400px] rounded-full bg-gradient-to-r from-teal-500/20 to-cyan-500/20 sm:from-teal-500/30 sm:to-cyan-500/30 blur-3xl"
         ></motion.div>
 
-        {/* Tech particles orbiting around center */}
+        {/* Tech particles orbiting around center - responsive sizing */}
         <div className="absolute inset-0 flex items-center justify-center">
           {techParticles.map((particle, i) => {
             const Icon = particle.icon;
             const angle = (i * 360) / techParticles.length;
+            const radius = window.innerWidth > 768 ? 250 : 150;
             return (
               <motion.div
                 key={i}
                 className="absolute"
                 style={{
-                  transformOrigin: '250px 0px',
+                  transformOrigin: `${radius}px 0px`,
                 }}
                 animate={{
                   rotate: [angle, angle + 360],
@@ -195,30 +180,15 @@ export default function HeroSection() {
                     delay: particle.delay,
                   }}
                 >
-                  <Icon className="w-8 h-8 text-isclub-teal/50" />
+                  <Icon className="w-6 h-6 sm:w-8 sm:h-8 text-isclub-teal/50" />
                 </motion.div>
               </motion.div>
             );
           })}
         </div>
 
-        {/* Enhanced scanning beam effect */}
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/15 to-transparent"
-          style={{ width: '4px' }}
-          animate={{
-            x: ['-200px', 'calc(100vw + 200px)'],
-            opacity: [0, 1, 0],
-          }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        />
-
-        {/* Enhanced grid pattern with animation */}
-        <div className="absolute inset-0 opacity-8">
+        {/* Enhanced grid pattern with animation - responsive sizing */}
+        <div className="absolute inset-0 opacity-5 sm:opacity-8">
           <motion.div
             className="w-full h-full"
             style={{
@@ -226,30 +196,31 @@ export default function HeroSection() {
                 linear-gradient(to right, rgba(20, 184, 166, 0.4) 1px, transparent 1px),
                 linear-gradient(to bottom, rgba(20, 184, 166, 0.4) 1px, transparent 1px)
               `,
-              backgroundSize: '60px 60px',
+              backgroundSize: '40px 40px',
             }}
             animate={{
-              backgroundPosition: ['0px 0px', '60px 60px'],
-              opacity: [0.6, 1, 0.6],
+              backgroundPosition: ['0px 0px', '40px 40px'],
+              opacity: [0.4, 0.8, 0.4],
             }}
             transition={{
               duration: 15,
               repeat: Infinity,
               ease: "linear",
             }}
+            className="sm:bg-[length:60px_60px]"
           />
         </div>
 
-        {/* Enhanced floating hexagons */}
-        {[...Array(12)].map((_, i) => (
+        {/* Enhanced floating hexagons - responsive count and sizing */}
+        {[...Array(window.innerWidth > 768 ? 12 : 6)].map((_, i) => (
           <motion.div
             key={`hex-${i}`}
             className="absolute border-2 border-isclub-teal/30"
             style={{
-              left: `${15 + i * 8}%`,
+              left: `${15 + i * (window.innerWidth > 768 ? 8 : 12)}%`,
               top: `${15 + (i % 4) * 20}%`,
-              width: '50px',
-              height: '50px',
+              width: window.innerWidth > 768 ? '50px' : '30px',
+              height: window.innerWidth > 768 ? '50px' : '30px',
               clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
             }}
             animate={{
@@ -267,40 +238,17 @@ export default function HeroSection() {
             }}
           />
         ))}
-
-        {/* Data stream lines */}
-        {[...Array(8)].map((_, i) => (
-          <motion.div
-            key={`stream-${i}`}
-            className="absolute h-px bg-gradient-to-r from-transparent via-isclub-teal/40 to-transparent"
-            style={{
-              left: 0,
-              right: 0,
-              top: `${20 + i * 10}%`,
-            }}
-            animate={{
-              scaleX: [0, 1, 0],
-              opacity: [0, 0.8, 0],
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              delay: i * 0.5,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
       </div>
       
-      <div className="container mx-auto max-w-6xl z-10">
+      <div className="container mx-auto max-w-7xl z-10 text-center">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-center"
+          className="space-y-6 sm:space-y-8"
         >
           <motion.span 
-            className="tech-badge mb-6 mt-8"
+            className="inline-block px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base font-medium bg-primary/10 text-primary rounded-full border border-primary/20"
             animate={{
               boxShadow: [
                 '0 0 0 rgba(20, 184, 166, 0.3)',
@@ -317,9 +265,9 @@ export default function HeroSection() {
             KUSOM Information Systems Club
           </motion.span>
           
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-isclub-dark leading-tight mb-6">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-display font-bold text-isclub-dark leading-tight">
             <motion.span 
-              className="block"
+              className="block mb-2 sm:mb-4"
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
@@ -341,7 +289,7 @@ export default function HeroSection() {
           </h1>
           
           <motion.p 
-            className="text-lg md:text-xl text-isclub-gray max-w-2xl mx-auto mb-12"
+            className="text-base sm:text-lg md:text-xl lg:text-2xl text-isclub-gray max-w-xs sm:max-w-lg md:max-w-2xl lg:max-w-4xl mx-auto px-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
@@ -349,12 +297,12 @@ export default function HeroSection() {
             A hub for students eager to explore the vast world of computing, design, coding, and web development.
           </motion.p>
 
-          {/* Event Countdown moved further down */}
+          {/* Event Countdown */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1 }}
-            className="mb-12"
+            className="my-8 sm:my-12"
           >
             <EventCountdown />
           </motion.div>
@@ -364,15 +312,15 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.2 }}
-            className="mb-8"
+            className="mt-8 sm:mt-12"
           >
             <motion.button
               className={cn(
-                "px-12 py-4 rounded-lg tech-gradient text-white font-semibold text-lg",
+                "px-8 py-3 sm:px-12 sm:py-4 lg:px-16 lg:py-5 rounded-lg tech-gradient text-white font-semibold text-base sm:text-lg lg:text-xl",
                 "transition-all duration-300 transform relative overflow-hidden",
                 "shadow-2xl hover:shadow-3xl border border-white/20",
                 "focus:outline-none focus:ring-2 focus:ring-isclub-teal/50",
-                "backdrop-blur-sm"
+                "backdrop-blur-sm w-full max-w-xs sm:max-w-sm md:w-auto"
               )}
               whileHover={{ 
                 scale: 1.05,
