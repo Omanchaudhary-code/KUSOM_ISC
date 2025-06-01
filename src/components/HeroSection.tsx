@@ -247,21 +247,12 @@ export default function HeroSection() {
           className="space-y-6 sm:space-y-8"
         >
           <motion.div 
-            className="flex justify-center w-full"
-            animate={{
-              boxShadow: [
-                '0 0 0 rgba(20, 184, 166, 0.3)',
-                '0 0 25px rgba(20, 184, 166, 0.7)',
-                '0 0 0 rgba(20, 184, 166, 0.3)',
-              ],
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
+            className="flex justify-center w-full mb-6 sm:mb-8 lg:mb-12"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <span className="inline-flex items-center justify-center px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 text-sm sm:text-base md:text-lg font-medium bg-primary/10 text-primary rounded-full border border-primary/20 max-w-[95vw] text-center">
+            <span className="inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 lg:px-12 lg:py-5 text-sm sm:text-base lg:text-lg xl:text-xl font-medium bg-primary/10 text-primary rounded-full border border-primary/20 max-w-[90vw] sm:max-w-none text-center">
               KUSOM Information Systems Club
             </span>
           </motion.div>
