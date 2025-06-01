@@ -10,7 +10,7 @@ export default function Footer() {
             <a href="#" className="flex items-center space-x-2 mb-6">
               <span><img src="https://i.imgur.com/Z9AjSJE.png" alt="Logo" width="32px" /></span>
               <span className="text-isclub-teal font-display font-bold text-xl">IS</span>
-              <span className="font-display font-medium text-xl">Club</span>
+              <span className="font-display font-medium text-xl">Club Oman</span>
             </a>
             <p className="text-gray-400 text-sm mb-6">
               Empowering KUSOMites to excel in the evolving business and tech landscape.
