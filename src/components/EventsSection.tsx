@@ -27,8 +27,8 @@ export default function EventsSection() {
     },
     {
       id: "design-thinking",
-      title: "IS Hackathon",
-      date: "May 23-25, 2025",
+      title: "Hack for Business",
+      date: "June 21-23, 2025",
       time: "48 Hours",
       location: "Multi-purpose Hall, KU",
       description: "Join us for a 48-hour hackathon where teams will compete to build innovative solutions to real-world problems.",

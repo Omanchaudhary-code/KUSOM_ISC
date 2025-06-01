@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Timer, MapPin, Calendar } from 'lucide-react';
 
 const calculateTimeLeft = () => {
-  const targetDate = new Date('2025-06-20T00:00:00');
+  const targetDate = new Date('2025-06-21T11:00:00');
   const now = new Date();
   const difference = targetDate.getTime() - now.getTime();
 
@@ -156,7 +156,7 @@ const EventCountdown = () => {
         >
           <Timer className="w-5 h-5 sm:w-7 sm:h-7" />
         </motion.div>
-        <span className="text-base sm:text-xl font-medium text-center">Business Hackathon 2025</span>
+        <span className="text-base sm:text-xl font-medium text-center">Hack For Business 2025</span>
       </motion.div>
       
       <div className="flex gap-3 sm:gap-6 md:gap-8 relative z-10 w-full max-w-sm sm:max-w-none justify-center">

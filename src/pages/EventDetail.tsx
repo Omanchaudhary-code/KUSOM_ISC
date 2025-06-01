@@ -42,11 +42,11 @@ const events = [
   },
   {
     id: "design-thinking",
-    title: "Design Thinking Seminar",
-    date: "November 5, 2023",
-    time: "1:00 PM - 3:30 PM",
-    location: "KUSOM Auditorium",
-    description: "A comprehensive workshop on applying design thinking principles to business problems.",
+    title: "Hack For Business",
+    date: "June 21-23, 2025",
+    time: "48 Hours",
+    location: "Multipurpose Hall, KU",
+    description: "A 48-hour hackathon where teams will compete to build innovative solutions to real-world problems.",
     imageUrl: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
     longDescription: `
       Design Thinking is a methodology used by designers to solve complex problems and find desirable solutions for clients. 
@@ -59,7 +59,7 @@ const events = [
     targetAudience: "Business students, aspiring entrepreneurs, and anyone interested in innovative problem-solving.",
     prerequisites: [
       "No technical prerequisites required",
-      "Bring a notebook and pen for ideation exercises"
+      "Bring your laptop"
     ],
     schedule: [
       { time: "1:00 PM", activity: "Introduction to Design Thinking" },
