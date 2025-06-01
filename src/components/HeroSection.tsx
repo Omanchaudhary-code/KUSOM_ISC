@@ -246,13 +246,14 @@ export default function HeroSection() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="space-y-6 sm:space-y-8"
         >
+          {/* Club badge with proper alignment */}
           <motion.div 
-            className="flex justify-center w-full mb-6 sm:mb-8 lg:mb-12"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
+            className="mb-6 sm:mb-8 lg:mb-12 flex justify-center"
           >
-            <span className="inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 lg:px-12 lg:py-5 text-sm sm:text-base lg:text-lg xl:text-xl font-medium bg-primary/10 text-primary rounded-full border border-primary/20 max-w-[90vw] sm:max-w-none text-center">
+            <span className="inline-flex items-center justify-center px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 lg:px-10 lg:py-4 text-xs sm:text-sm md:text-base lg:text-lg font-medium bg-primary/10 text-primary rounded-full border border-primary/20 max-w-full whitespace-nowrap">
               KUSOM Information Systems Club
             </span>
           </motion.div>
