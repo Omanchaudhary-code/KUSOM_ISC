@@ -246,8 +246,8 @@ export default function HeroSection() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="space-y-6 sm:space-y-8"
         >
-          <motion.span 
-            className="inline-flex items-center px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 text-xs sm:text-sm md:text-base font-medium bg-primary/10 text-primary rounded-full border border-primary/20 whitespace-nowrap overflow-hidden text-ellipsis max-w-[90vw] sm:max-w-none"
+          <motion.div 
+            className="flex justify-center w-full"
             animate={{
               boxShadow: [
                 '0 0 0 rgba(20, 184, 166, 0.3)',
@@ -261,9 +261,10 @@ export default function HeroSection() {
               ease: "easeInOut",
             }}
           >
-            <span className="block sm:hidden">KUSOM IS Club</span>
-            <span className="hidden sm:block">KUSOM Information Systems Club</span>
-          </motion.span>
+            <span className="inline-flex items-center justify-center px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 text-sm sm:text-base md:text-lg font-medium bg-primary/10 text-primary rounded-full border border-primary/20 max-w-[95vw] text-center">
+              KUSOM Information Systems Club
+            </span>
+          </motion.div>
           
           <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-display font-bold text-isclub-dark leading-tight">
             <motion.span 
