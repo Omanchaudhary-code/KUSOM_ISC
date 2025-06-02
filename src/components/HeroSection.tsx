@@ -1,6 +1,6 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowDown, Terminal, Code, CircuitBoard, Cpu, Database, Zap, Rocket, Brain } from 'lucide-react';
+import { Terminal, Code, CircuitBoard, Cpu, Database, Zap, Rocket, Brain } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useNavigate } from 'react-router-dom';
 import EventCountdown from './EventCountdown';
@@ -286,7 +286,7 @@ export default function HeroSection() {
                   ease: "linear",
                 }}
               />
-              <span className="relative z-10 font-bold tracking-wide">Register Here</span>
+
               
               {/* Enhanced animated border */}
               <motion.div
@@ -326,8 +326,7 @@ export default function HeroSection() {
           }}
           className="flex flex-col items-center space-y-2 text-isclub-gray/70"
         >
-          <span className="text-sm font-medium">Scroll to explore</span>
-          <ArrowDown className="w-5 h-5" />
+
         </motion.div>
       </motion.div>
     </motion.section>
