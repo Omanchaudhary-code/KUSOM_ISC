@@ -1,5 +1,5 @@
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Timer, MapPin, Calendar } from 'lucide-react';
 
@@ -31,24 +31,39 @@ const EventCountdown = () => {
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
   const [prevTimeLeft, setPrevTimeLeft] = useState(calculateTimeLeft());
   const intervalRef = useRef<NodeJS.Timeout>();
+  const frameRef = useRef<number>();
+
+  // Use requestAnimationFrame for smoother updates
+  const updateTimer = useCallback(() => {
+    const newTimeLeft = calculateTimeLeft();
+    setPrevTimeLeft(timeLeft);
+    setTimeLeft(newTimeLeft);
+  }, [timeLeft]);
 
   useEffect(() => {
-    // Use requestAnimationFrame for smooth updates
-    const updateTimer = () => {
-      const newTimeLeft = calculateTimeLeft();
-      setPrevTimeLeft(timeLeft);
-      setTimeLeft(newTimeLeft);
+    // Smooth timer with requestAnimationFrame
+    const tick = () => {
+      updateTimer();
+      frameRef.current = requestAnimationFrame(tick);
     };
 
     // Update every second with smooth transitions
-    intervalRef.current = setInterval(updateTimer, 1000);
+    intervalRef.current = setInterval(() => {
+      if (frameRef.current) {
+        cancelAnimationFrame(frameRef.current);
+      }
+      frameRef.current = requestAnimationFrame(tick);
+    }, 1000);
 
     return () => {
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
       }
+      if (frameRef.current) {
+        cancelAnimationFrame(frameRef.current);
+      }
     };
-  }, [timeLeft]);
+  }, [updateTimer]);
 
   const timeUnits = [
     { label: 'Days', value: timeLeft.days, prevValue: prevTimeLeft.days },
@@ -62,16 +77,16 @@ const EventCountdown = () => {
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1, type: "spring", bounce: 0.4 }}
+        transition={{ duration: 1.2, type: "spring", bounce: 0.4 }}
         className="flex flex-col items-center mt-4 sm:mt-8 px-4"
       >
         <motion.div
           animate={{
             rotateY: [0, 360],
-            scale: [1, 1.2, 1],
+            scale: [1, 1.3, 1],
           }}
           transition={{
-            duration: 3,
+            duration: 4,
             repeat: Infinity,
             ease: "easeInOut",
           }}
@@ -140,18 +155,18 @@ const EventCountdown = () => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1, delay: 0.2 }}
+      transition={{ duration: 1.2, delay: 0.3 }}
       className="flex flex-col items-center mt-4 sm:mt-8 relative px-4"
     >
       <motion.div 
         className="flex items-center gap-3 mb-6 sm:mb-8 text-isclub-teal relative z-10"
         animate={{
-          scale: [1, 1.02, 1],
+          scale: [1, 1.03, 1],
         }}
         transition={{
-          duration: 4,
+          duration: 5,
           repeat: Infinity,
           ease: "easeInOut",
         }}
@@ -161,7 +176,7 @@ const EventCountdown = () => {
             rotate: [0, 360],
           }}
           transition={{
-            duration: 10,
+            duration: 12,
             repeat: Infinity,
             ease: "linear",
           }}
@@ -178,17 +193,17 @@ const EventCountdown = () => {
           <motion.div
             key={label}
             className="flex flex-col items-center flex-1 sm:flex-none min-w-0"
-            initial={{ opacity: 0, y: 30, scale: 0.8 }}
+            initial={{ opacity: 0, y: 40, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ 
-              delay: index * 0.15,
-              duration: 0.8,
+              delay: index * 0.2,
+              duration: 1,
               type: "spring",
               bounce: 0.4
             }}
             whileHover={{ 
-              scale: 1.05,
-              y: -5,
+              scale: 1.08,
+              y: -8,
               transition: { type: "spring", stiffness: 400, damping: 15 }
             }}
           >
@@ -197,13 +212,13 @@ const EventCountdown = () => {
                 className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-xl bg-gradient-to-br from-isclub-teal via-isclub-cyan to-blue-500 flex items-center justify-center text-white text-lg sm:text-2xl md:text-3xl font-bold relative overflow-hidden shadow-2xl border border-white/20"
                 animate={{
                   boxShadow: [
-                    "0 4px 20px rgba(20, 184, 166, 0.3)",
-                    "0 8px 40px rgba(20, 184, 166, 0.6)",
-                    "0 4px 20px rgba(20, 184, 166, 0.3)",
+                    "0 4px 20px rgba(20, 184, 166, 0.4)",
+                    "0 8px 40px rgba(20, 184, 166, 0.7)",
+                    "0 4px 20px rgba(20, 184, 166, 0.4)",
                   ],
                 }}
                 transition={{
-                  duration: 3,
+                  duration: 4,
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
@@ -212,21 +227,22 @@ const EventCountdown = () => {
                   <motion.div
                     key={value}
                     initial={{ 
-                      y: value !== prevValue ? -40 : 0, 
+                      y: value !== prevValue ? -50 : 0, 
                       opacity: value !== prevValue ? 0 : 1,
-                      scale: value !== prevValue ? 0.8 : 1 
+                      scale: value !== prevValue ? 0.7 : 1 
                     }}
                     animate={{ y: 0, opacity: 1, scale: 1 }}
                     exit={{ 
-                      y: 40, 
+                      y: 50, 
                       opacity: 0,
-                      scale: 0.8,
-                      transition: { duration: 0.2 }
+                      scale: 0.7,
+                      transition: { duration: 0.3, ease: "easeInOut" }
                     }}
                     transition={{ 
-                      duration: 0.4,
+                      duration: 0.5,
                       type: "spring",
-                      bounce: 0.2
+                      bounce: 0.3,
+                      ease: "easeInOut"
                     }}
                     className="absolute inset-0 flex items-center justify-center"
                   >
@@ -234,42 +250,42 @@ const EventCountdown = () => {
                   </motion.div>
                 </AnimatePresence>
                 
-                {/* Animated shimmer effect */}
+                {/* Enhanced shimmer effect */}
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent"
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
                   animate={{
-                    x: [-120, 120],
+                    x: ['-120%', '120%'],
                   }}
                   transition={{
-                    duration: 4,
+                    duration: 3,
                     repeat: Infinity,
                     ease: "easeInOut",
                   }}
                 />
 
-                {/* Corner accents with smooth animation */}
+                {/* Enhanced corner accents */}
                 <motion.div
-                  className="absolute top-1 left-1 w-2 h-2 sm:w-3 sm:h-3 border-l-2 border-t-2 border-white/40"
+                  className="absolute top-1 left-1 w-2 h-2 sm:w-3 sm:h-3 border-l-2 border-t-2 border-white/50"
                   animate={{
-                    opacity: [0.4, 1, 0.4],
-                    scale: [1, 1.1, 1],
+                    opacity: [0.5, 1, 0.5],
+                    scale: [1, 1.2, 1],
                   }}
                   transition={{
-                    duration: 2,
+                    duration: 3,
                     repeat: Infinity,
                     ease: "easeInOut",
                   }}
                 />
                 <motion.div
-                  className="absolute bottom-1 right-1 w-2 h-2 sm:w-3 sm:h-3 border-r-2 border-b-2 border-white/40"
+                  className="absolute bottom-1 right-1 w-2 h-2 sm:w-3 sm:h-3 border-r-2 border-b-2 border-white/50"
                   animate={{
-                    opacity: [0.4, 1, 0.4],
-                    scale: [1, 1.1, 1],
+                    opacity: [0.5, 1, 0.5],
+                    scale: [1, 1.2, 1],
                   }}
                   transition={{
-                    duration: 2,
+                    duration: 3,
                     repeat: Infinity,
-                    delay: 1,
+                    delay: 1.5,
                     ease: "easeInOut",
                   }}
                 />
@@ -281,7 +297,7 @@ const EventCountdown = () => {
                 color: ["#64748B", "#14B8A6", "#0891B2", "#14B8A6", "#64748B"],
               }}
               transition={{
-                duration: 5,
+                duration: 6,
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
@@ -296,15 +312,15 @@ const EventCountdown = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
+        transition={{ delay: 2 }}
         className="mt-6 sm:mt-8 text-center relative z-10"
       >
         <motion.div
           animate={{
-            y: [0, -8, 0],
+            y: [0, -10, 0],
           }}
           transition={{
-            duration: 4,
+            duration: 5,
             repeat: Infinity,
             ease: "easeInOut",
           }}
@@ -312,10 +328,10 @@ const EventCountdown = () => {
         >
           <motion.div
             animate={{
-              scale: [1, 1.2, 1],
+              scale: [1, 1.3, 1],
             }}
             transition={{
-              duration: 2,
+              duration: 3,
               repeat: Infinity,
               ease: "easeInOut",
             }}
