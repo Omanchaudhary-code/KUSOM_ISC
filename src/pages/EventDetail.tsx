@@ -10,7 +10,7 @@ const events = [
     time: "48 Hours",
     location: "Multipurpose Hall, KU",
     description: "A 48-hour hackathon where teams will compete to build innovative solutions to real-world problems.",
-    imageUrl: "https://i.imgur.com/SZIDrs6.png",
+    imageUrl: "https://i.imgur.com/20fdhl6_d.jpeg?maxwidth=520&shape=thumb&fidelity=high",
     longDescription: `
     Design Thinking is a methodology used by designers to solve complex problems and find desirable solutions for clients. 
     In this seminar, we'll explore how design thinking can be applied to various business challenges.
