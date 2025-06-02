@@ -67,13 +67,6 @@ const events = [
       { time: "2:15 PM", activity: "Coffee Break" },
       { time: "2:30 PM", activity: "Ideate, Prototype & Test Stages" },
       { time: "3:15 PM", activity: "Case Study Discussion & Closing" }
-    ],
-    speakers: [
-      {
-        name: "Maya Rodriguez",
-        role: "Design Strategy Consultant",
-        imageUrl: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e"
-      }
     ]
   },
   {
