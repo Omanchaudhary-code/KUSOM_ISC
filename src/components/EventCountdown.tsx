@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Timer, MapPin, Calendar } from 'lucide-react';
 
@@ -29,20 +29,32 @@ const calculateTimeLeft = () => {
 
 const EventCountdown = () => {
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+  const [prevTimeLeft, setPrevTimeLeft] = useState(calculateTimeLeft());
+  const intervalRef = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft());
-    }, 1000);
+    // Use requestAnimationFrame for smooth updates
+    const updateTimer = () => {
+      const newTimeLeft = calculateTimeLeft();
+      setPrevTimeLeft(timeLeft);
+      setTimeLeft(newTimeLeft);
+    };
 
-    return () => clearInterval(timer);
-  }, []);
+    // Update every second with smooth transitions
+    intervalRef.current = setInterval(updateTimer, 1000);
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [timeLeft]);
 
   const timeUnits = [
-    { label: 'Days', value: timeLeft.days },
-    { label: 'Hours', value: timeLeft.hours },
-    { label: 'Minutes', value: timeLeft.minutes },
-    { label: 'Seconds', value: timeLeft.seconds },
+    { label: 'Days', value: timeLeft.days, prevValue: prevTimeLeft.days },
+    { label: 'Hours', value: timeLeft.hours, prevValue: prevTimeLeft.hours },
+    { label: 'Minutes', value: timeLeft.minutes, prevValue: prevTimeLeft.minutes },
+    { label: 'Seconds', value: timeLeft.seconds, prevValue: prevTimeLeft.seconds },
   ];
 
   if (timeLeft.isFinished) {
@@ -134,12 +146,12 @@ const EventCountdown = () => {
       className="flex flex-col items-center mt-4 sm:mt-8 relative px-4"
     >
       <motion.div 
-        className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-8 text-isclub-teal relative z-10"
+        className="flex items-center gap-3 mb-6 sm:mb-8 text-isclub-teal relative z-10"
         animate={{
-          scale: [1, 1.05, 1],
+          scale: [1, 1.02, 1],
         }}
         transition={{
-          duration: 3,
+          duration: 4,
           repeat: Infinity,
           ease: "easeInOut",
         }}
@@ -149,129 +161,143 @@ const EventCountdown = () => {
             rotate: [0, 360],
           }}
           transition={{
-            duration: 8,
+            duration: 10,
             repeat: Infinity,
             ease: "linear",
           }}
         >
-          <Timer className="w-5 h-5 sm:w-7 sm:h-7" />
+          <Timer className="w-6 h-6 sm:w-8 sm:h-8" />
         </motion.div>
-        <span className="text-base sm:text-xl font-medium text-center">Hack For Business 2025</span>
+        <span className="text-lg sm:text-2xl font-bold text-center bg-gradient-to-r from-isclub-teal to-isclub-cyan bg-clip-text text-transparent">
+          Hack For Business 2025
+        </span>
       </motion.div>
       
-      <div className="flex gap-3 sm:gap-6 md:gap-8 relative z-10 w-full max-w-sm sm:max-w-none justify-center">
-        <AnimatePresence mode="wait">
-          {timeUnits.map(({ label, value }, index) => (
-            <motion.div
-              key={label}
-              className="flex flex-col items-center flex-1 sm:flex-none"
-              initial={{ opacity: 0, y: 30, scale: 0.8 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ 
-                delay: index * 0.15,
-                duration: 0.8,
-                type: "spring",
-                bounce: 0.4
-              }}
-              whileHover={{ 
-                scale: 1.1,
-                y: -5,
-                transition: { type: "spring", stiffness: 400, damping: 10 }
-              }}
-            >
-              <div className="relative">
-                <motion.div
-                  className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-xl tech-gradient flex items-center justify-center text-white text-lg sm:text-2xl md:text-3xl font-bold relative overflow-hidden shadow-2xl"
-                  animate={{
-                    boxShadow: [
-                      "0 0 0 rgba(45, 212, 191, 0.3)",
-                      "0 0 40px rgba(45, 212, 191, 0.8)",
-                      "0 0 0 rgba(45, 212, 191, 0.3)",
-                    ],
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                >
+      <div className="flex gap-4 sm:gap-6 md:gap-8 relative z-10 w-full max-w-2xl justify-center">
+        {timeUnits.map(({ label, value, prevValue }, index) => (
+          <motion.div
+            key={label}
+            className="flex flex-col items-center flex-1 sm:flex-none min-w-0"
+            initial={{ opacity: 0, y: 30, scale: 0.8 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ 
+              delay: index * 0.15,
+              duration: 0.8,
+              type: "spring",
+              bounce: 0.4
+            }}
+            whileHover={{ 
+              scale: 1.05,
+              y: -5,
+              transition: { type: "spring", stiffness: 400, damping: 15 }
+            }}
+          >
+            <div className="relative">
+              <motion.div
+                className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-xl bg-gradient-to-br from-isclub-teal via-isclub-cyan to-blue-500 flex items-center justify-center text-white text-lg sm:text-2xl md:text-3xl font-bold relative overflow-hidden shadow-2xl border border-white/20"
+                animate={{
+                  boxShadow: [
+                    "0 4px 20px rgba(20, 184, 166, 0.3)",
+                    "0 8px 40px rgba(20, 184, 166, 0.6)",
+                    "0 4px 20px rgba(20, 184, 166, 0.3)",
+                  ],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                <AnimatePresence mode="wait">
                   <motion.div
                     key={value}
-                    initial={{ y: -30, opacity: 0, scale: 0.5 }}
+                    initial={{ 
+                      y: value !== prevValue ? -40 : 0, 
+                      opacity: value !== prevValue ? 0 : 1,
+                      scale: value !== prevValue ? 0.8 : 1 
+                    }}
                     animate={{ y: 0, opacity: 1, scale: 1 }}
-                    exit={{ y: 30, opacity: 0, scale: 0.5 }}
+                    exit={{ 
+                      y: 40, 
+                      opacity: 0,
+                      scale: 0.8,
+                      transition: { duration: 0.2 }
+                    }}
                     transition={{ 
-                      duration: 0.6,
+                      duration: 0.4,
                       type: "spring",
-                      bounce: 0.3
+                      bounce: 0.2
                     }}
                     className="absolute inset-0 flex items-center justify-center"
                   >
                     {value.toString().padStart(2, '0')}
                   </motion.div>
-                  
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent"
-                    animate={{
-                      x: [-120, 120],
-                    }}
-                    transition={{
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                  />
+                </AnimatePresence>
+                
+                {/* Animated shimmer effect */}
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent"
+                  animate={{
+                    x: [-120, 120],
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
 
-                  {/* Corner accents */}
-                  <motion.div
-                    className="absolute top-1 left-1 w-2 h-2 sm:w-3 sm:h-3 border-l-2 border-t-2 border-white/30"
-                    animate={{
-                      opacity: [0.3, 1, 0.3],
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                  />
-                  <motion.div
-                    className="absolute bottom-1 right-1 w-2 h-2 sm:w-3 sm:h-3 border-r-2 border-b-2 border-white/30"
-                    animate={{
-                      opacity: [0.3, 1, 0.3],
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      delay: 1,
-                      ease: "easeInOut",
-                    }}
-                  />
-                </motion.div>
-              </div>
-              
-              <motion.span
-                animate={{
-                  color: ["#64748B", "#14B8A6", "#0891B2", "#14B8A6", "#64748B"],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className="mt-2 sm:mt-3 text-xs sm:text-sm font-semibold tracking-wide text-center"
-              >
-                {label}
-              </motion.span>
-            </motion.div>
-          ))}
-        </AnimatePresence>
+                {/* Corner accents with smooth animation */}
+                <motion.div
+                  className="absolute top-1 left-1 w-2 h-2 sm:w-3 sm:h-3 border-l-2 border-t-2 border-white/40"
+                  animate={{
+                    opacity: [0.4, 1, 0.4],
+                    scale: [1, 1.1, 1],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
+                <motion.div
+                  className="absolute bottom-1 right-1 w-2 h-2 sm:w-3 sm:h-3 border-r-2 border-b-2 border-white/40"
+                  animate={{
+                    opacity: [0.4, 1, 0.4],
+                    scale: [1, 1.1, 1],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    delay: 1,
+                    ease: "easeInOut",
+                  }}
+                />
+              </motion.div>
+            </div>
+            
+            <motion.span
+              animate={{
+                color: ["#64748B", "#14B8A6", "#0891B2", "#14B8A6", "#64748B"],
+              }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="mt-3 text-xs sm:text-sm font-bold tracking-wide text-center"
+            >
+              {label}
+            </motion.span>
+          </motion.div>
+        ))}
       </div>
       
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
-        className="mt-4 sm:mt-8 text-center relative z-10"
+        transition={{ delay: 1.5 }}
+        className="mt-6 sm:mt-8 text-center relative z-10"
       >
         <motion.div
           animate={{
@@ -282,7 +308,7 @@ const EventCountdown = () => {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="flex items-center justify-center gap-2 sm:gap-3 text-gray-600"
+          className="flex items-center justify-center gap-3 text-gray-600"
         >
           <motion.div
             animate={{
@@ -294,9 +320,9 @@ const EventCountdown = () => {
               ease: "easeInOut",
             }}
           >
-            <MapPin className="w-4 h-4 sm:w-5 sm:h-5" />
+            <MapPin className="w-5 h-5 text-isclub-teal" />
           </motion.div>
-          <span className="text-sm sm:text-base font-medium">Kathmandu University, Dhulikhel</span>
+          <span className="text-sm sm:text-base font-semibold">Kathmandu University, Dhulikhel</span>
         </motion.div>
       </motion.div>
     </motion.div>

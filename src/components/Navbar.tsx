@@ -1,13 +1,14 @@
-
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import { Menu, X, Info, Code, Calendar, Users, Mail } from 'lucide-react';
+import { Menu, X, Info, Code, Calendar, Users, Mail, UserPlus } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Button } from '@/components/ui/button';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const navigate = useNavigate();
 
   // Handle scroll effect
   useEffect(() => {
@@ -69,75 +70,111 @@ export default function Navbar() {
             </div>
           </Link>
 
-          {/* Desktop Navigation - responsive sizing */}
+          {/* Desktop Navigation - responsive sizing with Register button */}
           <div className="hidden lg:flex items-center space-x-1 xl:space-x-2">
-            {navItems.map((item, index) => (
-              <motion.div
-                key={item.name}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
-                <Link
-                  to={item.href}
-                  className="group flex items-center space-x-2 px-3 py-2 lg:px-4 lg:py-2 xl:px-5 xl:py-3 text-sm lg:text-base font-medium text-isclub-gray hover:text-isclub-teal transition-all duration-300 rounded-lg hover:bg-isclub-teal/5 relative overflow-hidden"
+            <div className="flex items-center space-x-1 xl:space-x-2">
+              {navItems.map((item, index) => (
+                <motion.div
+                  key={item.name}
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <motion.span
-                    className="flex items-center justify-center w-7 h-7 lg:w-8 lg:h-8 rounded-full bg-gradient-to-r from-isclub-teal/10 to-isclub-cyan/10 group-hover:from-isclub-teal/20 group-hover:to-isclub-cyan/20 transition-all duration-300"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
+                  <Link
+                    to={item.href}
+                    className="group flex items-center space-x-2 px-3 py-2 lg:px-4 lg:py-2 xl:px-5 xl:py-3 text-sm lg:text-base font-medium text-isclub-gray hover:text-isclub-teal transition-all duration-300 rounded-lg hover:bg-isclub-teal/5 relative overflow-hidden"
                   >
-                    {item.icon}
-                  </motion.span>
-                  <span className="relative hidden xl:inline">
-                    {item.name}
-                    <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-isclub-teal to-isclub-cyan transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full"></span>
-                  </span>
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-isclub-teal/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    initial={false}
-                  />
-                </Link>
-              </motion.div>
-            ))}
+                    <motion.span
+                      className="flex items-center justify-center w-7 h-7 lg:w-8 lg:h-8 rounded-full bg-gradient-to-r from-isclub-teal/10 to-isclub-cyan/10 group-hover:from-isclub-teal/20 group-hover:to-isclub-cyan/20 transition-all duration-300"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      {item.icon}
+                    </motion.span>
+                    <span className="relative hidden xl:inline">
+                      {item.name}
+                      <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-isclub-teal to-isclub-cyan transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full"></span>
+                    </span>
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-isclub-teal/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      initial={false}
+                    />
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+            
+            {/* Desktop Register Button */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              className="ml-4"
+            >
+              <Button
+                onClick={() => navigate('/register')}
+                className="bg-gradient-to-r from-isclub-teal to-isclub-cyan hover:from-isclub-teal/90 hover:to-isclub-cyan/90 text-white font-semibold px-4 py-2 lg:px-6 lg:py-2.5 text-sm lg:text-base rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 border border-white/20"
+              >
+                <UserPlus className="w-4 h-4 mr-2" />
+                Register
+              </Button>
+            </motion.div>
           </div>
 
           {/* Mobile Menu Button - responsive sizing */}
-          <motion.button
-            className="lg:hidden flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-r from-isclub-teal/10 to-isclub-cyan/10 hover:from-isclub-teal/20 hover:to-isclub-cyan/20 transition-all duration-300"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <AnimatePresence mode="wait">
-              {isOpen ? (
-                <motion.div
-                  key="close"
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: 90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <X className="w-5 h-5 text-isclub-gray" />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="menu"
-                  initial={{ rotate: 90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: -90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <Menu className="w-5 h-5 text-isclub-gray" />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.button>
+          <div className="lg:hidden flex items-center space-x-3">
+            {/* Mobile Register Button */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+            >
+              <Button
+                onClick={() => navigate('/register')}
+                size="sm"
+                className="bg-gradient-to-r from-isclub-teal to-isclub-cyan hover:from-isclub-teal/90 hover:to-isclub-cyan/90 text-white font-semibold px-3 py-2 text-xs sm:text-sm rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl border border-white/20"
+              >
+                <UserPlus className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
+                Register
+              </Button>
+            </motion.div>
+            
+            <motion.button
+              className="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-r from-isclub-teal/10 to-isclub-cyan/10 hover:from-isclub-teal/20 hover:to-isclub-cyan/20 transition-all duration-300"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label="Toggle menu"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <AnimatePresence mode="wait">
+                {isOpen ? (
+                  <motion.div
+                    key="close"
+                    initial={{ rotate: -90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <X className="w-5 h-5 text-isclub-gray" />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="menu"
+                    initial={{ rotate: 90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Menu className="w-5 h-5 text-isclub-gray" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.button>
+          </div>
         </div>
       </div>
 
-      {/* Mobile Navigation - responsive layout */}
+      {/* Mobile Navigation - responsive layout with Register option */}
       <AnimatePresence>
         {isOpen && (
           <motion.div 
@@ -171,6 +208,30 @@ export default function Navbar() {
                   </Link>
                 </motion.div>
               ))}
+              
+              {/* Mobile Register Link */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: navItems.length * 0.1 }}
+              >
+                <button
+                  onClick={() => {
+                    navigate('/register');
+                    setIsOpen(false);
+                  }}
+                  className="w-full flex items-center space-x-3 p-3 sm:p-4 text-base font-semibold text-white bg-gradient-to-r from-isclub-teal to-isclub-cyan hover:from-isclub-teal/90 hover:to-isclub-cyan/90 transition-all duration-300 rounded-lg shadow-lg"
+                >
+                  <motion.span
+                    className="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/20 transition-all duration-300"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <UserPlus className="w-5 h-5" />
+                  </motion.span>
+                  <span className="font-semibold">Register for Event</span>
+                </button>
+              </motion.div>
             </div>
           </motion.div>
         )}
