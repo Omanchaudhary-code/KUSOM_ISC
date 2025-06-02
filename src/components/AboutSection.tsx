@@ -24,13 +24,16 @@ export default function AboutSection() {
             custom={0}
           >
             <div className="relative">
-              <div className="absolute -top-4 -left-4 w-24 h-24 bg-isclub-blue-light rounded-lg -z-10"></div>
-              <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-isclub-blue/10 rounded-lg -z-10"></div>
-              <div className="relative z-10 overflow-hidden rounded-lg shadow-tech">
+              <div className="absolute -inset-1 bg-gradient-to-r from-isclub-teal to-isclub-cyan rounded-2xl blur opacity-30 circuit-animate"></div>
+              <div className="relative glass-card rounded-2xl overflow-hidden">
                 <img 
-                  src="https://i.imgur.com/8jD5qms.jpeg" 
+                  src="https://i.imgur.com/DGHDcSi.jpeg"
                   alt="ISC Board 2025" 
-                  className="w-full h-auto object-cover"
+                  className="w-full h-auto object-cover rounded-2xl"
+                  style={{
+                    aspectRatio: '16/12',
+                    maxHeight: 'clamp(300px, 50vw, 600px)'
+                  }}
                   loading="lazy"
                 />
               </div>
