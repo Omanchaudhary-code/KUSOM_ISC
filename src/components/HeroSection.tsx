@@ -38,7 +38,7 @@ export default function HeroSection() {
       initial={{ opacity: 0, y: 100 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1.5, ease: "easeOut" }}
-      style={{ y, opacity }}
+      style={{ y }}
     >
       {/* Enhanced Tech-Themed Animated Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50/30 to-teal-50/40 -z-10"></div>
@@ -259,12 +259,12 @@ export default function HeroSection() {
           >
             <motion.button
               className={cn(
-                "relative rounded-lg tech-gradient text-white font-bold",
-                "transition-all duration-300 transform overflow-hidden",
-                "shadow-2xl hover:shadow-3xl border border-white/30",
-                "focus:outline-none focus:ring-4 focus:ring-isclub-teal/30",
-                "backdrop-blur-sm px-10 py-5 sm:px-12 sm:py-6 md:px-16 md:py-7",
-                "text-lg sm:text-xl md:text-2xl tracking-wide"
+                // "relative rounded-lg tech-gradient text-white font-bold",
+                // "transition-all duration-300 transform overflow-hidden",
+                // "shadow-2xl hover:shadow-3xl border border-white/30",
+                // "focus:outline-none focus:ring-4 focus:ring-isclub-teal/30",
+                // "backdrop-blur-sm px-10 py-5 sm:px-12 sm:py-6 md:px-16 md:py-7",
+                // "text-lg sm:text-xl md:text-2xl tracking-wide"
               )}
               whileHover={{ 
                 scale: 1.08,
