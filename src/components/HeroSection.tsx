@@ -34,7 +34,7 @@ export default function HeroSection() {
 
   return (
     <motion.section 
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 xl:px-12 pt-20 pb-8"
+      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 xl:px-12 pt-16 md:pt-20 pb-8"
       initial={{ opacity: 0, y: 100 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1.5, ease: "easeOut" }}
@@ -195,7 +195,7 @@ export default function HeroSection() {
           className="text-center space-y-6 sm:space-y-8 lg:space-y-10"
         >
           {/* Main heading with enhanced stagger animation */}
-          <div className="space-y-4">
+          <div className="space-y-4 md:space-y-6">
             <motion.h1 
               className="font-display font-bold text-isclub-dark leading-tight"
               style={{
@@ -228,7 +228,7 @@ export default function HeroSection() {
           
           {/* Description with enhanced entrance */}
           <motion.p 
-            className="text-isclub-gray max-w-4xl mx-auto px-4 leading-relaxed"
+            className="text-isclub-gray max-w-4xl mx-auto px-4 leading-relaxed mb-6 md:mb-8"
             style={{
               fontSize: 'clamp(1rem, 2.5vw, 1.25rem)',
               lineHeight: 'clamp(1.5rem, 3vw, 1.75rem)'
@@ -240,22 +240,22 @@ export default function HeroSection() {
             A hub for students eager to explore the vast world of computing, design, coding, and web development.
           </motion.p>
 
-          {/* Event Countdown with enhanced container */}
+          {/* Event Countdown with enhanced container and mobile spacing */}
           <motion.div
             initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.4 }}
-            className="py-6 sm:py-8 lg:py-10"
+            className="py-6 sm:py-8 lg:py-10 mb-8 md:mb-10"
           >
             <EventCountdown />
           </motion.div>
 
-          {/* Enhanced Register Button - Made more prominent */}
+          {/* Enhanced Register Button - Made more prominent with improved mobile spacing */}
           <motion.div
             initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.6 }}
-            className="pt-6 sm:pt-8 lg:pt-10"
+            className="pt-8 md:pt-10"
           >
             <motion.button
               className={cn(
@@ -308,9 +308,9 @@ export default function HeroSection() {
         </motion.div>
       </div>
 
-      {/* Enhanced scroll indicator */}
+      {/* Enhanced scroll indicator - Hidden on mobile */}
       <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 hidden md:block"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 2.5, duration: 1 }}
