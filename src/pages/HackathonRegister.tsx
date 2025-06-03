@@ -17,8 +17,6 @@ import { useNavigate } from 'react-router-dom';
 
 const participantSchema = z.object({
   full_name: z.string().min(2, 'Full name must be at least 2 characters'),
-  email: z.string().email('Invalid email address'),
-  phone: z.string().min(10, 'Phone number must be at least 10 digits'),
 });
 
 const registrationSchema = z.object({
@@ -49,8 +47,8 @@ export default function HackathonRegister() {
       leader_phone: '',
       team_size: 2,
       participants: [
-        { full_name: '', email: '', phone: '' },
-        { full_name: '', email: '', phone: '' },
+        { full_name: '' },
+        { full_name: '' },
       ],
       vegetarian_count: 0,
     },
@@ -69,7 +67,7 @@ export default function HackathonRegister() {
     
     if (size > currentParticipants) {
       for (let i = currentParticipants; i < size; i++) {
-        append({ full_name: '', email: '', phone: '' });
+        append({ full_name: '' });
       }
     } else if (size < currentParticipants) {
       for (let i = currentParticipants - 1; i >= size; i--) {
@@ -347,7 +345,7 @@ export default function HackathonRegister() {
                         Member {index + 1}
                       </h3>
 
-                      <div className="grid md:grid-cols-3 gap-4">
+                      <div className="grid md:grid-cols-1 gap-4">
                         <FormField
                           control={form.control}
                           name={`participants.${index}.full_name`}
@@ -356,34 +354,6 @@ export default function HackathonRegister() {
                               <FormLabel>Full Name</FormLabel>
                               <FormControl>
                                 <Input placeholder="Member's full name" {...field} />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-
-                        <FormField
-                          control={form.control}
-                          name={`participants.${index}.email`}
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Email Address</FormLabel>
-                              <FormControl>
-                                <Input type="email" placeholder="member@example.com" {...field} />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-
-                        <FormField
-                          control={form.control}
-                          name={`participants.${index}.phone`}
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Phone Number</FormLabel>
-                              <FormControl>
-                                <Input placeholder="Member's phone" {...field} />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
