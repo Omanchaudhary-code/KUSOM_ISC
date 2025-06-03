@@ -13,6 +13,8 @@ import EventDetail from "./pages/EventDetail";
 import Team from "./pages/Team";
 import Contact from "./pages/Contact";
 import Register from "./pages/Register";
+import HackathonRegister from "./pages/HackathonRegister";
+import RegisterSuccess from "./pages/RegisterSuccess";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -45,7 +47,8 @@ const App = () => (
           <Route path="/events/:eventId" element={<EventDetail />} />
           <Route path="/team" element={<Team />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/register" element={<HackathonRegister />} />
+          <Route path="/register-success" element={<RegisterSuccess />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

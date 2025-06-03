@@ -53,6 +53,48 @@ export type Database = {
           },
         ]
       }
+      registrations: {
+        Row: {
+          created_at: string
+          id: string
+          leader_email: string
+          leader_name: string
+          leader_phone: string
+          participants: Json
+          payment_receipt_url: string | null
+          team_name: string
+          team_size: number
+          updated_at: string
+          vegetarian_count: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          leader_email: string
+          leader_name: string
+          leader_phone: string
+          participants: Json
+          payment_receipt_url?: string | null
+          team_name: string
+          team_size: number
+          updated_at?: string
+          vegetarian_count?: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          leader_email?: string
+          leader_name?: string
+          leader_phone?: string
+          participants?: Json
+          payment_receipt_url?: string | null
+          team_name?: string
+          team_size?: number
+          updated_at?: string
+          vegetarian_count?: number
+        }
+        Relationships: []
+      }
       teams: {
         Row: {
           created_at: string | null
