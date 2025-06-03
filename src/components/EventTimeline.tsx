@@ -13,7 +13,7 @@ const events = [
     time: "48 Hours",
     location: "Multipurpose Hall, KU",
     description: "Join us for an exciting 48-hour hackathon where teams will compete to develop innovative business solutions. This event brings together creative minds, entrepreneurs, and tech enthusiasts to solve real-world business challenges.",
-    imageUrl: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
+    imageUrl: "https://i.imgur.com/08Qg0fr_d.jpeg?maxwidth=520&shape=thumb&fidelity=high",
     highlights: [
       "Cash prizes worth $5000",
       "Networking opportunities",

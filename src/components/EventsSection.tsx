@@ -33,7 +33,7 @@ export default function EventsSection() {
       time: "48 Hours",
       location: "Multi-purpose Hall, KU",
       description: "Join us for a 48-hour hackathon where teams will compete to build innovative solutions to real-world problems.",
-      imageUrl: "https://i.imgur.com/20fdhl6.jpeg"
+      imageUrl: "https://i.imgur.com/08Qg0fr_d.jpeg?maxwidth=520&shape=thumb&fidelity=high"
     }
   ];
 

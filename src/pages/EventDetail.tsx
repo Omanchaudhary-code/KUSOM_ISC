@@ -12,24 +12,13 @@ const events = [
     description: "A 48-hour hackathon where teams will compete to build innovative solutions to real-world problems.",
     imageUrl: "https://i.imgur.com/20fdhl6_d.jpeg?maxwidth=520&shape=thumb&fidelity=high",
     longDescription: `
-    Design Thinking is a methodology used by designers to solve complex problems and find desirable solutions for clients. 
-    In this seminar, we'll explore how design thinking can be applied to various business challenges.
-    
-    The workshop will cover the five stages of design thinking: Empathize, Define, Ideate, Prototype, and Test. 
-    Through hands-on activities and case studies, you'll learn how to apply these principles to create innovative 
-    solutions that are centered around user needs and experiences.
+    Join us for Hack for Business, a 3-day hackathon hosted by the Information System Club from June 20–22 at Kathmandu University Central Campus, Multi-purpose Hall. This event brings together innovative minds to develop tech-driven solutions for real-world business challenges. Collaborate, create, and compete for a chance to make impactful change in the business world through technology.
     `,
     targetAudience: "Business students, aspiring entrepreneurs, and anyone interested in innovative problem-solving.",
     prerequisites: [
-      "No technical prerequisites required",
-      "Bring your laptop"
-    ],
-    schedule: [
-      { time: "1:00 PM", activity: "Introduction to Design Thinking" },
-      { time: "1:30 PM", activity: "Empathize & Define Stages" },
-      { time: "2:15 PM", activity: "Coffee Break" },
-      { time: "2:30 PM", activity: "Ideate, Prototype & Test Stages" },
-      { time: "3:15 PM", activity: "Case Study Discussion & Closing" }
+      "Basic programming skills",
+      "Problem-solving mindset",
+      "Interest in business and innovation"
     ]
   },
   {
