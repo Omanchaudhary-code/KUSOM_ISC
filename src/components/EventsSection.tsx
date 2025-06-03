@@ -13,6 +13,8 @@ type Event = {
   location: string;
   description: string;
   imageUrl: string;
+  showRegisterButton?: boolean;
+  registrationUrl?: string;
 };
 
 export default function EventsSection() {
@@ -24,7 +26,8 @@ export default function EventsSection() {
       time: "12:00 PM - 3:00 PM",
       location: "Computer Lab, Block 10",
       description: "Learn the fundamentals of modern web development with AI.",
-      imageUrl: "https://i.imgur.com/wMJkWRA.jpeg"
+      imageUrl: "https://i.imgur.com/wMJkWRA.jpeg",
+      showRegisterButton: false
     },
     {
       id: "design-thinking",
@@ -33,7 +36,9 @@ export default function EventsSection() {
       time: "48 Hours",
       location: "Multi-purpose Hall, KU",
       description: "Join us for a 48-hour hackathon where teams will compete to build innovative solutions to real-world problems.",
-      imageUrl: "https://i.imgur.com/08Qg0fr_d.jpeg?maxwidth=520&shape=thumb&fidelity=high"
+      imageUrl: "https://i.imgur.com/08Qg0fr_d.jpeg?maxwidth=520&shape=thumb&fidelity=high",
+      showRegisterButton: true,
+      registrationUrl: "https://forms.gle/your-form-link-here"
     }
   ];
 
@@ -149,20 +154,25 @@ export default function EventsSection() {
                       Learn More
                     </Link>
                     
-                    <button 
-                      className={cn(
-                        "inline-flex items-center justify-center rounded-lg font-medium",
-                        "bg-isclub-blue-light text-isclub-teal border border-isclub-teal/20",
-                        "transition-all duration-300 hover:bg-isclub-blue-light/70 hover:scale-105",
-                        "focus:outline-none focus:ring-2 focus:ring-isclub-teal/50"
-                      )}
-                      style={{
-                        padding: 'clamp(0.75rem, 1.5vw, 1rem) clamp(1.25rem, 2.5vw, 1.5rem)',
-                        fontSize: 'clamp(0.875rem, 1.5vw, 1rem)'
-                      }}
-                    >
-                      Register Now
-                    </button>
+                    {event.showRegisterButton && (
+                      <a 
+                        href={event.registrationUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={cn(
+                          "inline-flex items-center justify-center rounded-lg font-medium",
+                          "bg-isclub-blue-light text-isclub-teal border border-isclub-teal/20",
+                          "transition-all duration-300 hover:bg-isclub-blue-light/70 hover:scale-105",
+                          "focus:outline-none focus:ring-2 focus:ring-isclub-teal/50"
+                        )}
+                        style={{
+                          padding: 'clamp(0.75rem, 1.5vw, 1rem) clamp(1.25rem, 2.5vw, 1.5rem)',
+                          fontSize: 'clamp(0.875rem, 1.5vw, 1rem)'
+                        }}
+                      >
+                        Register Now
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
