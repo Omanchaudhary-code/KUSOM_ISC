@@ -38,7 +38,7 @@ export default function EventsSection() {
       description: "Join us for a 48-hour hackathon where teams will compete to build innovative solutions to real-world problems.",
       imageUrl: "https://i.imgur.com/08Qg0fr_d.jpeg?maxwidth=520&shape=thumb&fidelity=high",
       showRegisterButton: true,
-      registrationUrl: "https://forms.gle/your-form-link-here"
+      registrationUrl: "/register"
     }
   ];
 
