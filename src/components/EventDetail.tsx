@@ -168,7 +168,7 @@ export default function EventDetail({ events }: EventDetailProps) {
               transition={{ duration: 0.5, delay: 0.4 }}
               className="sticky top-24"
             >
-              <div className="bg-gray-50 rounded-xl p-6 mb-6">
+              <div className="bg-gray-50 rounded-xl p-6">
                 <h3 className="text-lg font-semibold mb-4 flex items-center">
                   <Users className="w-5 h-5 mr-2 text-isclub-teal" />
                   Who Should Attend
@@ -187,25 +187,6 @@ export default function EventDetail({ events }: EventDetailProps) {
                     </ul>
                   </div>
                 )}
-              </div>
-              
-              <div className="bg-isclub-blue-light/30 rounded-xl p-6">
-                <h3 className="text-lg font-semibold mb-4">Register Now</h3>
-                <p className="text-gray-700 mb-6">
-                  Secure your spot for this exciting event! Limited seats available.
-                </p>
-                <button 
-                  className={cn(
-                    "w-full py-3 rounded-lg font-medium",
-                    "bg-isclub-teal text-white",
-                    "transition-all duration-300 hover:bg-isclub-navy"
-                  )}
-                >
-                  Register for This Event
-                </button>
-                <div className="mt-4 text-center text-sm text-gray-600">
-                  Registration closes 2 days before the event
-                </div>
               </div>
             </motion.div>
           </div>
