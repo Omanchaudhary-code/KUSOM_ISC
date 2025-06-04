@@ -61,25 +61,21 @@ export default function BriefAbout() {
             </div>
           </motion.div>
           
-          {/* Image - responsive sizing and positioning */}
+          {/* Image - Enhanced responsive design for mobile visibility */}
           <motion.div 
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="relative order-first lg:order-last"
+            className="relative order-first lg:order-last about-image-container"
           >
-            <div className="relative">
+            <div className="relative w-full">
               <div className="absolute -inset-1 bg-gradient-to-r from-isclub-teal to-isclub-cyan rounded-2xl blur opacity-30 circuit-animate"></div>
-              <div className="relative glass-card rounded-2xl overflow-hidden">
+              <div className="relative glass-card rounded-2xl overflow-hidden shadow-lg">
                 <img 
                   src="https://i.imgur.com/DGHDcSi.jpeg"
-                  alt="IS Club Team" 
-                  className="w-full h-auto object-cover rounded-2xl"
-                  style={{
-                    aspectRatio: '16/12',
-                    maxHeight: 'clamp(300px, 50vw, 600px)'
-                  }}
+                  alt="IS Club team photo" 
+                  className="about-image w-full h-auto object-contain rounded-2xl"
                   loading="lazy"
                 />
               </div>

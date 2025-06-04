@@ -197,6 +197,50 @@
   .grid-responsive {
     @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8;
   }
+
+  /* About IS Club image responsive styles */
+  .about-image-container {
+    @apply w-full max-w-none;
+  }
+
+  .about-image {
+    @apply w-full h-auto object-contain;
+    min-height: 250px;
+    max-height: 500px;
+  }
+
+  /* Mobile-specific styles for About IS Club image */
+  @media (max-width: 768px) {
+    .about-image-container {
+      padding: 0;
+      margin: 0 auto;
+      width: 100%;
+    }
+    
+    .about-image {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      min-height: 200px;
+      max-height: 400px;
+    }
+  }
+
+  /* Extra small mobile devices */
+  @media (max-width: 480px) {
+    .about-image-container {
+      width: 100%;
+      padding: 0;
+    }
+    
+    .about-image {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      min-height: 180px;
+      max-height: 350px;
+    }
+  }
 }
 
 /* Custom animations and transitions */
