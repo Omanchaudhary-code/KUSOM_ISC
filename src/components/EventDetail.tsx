@@ -43,6 +43,9 @@ export default function EventDetail({ events }: EventDetailProps) {
     );
   }
 
+  // Show sponsors section only for Hack For Business event
+  const showSponsors = event.id === "design-thinking";
+
   return (
     <section className="py-24 px-4">
       <div className="container mx-auto max-w-6xl">
@@ -191,6 +194,107 @@ export default function EventDetail({ events }: EventDetailProps) {
             </motion.div>
           </div>
         </div>
+
+        {/* Sponsors & Partners Section - Only for Hack For Business */}
+        {showSponsors && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="mt-24 tech-pattern py-16"
+          >
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-display font-bold text-isclub-navy mb-4">
+                💼 Our Sponsors & Partners
+              </h2>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                Hack For Business 2025 is made possible through the support of our amazing partners and collaborators.
+              </p>
+            </div>
+
+            {/* Under the Banner of KAF */}
+            <div className="mb-12">
+              <h3 className="text-xl font-semibold text-center mb-6 text-isclub-navy">
+                🏆 Under the Banner of:
+              </h3>
+              <div className="relative overflow-hidden bg-white/50 backdrop-blur-sm rounded-xl p-6 shadow-sm">
+                <div className="marquee-container">
+                  <motion.div
+                    className="flex items-center justify-center space-x-8"
+                    animate={{ x: [0, -100, 0] }}
+                    transition={{ 
+                      duration: 15, 
+                      repeat: Infinity, 
+                      ease: "linear" 
+                    }}
+                    whileHover={{ animationPlayState: "paused" }}
+                  >
+                    <div className="flex items-center space-x-4 min-w-max">
+                      <div className="w-20 h-20 bg-gradient-to-br from-isclub-teal to-isclub-cyan rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                        KAF
+                      </div>
+                      <div className="text-center">
+                        <p className="font-semibold text-lg text-isclub-navy">KUSOM Annual Fest (KAF)</p>
+                        <p className="text-sm text-gray-600">Hack For Business 2025 is proudly organized under KAF</p>
+                      </div>
+                    </div>
+                    {/* Duplicate for seamless loop */}
+                    <div className="flex items-center space-x-4 min-w-max">
+                      <div className="w-20 h-20 bg-gradient-to-br from-isclub-teal to-isclub-cyan rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                        KAF
+                      </div>
+                      <div className="text-center">
+                        <p className="font-semibold text-lg text-isclub-navy">KUSOM Annual Fest (KAF)</p>
+                        <p className="text-sm text-gray-600">Hack For Business 2025 is proudly organized under KAF</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                </div>
+              </div>
+            </div>
+
+            {/* Collaboration Partner KUCC */}
+            <div className="mb-8">
+              <h3 className="text-xl font-semibold text-center mb-6 text-isclub-navy">
+                🤝 Collaboration Partner:
+              </h3>
+              <div className="relative overflow-hidden bg-white/50 backdrop-blur-sm rounded-xl p-6 shadow-sm">
+                <div className="marquee-container">
+                  <motion.div
+                    className="flex items-center justify-center space-x-8"
+                    animate={{ x: [0, 100, 0] }}
+                    transition={{ 
+                      duration: 20, 
+                      repeat: Infinity, 
+                      ease: "linear" 
+                    }}
+                    whileHover={{ animationPlayState: "paused" }}
+                  >
+                    <div className="flex items-center space-x-4 min-w-max">
+                      <div className="w-20 h-20 bg-gradient-to-br from-isclub-navy to-isclub-dark rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                        KUCC
+                      </div>
+                      <div className="text-center">
+                        <p className="font-semibold text-lg text-isclub-navy">Kathmandu University Computer Club</p>
+                        <p className="text-sm text-gray-600">In collaboration with KUCC</p>
+                      </div>
+                    </div>
+                    {/* Duplicate for seamless loop */}
+                    <div className="flex items-center space-x-4 min-w-max">
+                      <div className="w-20 h-20 bg-gradient-to-br from-isclub-navy to-isclub-dark rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                        KUCC
+                      </div>
+                      <div className="text-center">
+                        <p className="font-semibold text-lg text-isclub-navy">Kathmandu University Computer Club</p>
+                        <p className="text-sm text-gray-600">In collaboration with KUCC</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
       </div>
     </section>
   );
