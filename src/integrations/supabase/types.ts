@@ -62,6 +62,7 @@ export type Database = {
           leader_phone: string
           participants: Json
           payment_receipt_url: string | null
+          project_idea: string
           team_name: string
           team_size: number
           updated_at: string
@@ -75,6 +76,7 @@ export type Database = {
           leader_phone: string
           participants: Json
           payment_receipt_url?: string | null
+          project_idea?: string
           team_name: string
           team_size: number
           updated_at?: string
@@ -88,6 +90,7 @@ export type Database = {
           leader_phone?: string
           participants?: Json
           payment_receipt_url?: string | null
+          project_idea?: string
           team_name?: string
           team_size?: number
           updated_at?: string
@@ -121,7 +124,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_team_count: {
+        Args: Record<PropertyKey, never>
+        Returns: number
+      }
     }
     Enums: {
       [_ in never]: never

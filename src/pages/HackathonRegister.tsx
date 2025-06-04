@@ -1,12 +1,13 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { motion } from 'framer-motion';
-import { Users, User, Upload, Calendar, MapPin } from 'lucide-react';
+import { Users, User, Upload, Calendar, MapPin, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useToast } from '@/hooks/use-toast';
@@ -27,6 +28,7 @@ const registrationSchema = z.object({
   team_size: z.number().min(2, 'Team must have at least 2 members').max(5, 'Team cannot exceed 5 members'),
   participants: z.array(participantSchema).min(2).max(5),
   vegetarian_count: z.number().min(0).max(5),
+  project_idea: z.string().min(10, 'Project idea must be at least 10 characters'),
   payment_receipt: z.instanceof(File).optional(),
 });
 
@@ -35,6 +37,10 @@ type RegistrationFormData = z.infer<typeof registrationSchema>;
 export default function HackathonRegister() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [paymentFile, setPaymentFile] = useState<File | null>(null);
+  const [teamCount, setTeamCount] = useState<number>(0);
+  const [isRegistrationClosed, setIsRegistrationClosed] = useState(false);
+  const [alreadyRegistered, setAlreadyRegistered] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -51,6 +57,7 @@ export default function HackathonRegister() {
         { full_name: '' },
       ],
       vegetarian_count: 0,
+      project_idea: '',
     },
   });
 
@@ -60,6 +67,71 @@ export default function HackathonRegister() {
   });
 
   const teamSize = form.watch('team_size');
+  const leaderEmail = form.watch('leader_email');
+  const leaderPhone = form.watch('leader_phone');
+
+  // Check team count and registration status
+  useEffect(() => {
+    const checkRegistrationStatus = async () => {
+      try {
+        // Get current team count
+        const { data: countData, error: countError } = await supabase.rpc('get_team_count');
+        
+        if (countError) {
+          console.error('Error fetching team count:', countError);
+        } else {
+          setTeamCount(countData || 0);
+          setIsRegistrationClosed(countData >= 25);
+        }
+
+        // Check if already registered (from localStorage)
+        const registeredEmail = localStorage.getItem('hackathon_registered_email');
+        const registeredPhone = localStorage.getItem('hackathon_registered_phone');
+        
+        if (registeredEmail || registeredPhone) {
+          setAlreadyRegistered(true);
+        }
+      } catch (error) {
+        console.error('Error checking registration status:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    checkRegistrationStatus();
+  }, []);
+
+  // Check for duplicate registration when email/phone changes
+  useEffect(() => {
+    const checkDuplicateRegistration = async () => {
+      if (!leaderEmail && !leaderPhone) return;
+
+      try {
+        const { data, error } = await supabase
+          .from('registrations')
+          .select('id')
+          .or(`leader_email.eq.${leaderEmail},leader_phone.eq.${leaderPhone}`)
+          .limit(1);
+
+        if (error) {
+          console.error('Error checking duplicate:', error);
+          return;
+        }
+
+        if (data && data.length > 0) {
+          setAlreadyRegistered(true);
+          // Store in localStorage for future visits
+          if (leaderEmail) localStorage.setItem('hackathon_registered_email', leaderEmail);
+          if (leaderPhone) localStorage.setItem('hackathon_registered_phone', leaderPhone);
+        }
+      } catch (error) {
+        console.error('Error checking duplicate registration:', error);
+      }
+    };
+
+    const timeoutId = setTimeout(checkDuplicateRegistration, 500);
+    return () => clearTimeout(timeoutId);
+  }, [leaderEmail, leaderPhone]);
 
   // Adjust participants array when team size changes
   const handleTeamSizeChange = (size: number) => {
@@ -135,6 +207,7 @@ export default function HackathonRegister() {
         team_size: data.team_size,
         participants: data.participants,
         vegetarian_count: data.vegetarian_count,
+        project_idea: data.project_idea,
         payment_receipt_url: paymentReceiptUrl,
       };
 
@@ -145,8 +218,20 @@ export default function HackathonRegister() {
 
       if (insertError) {
         console.error('Registration error:', insertError);
+        if (insertError.code === '23505') {
+          toast({
+            title: "Registration Failed",
+            description: "This email or phone number has already been registered.",
+            variant: "destructive",
+          });
+          return;
+        }
         throw insertError;
       }
+
+      // Store registration info in localStorage
+      localStorage.setItem('hackathon_registered_email', data.leader_email);
+      localStorage.setItem('hackathon_registered_phone', data.leader_phone);
 
       // Send confirmation email
       try {
@@ -185,6 +270,96 @@ export default function HackathonRegister() {
     }
   };
 
+  if (isLoading) {
+    return (
+      <div className="flex flex-col min-h-screen">
+        <Navbar />
+        <main className="flex-1 pt-20 pb-12 bg-gradient-to-br from-slate-50 via-blue-50/30 to-teal-50/40">
+          <div className="container mx-auto px-4 max-w-4xl">
+            <div className="text-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-isclub-teal mx-auto"></div>
+              <p className="mt-4 text-isclub-gray">Loading registration status...</p>
+            </div>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (alreadyRegistered) {
+    return (
+      <div className="flex flex-col min-h-screen">
+        <Navbar />
+        <main className="flex-1 pt-20 pb-12 bg-gradient-to-br from-slate-50 via-blue-50/30 to-teal-50/40">
+          <div className="container mx-auto px-4 max-w-4xl">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-center"
+            >
+              <div className="bg-white rounded-xl shadow-lg p-8">
+                <AlertCircle className="w-16 h-16 text-yellow-500 mx-auto mb-4" />
+                <h1 className="text-3xl font-display font-bold text-isclub-dark mb-4">
+                  Already Registered
+                </h1>
+                <p className="text-lg text-isclub-gray">
+                  You have already registered your team for Hack for Business hackathon.
+                </p>
+                <Button
+                  onClick={() => navigate('/')}
+                  className="mt-6 px-8 py-3 bg-gradient-to-r from-isclub-teal to-isclub-cyan text-white font-semibold rounded-lg"
+                >
+                  Go to Homepage
+                </Button>
+              </div>
+            </motion.div>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (isRegistrationClosed) {
+    return (
+      <div className="flex flex-col min-h-screen">
+        <Navbar />
+        <main className="flex-1 pt-20 pb-12 bg-gradient-to-br from-slate-50 via-blue-50/30 to-teal-50/40">
+          <div className="container mx-auto px-4 max-w-4xl">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-center"
+            >
+              <div className="bg-white rounded-xl shadow-lg p-8">
+                <AlertCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
+                <h1 className="text-3xl font-display font-bold text-isclub-dark mb-4">
+                  Registrations Closed
+                </h1>
+                <p className="text-lg text-isclub-gray mb-4">
+                  Registrations are now closed. All 25 team slots have been filled.
+                </p>
+                <p className="text-isclub-gray">
+                  Thank you for your interest in Hack for Business hackathon!
+                </p>
+                <Button
+                  onClick={() => navigate('/')}
+                  className="mt-6 px-8 py-3 bg-gradient-to-r from-isclub-teal to-isclub-cyan text-white font-semibold rounded-lg"
+                >
+                  Go to Homepage
+                </Button>
+              </div>
+            </motion.div>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
@@ -202,13 +377,21 @@ export default function HackathonRegister() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
               <div className="flex items-center gap-2 text-isclub-teal">
                 <Calendar className="w-5 h-5" />
-                <span className="font-medium">June 21-23, 2025</span>
+                <span className="font-medium">June 20-22, 2025</span>
               </div>
               <div className="flex items-center gap-2 text-isclub-gray">
                 <MapPin className="w-5 h-5" />
                 <span>Multi-purpose Hall, Kathmandu University</span>
               </div>
             </div>
+            
+            {/* Team slots remaining indicator */}
+            <div className="bg-gradient-to-r from-orange-100 to-red-100 border border-orange-200 rounded-lg p-4 mb-6 max-w-md mx-auto">
+              <p className="text-orange-800 font-semibold text-lg">
+                Hurry! Only {25 - teamCount} out of 25 team slots remaining!
+              </p>
+            </div>
+
             <p className="text-lg text-isclub-gray max-w-2xl mx-auto">
               Register your team for the most exciting 48-hour hackathon focusing on innovative business solutions.
             </p>
@@ -373,15 +556,33 @@ export default function HackathonRegister() {
                     name="vegetarian_count"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Number of vegetarians in your team</FormLabel>
+                        <FormLabel>Number of vegetarians in your team *</FormLabel>
                         <FormControl>
                           <Input 
                             type="number" 
                             min="0" 
-                            max={teamSize}
+                            max="5"
                             placeholder="0"
                             {...field}
                             onChange={(e) => field.onChange(parseInt(e.target.value) || 0)}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="project_idea"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Project Idea *</FormLabel>
+                        <FormControl>
+                          <Textarea 
+                            placeholder="Briefly describe your project idea..."
+                            className="min-h-[120px]"
+                            {...field}
                           />
                         </FormControl>
                         <FormMessage />
