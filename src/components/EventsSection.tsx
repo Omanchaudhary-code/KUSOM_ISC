@@ -30,7 +30,7 @@ export default function EventsSection() {
       showRegisterButton: false
     },
     {
-      id: "design-thinking",
+      id: "hackathon",
       title: "Hack for Business",
       date: "June 21-23, 2025",
       time: "48 Hours",

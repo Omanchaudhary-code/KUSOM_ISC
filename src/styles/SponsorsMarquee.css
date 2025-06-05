@@ -1,0 +1,22 @@
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee2 {
+  0% { transform: translateX(50%); }
+  100% { transform: translateX(0); }
+}
+
+.animateMarquee {
+  animation: marquee 30s linear infinite;
+}
+
+.animateMarquee2 {
+  animation: marquee2 30s linear infinite;
+}
+
+.hoverPause:hover .animateMarquee,
+.hoverPause:hover .animateMarquee2 {
+  animation-play-state: paused;
+}

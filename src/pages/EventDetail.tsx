@@ -4,16 +4,14 @@ import Footer from '@/components/Footer';
 
 const events = [
   {
-    id: "design-thinking",
+    id: "hackathon",
     title: "Hack For Business",
     date: "June 21-23, 2025",
     time: "48 Hours",
     location: "Multipurpose Hall, KU",
     description: "A 48-hour hackathon where teams will compete to build innovative solutions to real-world problems.",
-    imageUrl: "https://i.imgur.com/20fdhl6_d.jpeg?maxwidth=520&shape=thumb&fidelity=high",
-    longDescription: `
-    Join us for Hack for Business, a 3-day hackathon hosted by the Information System Club from June 20–22 at Kathmandu University Central Campus, Multi-purpose Hall. This event brings together innovative minds to develop tech-driven solutions for real-world business challenges. Collaborate, create, and compete for a chance to make impactful change in the business world through technology.
-    `,
+    imageUrl: "https://i.imgur.com/08Qg0fr.jpeg",
+    longDescription: "",
     targetAudience: "Business students, aspiring entrepreneurs, and anyone interested in innovative problem-solving.",
     prerequisites: [
       "Basic programming skills",

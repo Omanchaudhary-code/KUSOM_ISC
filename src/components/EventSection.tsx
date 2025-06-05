@@ -41,7 +41,7 @@ export default function EventSection() {
             className="mt-8"
           >
             <Link
-              to="/events/design-thinking"
+              to="/events/hackathon"
               className="inline-flex items-center px-6 py-3 rounded-lg bg-isclub-teal text-white hover:bg-isclub-navy transition-colors duration-300"
             >
               Learn More About The Event
