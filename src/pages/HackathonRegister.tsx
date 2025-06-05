@@ -25,13 +25,10 @@ const registrationSchema = z.object({
   leader_email: z.string().email('Invalid email address'),
   leader_phone: z.string().min(10, 'Phone number must be at least 10 digits'),
   team_size: z.number().min(2, 'Team must have at least 2 members').max(4, 'Team cannot exceed 4 members'),
-  participants: z.array(participantSchema).min(2).max(4),
-  vegetarian_count: z.number().min(0).max(4),
+  participants: z.array(participantSchema).min(1).max(3),
+  vegetarian_count: z.number().min(1, 'At least 1 vegetarian required').max(4, 'Maximum 4 vegetarians allowed'),
   project_idea: z.string().min(10, 'Project idea must be at least 10 characters'),
   payment_receipt: z.instanceof(File).optional(),
-}).refine((data) => data.vegetarian_count === data.team_size, {
-  message: "Number of vegetarians must equal the number of team members",
-  path: ["vegetarian_count"],
 });
 
 type RegistrationFormData = z.infer<typeof registrationSchema>;
@@ -56,7 +53,6 @@ export default function HackathonRegister() {
       team_size: 2,
       participants: [
         { full_name: '' },
-        { full_name: '' },
       ],
       vegetarian_count: 2,
       project_idea: '',
@@ -69,7 +65,6 @@ export default function HackathonRegister() {
   });
 
   const teamSize = form.watch('team_size');
-  const vegetarianCount = form.watch('vegetarian_count');
   const leaderEmail = form.watch('leader_email');
   const leaderPhone = form.watch('leader_phone');
 
@@ -136,21 +131,17 @@ export default function HackathonRegister() {
     return () => clearTimeout(timeoutId);
   }, [leaderEmail, leaderPhone]);
 
-  // Auto-update vegetarian count when team size changes
-  useEffect(() => {
-    form.setValue('vegetarian_count', teamSize);
-  }, [teamSize, form]);
-
   // Adjust participants array when team size changes
   const handleTeamSizeChange = (size: number) => {
+    const requiredParticipants = size - 1; // Subtract 1 for the leader
     const currentParticipants = fields.length;
     
-    if (size > currentParticipants) {
-      for (let i = currentParticipants; i < size; i++) {
+    if (requiredParticipants > currentParticipants) {
+      for (let i = currentParticipants; i < requiredParticipants; i++) {
         append({ full_name: '' });
       }
-    } else if (size < currentParticipants) {
-      for (let i = currentParticipants - 1; i >= size; i--) {
+    } else if (requiredParticipants < currentParticipants) {
+      for (let i = currentParticipants - 1; i >= requiredParticipants; i--) {
         remove(i);
       }
     }
@@ -440,7 +431,7 @@ export default function HackathonRegister() {
                       name="team_size"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Number of Team Members (including team leader). Max: 4</FormLabel>
+                          <FormLabel>Select total number of team members (including the team leader)</FormLabel>
                           <Select 
                             onValueChange={(value) => {
                               const size = parseInt(value);
@@ -533,7 +524,7 @@ export default function HackathonRegister() {
                       className="border border-gray-200 rounded-lg p-6 space-y-4"
                     >
                       <h3 className="text-lg font-medium text-isclub-dark">
-                        Member {index + 1}
+                        Member {index + 2}
                       </h3>
 
                       <div className="grid md:grid-cols-1 gap-4">
@@ -564,7 +555,7 @@ export default function HackathonRegister() {
                     name="vegetarian_count"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Number of vegetarians in your team *</FormLabel>
+                        <FormLabel>Number of Vegetarians in Team</FormLabel>
                         <Select 
                           onValueChange={(value) => field.onChange(parseInt(value))}
                           value={field.value.toString()}
@@ -575,18 +566,13 @@ export default function HackathonRegister() {
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
-                            {Array.from({ length: teamSize + 1 }, (_, i) => i).map((count) => (
+                            {[1, 2, 3, 4].map((count) => (
                               <SelectItem key={count} value={count.toString()}>
                                 {count} {count === 1 ? 'vegetarian' : 'vegetarians'}
                               </SelectItem>
                             ))}
                           </SelectContent>
                         </Select>
-                        {vegetarianCount !== teamSize && (
-                          <p className="text-sm text-red-600 mt-1">
-                            Number of vegetarians must equal the number of team members ({teamSize})
-                          </p>
-                        )}
                         <FormMessage />
                       </FormItem>
                     )}
@@ -616,7 +602,7 @@ export default function HackathonRegister() {
                       <h3 className="text-lg font-semibold text-isclub-dark mb-4">Payment via eSewa</h3>
                       <div className="flex justify-center mb-4">
                         <img 
-                          src="/lovable-uploads/8d25ccc5-4b02-4b54-bffe-47ef4ce3764b.png" 
+                          src="/lovable-uploads/c9b58623-b56d-4a65-8277-a231f763dc4e.png" 
                           alt="eSewa QR Code for payment" 
                           className="w-48 h-48 object-contain border-2 border-white rounded-lg shadow-lg"
                         />
