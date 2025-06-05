@@ -9,6 +9,9 @@ import Footer from '@/components/Footer';
 export default function RegisterSuccess() {
   const location = useLocation();
   const teamName = location.state?.teamName || 'Your Team';
+  const collegeName = location.state?.collegeName || 'Not provided';
+  const affiliatedUniversity = location.state?.affiliatedUniversity || 'Not provided';
+  const alternateContact = location.state?.alternateContact || 'Not provided';
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -60,6 +63,27 @@ export default function RegisterSuccess() {
                 <div className="flex items-center justify-center gap-3 text-isclub-gray">
                   <Users className="w-6 h-6" />
                   <span className="text-lg">48 Hours of Innovation & Competition</span>
+                </div>
+
+                <div className="flex items-center justify-center gap-3 text-isclub-gray">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z" />
+                  </svg>
+                  <span className="text-lg">College: {collegeName}</span>
+                </div>
+
+                <div className="flex items-center justify-center gap-3 text-isclub-gray">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 21v-1m4-4h-4.33m-4.33V4.33A4 4 0 1112 4v14a4 4 0 004.33 4.33m0 0H4m0 0V8m8-8h4.33m-4.33v4.33A4 4 0 0012 8v14a4 4 0 004.33 4.33m0 0H4m0 0v-1m4-4h4.33m-4.33V4.33A4 4 0 0112 4z" />
+                  </svg>
+                  <span className="text-lg">Affiliated University: {affiliatedUniversity}</span>
+                </div>
+
+                <div className="flex items-center justify-center gap-3 text-isclub-gray">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                  <span className="text-lg">Alternate Contact: {alternateContact}</span>
                 </div>
               </div>
             </motion.div>

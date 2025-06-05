@@ -21,9 +21,12 @@ const participantSchema = z.object({
 
 const registrationSchema = z.object({
   team_name: z.string().min(2, 'Team name must be at least 2 characters'),
+  college_name: z.string().min(2, 'College name must be at least 2 characters'),
+  affiliated_university: z.string().min(2, 'Affiliated university name must be at least 2 characters'),
   leader_name: z.string().min(2, 'Leader name must be at least 2 characters'),
   leader_email: z.string().email('Invalid email address'),
   leader_phone: z.string().min(10, 'Phone number must be at least 10 digits'),
+  alternate_contact: z.string().min(10, 'Alternate contact number must be at least 10 digits'),
   team_size: z.number().min(1, 'Team must have at least 1 member').max(4, 'Team cannot exceed 4 members'),
   participants: z.array(participantSchema).min(0).max(3),
   vegetarian_count: z.number().min(1, 'At least 1 vegetarian required').max(4, 'Maximum 4 vegetarians allowed'),
@@ -50,8 +53,8 @@ export default function HackathonRegister() {
       leader_name: '',
       leader_email: '',
       leader_phone: '',
-      team_size: 1,
-      participants: [],
+      team_size: 2,
+      participants: [{ full_name: '' }],
       vegetarian_count: 1,
       project_idea: '',
     },
@@ -198,9 +201,12 @@ export default function HackathonRegister() {
       // Prepare registration data with individual team member columns
       const registrationData = {
         team_name: data.team_name,
+        college_name: data.college_name,
+        affiliated_university: data.affiliated_university,
         leader_name: data.leader_name,
         leader_email: data.leader_email,
         leader_phone: data.leader_phone,
+        alternate_contact: data.alternate_contact,
         team_size: data.team_size,
         team_member_1: data.participants[0]?.full_name || null,
         team_member_2: data.participants[1]?.full_name || null,
@@ -254,7 +260,14 @@ export default function HackathonRegister() {
 
       // Navigate to success page after short delay
       setTimeout(() => {
-        navigate('/register-success', { state: { teamName: data.team_name } });
+        navigate('/register-success', { 
+          state: { 
+            teamName: data.team_name,
+            collegeName: data.college_name,
+            affiliatedUniversity: data.affiliated_university,
+            alternateContact: data.alternate_contact
+          } 
+        });
       }, 2000);
       
     } catch (error) {
@@ -376,7 +389,7 @@ export default function HackathonRegister() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
               <div className="flex items-center gap-2 text-isclub-teal">
                 <Calendar className="w-5 h-5" />
-                <span className="font-medium">June 20-22, 2025</span>
+                <span className="font-medium">June 21-23, 2025</span>
               </div>
               <div className="flex items-center gap-2 text-isclub-gray">
                 <MapPin className="w-5 h-5" />
@@ -428,6 +441,34 @@ export default function HackathonRegister() {
 
                     <FormField
                       control={form.control}
+                      name="college_name"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>College Name *</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Enter your college name" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="affiliated_university"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Affiliated University Name *</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Enter your affiliated university" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
                       name="team_size"
                       render={({ field }) => (
                         <FormItem>
@@ -446,9 +487,9 @@ export default function HackathonRegister() {
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              {[1, 2, 3, 4].map((size) => (
+                              {[2, 3, 4].map((size) => (
                                 <SelectItem key={size} value={size.toString()}>
-                                  {size} {size === 1 ? 'Member' : 'Members'}
+                                  {size} Members
                                 </SelectItem>
                               ))}
                             </SelectContent>
@@ -457,6 +498,8 @@ export default function HackathonRegister() {
                         </FormItem>
                       )}
                     />
+
+
                   </div>
 
                   {/* Team Leader Section */}
@@ -499,6 +542,20 @@ export default function HackathonRegister() {
                             <FormLabel>Phone Number</FormLabel>
                             <FormControl>
                               <Input placeholder="Team leader's phone" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="alternate_contact"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Contact Number of a Team Member Other Than the Leader *</FormLabel>
+                            <FormControl>
+                              <Input placeholder="Enter alternate contact number" {...field} />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
