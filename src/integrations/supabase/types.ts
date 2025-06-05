@@ -60,9 +60,12 @@ export type Database = {
           leader_email: string
           leader_name: string
           leader_phone: string
-          participants: Json
-          payment_receipt_url: string | null
+          payment_receipt_url: string
           project_idea: string
+          registered_at: string | null
+          team_member_1: string | null
+          team_member_2: string | null
+          team_member_3: string | null
           team_name: string
           team_size: number
           updated_at: string
@@ -74,9 +77,12 @@ export type Database = {
           leader_email: string
           leader_name: string
           leader_phone: string
-          participants: Json
-          payment_receipt_url?: string | null
+          payment_receipt_url: string
           project_idea?: string
+          registered_at?: string | null
+          team_member_1?: string | null
+          team_member_2?: string | null
+          team_member_3?: string | null
           team_name: string
           team_size: number
           updated_at?: string
@@ -88,9 +94,12 @@ export type Database = {
           leader_email?: string
           leader_name?: string
           leader_phone?: string
-          participants?: Json
-          payment_receipt_url?: string | null
+          payment_receipt_url?: string
           project_idea?: string
+          registered_at?: string | null
+          team_member_1?: string | null
+          team_member_2?: string | null
+          team_member_3?: string | null
           team_name?: string
           team_size?: number
           updated_at?: string
@@ -121,7 +130,27 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      registrations_view: {
+        Row: {
+          registered_at: string | null
+          team_name: string | null
+          team_size: number | null
+          vegetarian_count: number | null
+        }
+        Insert: {
+          registered_at?: never
+          team_name?: string | null
+          team_size?: number | null
+          vegetarian_count?: number | null
+        }
+        Update: {
+          registered_at?: never
+          team_name?: string | null
+          team_size?: number | null
+          vegetarian_count?: number | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       get_team_count: {

@@ -24,8 +24,8 @@ const registrationSchema = z.object({
   leader_name: z.string().min(2, 'Leader name must be at least 2 characters'),
   leader_email: z.string().email('Invalid email address'),
   leader_phone: z.string().min(10, 'Phone number must be at least 10 digits'),
-  team_size: z.number().min(2, 'Team must have at least 2 members').max(4, 'Team cannot exceed 4 members'),
-  participants: z.array(participantSchema).min(1).max(3),
+  team_size: z.number().min(1, 'Team must have at least 1 member').max(4, 'Team cannot exceed 4 members'),
+  participants: z.array(participantSchema).min(0).max(3),
   vegetarian_count: z.number().min(1, 'At least 1 vegetarian required').max(4, 'Maximum 4 vegetarians allowed'),
   project_idea: z.string().min(10, 'Project idea must be at least 10 characters'),
   payment_receipt: z.instanceof(File).optional(),
@@ -50,11 +50,9 @@ export default function HackathonRegister() {
       leader_name: '',
       leader_email: '',
       leader_phone: '',
-      team_size: 2,
-      participants: [
-        { full_name: '' },
-      ],
-      vegetarian_count: 2,
+      team_size: 1,
+      participants: [],
+      vegetarian_count: 1,
       project_idea: '',
     },
   });
@@ -197,14 +195,16 @@ export default function HackathonRegister() {
       // Upload payment receipt
       const paymentReceiptUrl = await uploadPaymentReceipt(paymentFile);
       
-      // Prepare registration data
+      // Prepare registration data with individual team member columns
       const registrationData = {
         team_name: data.team_name,
         leader_name: data.leader_name,
         leader_email: data.leader_email,
         leader_phone: data.leader_phone,
         team_size: data.team_size,
-        participants: data.participants,
+        team_member_1: data.participants[0]?.full_name || null,
+        team_member_2: data.participants[1]?.full_name || null,
+        team_member_3: data.participants[2]?.full_name || null,
         vegetarian_count: data.vegetarian_count,
         project_idea: data.project_idea,
         payment_receipt_url: paymentReceiptUrl,
@@ -220,7 +220,7 @@ export default function HackathonRegister() {
         if (insertError.code === '23505') {
           toast({
             title: "Registration Failed",
-            description: "This email or phone number has already been registered.",
+            description: "This email, phone number, or team name has already been registered.",
             variant: "destructive",
           });
           return;
@@ -446,9 +446,9 @@ export default function HackathonRegister() {
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              {[2, 3, 4].map((size) => (
+                              {[1, 2, 3, 4].map((size) => (
                                 <SelectItem key={size} value={size.toString()}>
-                                  {size} Members
+                                  {size} {size === 1 ? 'Member' : 'Members'}
                                 </SelectItem>
                               ))}
                             </SelectContent>
@@ -509,42 +509,44 @@ export default function HackathonRegister() {
                 </div>
 
                 {/* Team Members Section */}
-                <div className="space-y-6">
-                  <div className="flex items-center space-x-2 mb-4">
-                    <User className="w-6 h-6 text-isclub-teal" />
-                    <h2 className="text-2xl font-semibold text-isclub-dark">Team Members</h2>
+                {fields.length > 0 && (
+                  <div className="space-y-6">
+                    <div className="flex items-center space-x-2 mb-4">
+                      <User className="w-6 h-6 text-isclub-teal" />
+                      <h2 className="text-2xl font-semibold text-isclub-dark">Team Members</h2>
+                    </div>
+
+                    {fields.map((field, index) => (
+                      <motion.div
+                        key={field.id}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.3, delay: index * 0.1 }}
+                        className="border border-gray-200 rounded-lg p-6 space-y-4"
+                      >
+                        <h3 className="text-lg font-medium text-isclub-dark">
+                          Member {index + 2}
+                        </h3>
+
+                        <div className="grid md:grid-cols-1 gap-4">
+                          <FormField
+                            control={form.control}
+                            name={`participants.${index}.full_name`}
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel>Full Name</FormLabel>
+                                <FormControl>
+                                  <Input placeholder="Member's full name" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                        </div>
+                      </motion.div>
+                    ))}
                   </div>
-
-                  {fields.map((field, index) => (
-                    <motion.div
-                      key={field.id}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.3, delay: index * 0.1 }}
-                      className="border border-gray-200 rounded-lg p-6 space-y-4"
-                    >
-                      <h3 className="text-lg font-medium text-isclub-dark">
-                        Member {index + 2}
-                      </h3>
-
-                      <div className="grid md:grid-cols-1 gap-4">
-                        <FormField
-                          control={form.control}
-                          name={`participants.${index}.full_name`}
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Full Name</FormLabel>
-                              <FormControl>
-                                <Input placeholder="Member's full name" {...field} />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
+                )}
 
                 {/* Additional Information */}
                 <div className="space-y-6">
