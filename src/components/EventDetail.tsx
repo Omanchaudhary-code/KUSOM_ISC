@@ -122,7 +122,7 @@ export default function EventDetail({ events }: EventDetailProps) {
                         <span className="font-semibold">In collaboration with:</span> Kathmandu University Computer Club (KUCC)
                       </li>
                       <li>
-                        <span className="font-semibold">Prize Pool:</span> NPR 1.5 Lakh+
+                        <span className="font-semibold">Prize Pool:</span> Worth 1.5 Lakh+
                       </li>
                     </ul>
                     
