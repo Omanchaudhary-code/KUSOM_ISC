@@ -55,6 +55,9 @@ export type Database = {
       }
       registrations: {
         Row: {
+          affiliated_university: string
+          alternate_contact: string
+          college_name: string
           created_at: string
           id: string
           leader_email: string
@@ -72,6 +75,9 @@ export type Database = {
           vegetarian_count: number
         }
         Insert: {
+          affiliated_university?: string
+          alternate_contact?: string
+          college_name?: string
           created_at?: string
           id?: string
           leader_email: string
@@ -89,6 +95,9 @@ export type Database = {
           vegetarian_count?: number
         }
         Update: {
+          affiliated_university?: string
+          alternate_contact?: string
+          college_name?: string
           created_at?: string
           id?: string
           leader_email?: string

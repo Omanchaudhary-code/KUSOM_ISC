@@ -47,48 +47,48 @@ export default function EventDetail({ events }: EventDetailProps) {
   const showSponsors = event.id === "hackathon";
 
   return (
-    <section className="py-24 px-4">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-24 px-4">
       <div className="container mx-auto max-w-6xl">
-        <div className="mb-16">
+        <div className="mb-8 sm:mb-12 md:mb-16">
           <Link 
             to="/events" 
-            className="inline-flex items-center text-isclub-teal hover:underline mb-8"
+            className="inline-flex items-center text-isclub-teal hover:underline mb-6 sm:mb-8 text-sm sm:text-base"
           >
             <span className="mr-2">←</span> Back to all events
           </Link>
           
-          <div className="relative rounded-2xl overflow-hidden mb-8">
+          <div className="relative rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden mb-6 sm:mb-8">
             <div className="absolute inset-0 bg-gradient-to-r from-isclub-navy/80 to-transparent z-10"></div>
             <img 
               src={event.imageUrl} 
               alt={event.title} 
-              className="w-full h-[400px] object-cover"
+              className="w-full h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] object-cover"
             />
             
-            <div className="absolute bottom-0 left-0 z-20 p-8 md:p-12 w-full md:w-2/3">
+            <div className="absolute bottom-0 left-0 z-20 p-4 sm:p-6 md:p-8 lg:p-12 w-full">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white mb-4">
+                <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-display font-bold text-white mb-3 sm:mb-4 leading-tight">
                   {event.title}
                 </h1>
                 
-                <div className="flex flex-wrap gap-4 md:gap-6 text-white">
+                <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4 md:gap-6 text-white text-sm sm:text-base">
                   <div className="flex items-center">
-                    <Calendar className="w-5 h-5 mr-2" />
-                    <span>{event.date}</span>
+                    <Calendar className="w-4 h-4 sm:w-5 sm:h-5 mr-2 flex-shrink-0" />
+                    <span className="truncate">{event.date}</span>
                   </div>
                   
                   <div className="flex items-center">
-                    <Clock className="w-5 h-5 mr-2" />
-                    <span>{event.time}</span>
+                    <Clock className="w-4 h-4 sm:w-5 sm:h-5 mr-2 flex-shrink-0" />
+                    <span className="truncate">{event.time}</span>
                   </div>
                   
                   <div className="flex items-center">
-                    <MapPin className="w-5 h-5 mr-2" />
-                    <span>{event.location}</span>
+                    <MapPin className="w-4 h-4 sm:w-5 sm:h-5 mr-2 flex-shrink-0" />
+                    <span className="truncate">{event.location}</span>
                   </div>
                 </div>
               </motion.div>
@@ -96,19 +96,19 @@ export default function EventDetail({ events }: EventDetailProps) {
           </div>
         </div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 sm:gap-10 md:gap-12">
           <div className="lg:col-span-2">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="prose prose-lg max-w-none"
+              className="space-y-6 sm:space-y-8"
             >
-              <div className="text-gray-700 mb-8">
+              <div className="text-gray-700 leading-relaxed">
                 {event.id === 'hackathon' ? (
-                  <div className="space-y-6">
-                    <h2 className="text-xl font-display font-bold mb-4">Event Details</h2>
-                    <ul className="list-disc pl-5 space-y-2">
+                  <div className="space-y-6 sm:space-y-8">
+                    <h2 className="text-lg sm:text-xl md:text-2xl font-display font-bold mb-4 text-isclub-navy">Event Details</h2>
+                    <ul className="list-disc pl-5 space-y-2 sm:space-y-3 text-sm sm:text-base">
                       <li>
                         <span className="font-semibold">Date:</span> June 21–23, 2025
                       </li>
@@ -126,49 +126,61 @@ export default function EventDetail({ events }: EventDetailProps) {
                       </li>
                     </ul>
                     
-                    <h2 className="text-xl font-display font-bold mt-8 mb-4">About the Event</h2>
-                    <p className="mb-4">
+                    <h2 className="text-lg sm:text-xl md:text-2xl font-display font-bold mt-6 sm:mt-8 mb-4 text-isclub-navy">About the Event</h2>
+                    <p className="mb-4 sm:mb-6 text-sm sm:text-base leading-relaxed">
                       Hack for Business is a three-day hackathon organized by the Information System Club as part of the KUSOM Annual Fest (KAF), a flagship initiative of the Student Welfare Council (SWC) at Kathmandu University School of Management (KUSOM). This event is hosted in collaboration with the Kathmandu University Computer Club (KUCC), under the unifying theme "We Collaborate."
                     </p>
                     
-                    <h3 className="text-lg font-display font-semibold mt-6 mb-3">Objectives</h3>
-                    <ul className="list-disc pl-5 space-y-2">
+                    <h3 className="text-base sm:text-lg md:text-xl font-display font-semibold mt-6 mb-3 text-isclub-navy">Objectives</h3>
+                    <ul className="list-disc pl-5 space-y-2 sm:space-y-3 text-sm sm:text-base">
                       <li><strong>Foster interdisciplinary teamwork</strong></li>
                       <li><strong>Promote innovation</strong></li>
                       <li><strong>Bring together students</strong> from diverse academic backgrounds</li>
                       <li><strong>Develop technology-driven solutions</strong> to real-world business challenges</li>
                     </ul>
                     
-                    <h2 className="text-xl font-display font-bold mt-8 mb-4">About the Organizers</h2>
-                    <p>
+                    <h2 className="text-lg sm:text-xl md:text-2xl font-display font-bold mt-6 sm:mt-8 mb-4 text-isclub-navy">About the Organizers</h2>
+                    <p className="text-sm sm:text-base leading-relaxed">
                       This hackathon is part of the KUSOM Annual Fest (KAF), an event where each SWC-affiliated club organizes an activity in line with their core expertise. The Information System Club, with its focus on the intersection of business and technology, has initiated Hack for Business in alignment with this vision, supported by the technical capabilities of KUCC.
                     </p>
                   </div>
                 ) : (
-                  <div className="prose max-w-none">
-                    <ReactMarkdown>
-                      {event.longDescription || event.description}
-                    </ReactMarkdown>
+                  <div className="prose prose-sm sm:prose-base max-w-none">
+                    <div className="text-gray-700 text-sm sm:text-base leading-relaxed space-y-4 sm:space-y-6">
+                      <ReactMarkdown
+                        components={{
+                          p: ({ children }) => <p className="mb-4 sm:mb-6 text-sm sm:text-base leading-relaxed text-gray-700">{children}</p>,
+                          h1: ({ children }) => <h1 className="text-lg sm:text-xl md:text-2xl font-display font-bold mb-4 text-isclub-navy">{children}</h1>,
+                          h2: ({ children }) => <h2 className="text-base sm:text-lg md:text-xl font-display font-bold mb-3 sm:mb-4 text-isclub-navy">{children}</h2>,
+                          h3: ({ children }) => <h3 className="text-sm sm:text-base md:text-lg font-display font-semibold mb-2 sm:mb-3 text-isclub-navy">{children}</h3>,
+                          ul: ({ children }) => <ul className="list-disc pl-5 space-y-2 sm:space-y-3 mb-4 sm:mb-6">{children}</ul>,
+                          li: ({ children }) => <li className="text-sm sm:text-base leading-relaxed text-gray-700">{children}</li>,
+                          strong: ({ children }) => <strong className="font-semibold text-isclub-navy">{children}</strong>
+                        }}
+                      >
+                        {event.longDescription || event.description}
+                      </ReactMarkdown>
+                    </div>
                   </div>
                 )}
               </div>
               
               {event.schedule && (
-                <div className="mt-12">
-                  <h3 className="text-xl font-display font-semibold mb-6 flex items-center">
-                    <Clock className="w-5 h-5 mr-2 text-isclub-teal" />
+                <div className="mt-8 sm:mt-10 md:mt-12">
+                  <h3 className="text-lg sm:text-xl font-display font-semibold mb-4 sm:mb-6 flex items-center text-isclub-navy">
+                    <Clock className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-isclub-teal flex-shrink-0" />
                     Event Schedule
                   </h3>
-                  <div className="space-y-4">
+                  <div className="space-y-3 sm:space-y-4">
                     {event.schedule.map((item, index) => (
                       <div 
                         key={index}
-                        className="flex border-l-2 border-isclub-teal pl-4 py-2"
+                        className="flex flex-col sm:flex-row border-l-2 border-isclub-teal pl-4 py-2 gap-2 sm:gap-0"
                       >
-                        <div className="w-24 font-medium text-isclub-navy">
+                        <div className="w-full sm:w-24 font-medium text-isclub-navy text-sm sm:text-base">
                           {item.time}
                         </div>
-                        <div className="flex-1">
+                        <div className="flex-1 text-sm sm:text-base text-gray-700 leading-relaxed">
                           {item.activity}
                         </div>
                       </div>
@@ -178,25 +190,25 @@ export default function EventDetail({ events }: EventDetailProps) {
               )}
               
               {event.speakers && event.speakers.length > 0 && (
-                <div className="mt-12">
-                  <h3 className="text-xl font-display font-semibold mb-6 flex items-center">
-                    <Users className="w-5 h-5 mr-2 text-isclub-teal" />
+                <div className="mt-8 sm:mt-10 md:mt-12">
+                  <h3 className="text-lg sm:text-xl font-display font-semibold mb-4 sm:mb-6 flex items-center text-isclub-navy">
+                    <Users className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-isclub-teal flex-shrink-0" />
                     Instructors
                   </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                     {event.speakers.map((speaker, index) => (
                       <div 
                         key={index}
-                        className="flex items-center p-4 rounded-lg bg-gray-50"
+                        className="flex items-center p-4 sm:p-6 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors duration-200"
                       >
                         <img 
                           src={speaker.imageUrl} 
                           alt={speaker.name}
-                          className="w-16 h-16 rounded-full object-cover mr-4"
+                          className="w-12 h-12 sm:w-16 sm:h-16 rounded-full object-cover mr-3 sm:mr-4 flex-shrink-0"
                         />
-                        <div>
-                          <h4 className="font-medium">{speaker.name}</h4>
-                          <p className="text-sm text-gray-600">{speaker.role}</p>
+                        <div className="min-w-0 flex-1">
+                          <h4 className="font-medium text-sm sm:text-base text-isclub-navy truncate">{speaker.name}</h4>
+                          <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">{speaker.role}</p>
                         </div>
                       </div>
                     ))}
@@ -214,15 +226,15 @@ export default function EventDetail({ events }: EventDetailProps) {
               className="sticky top-24"
             >
               {event.id === 'hackathon' && (
-                <div className="bg-gradient-to-br from-isclub-teal to-isclub-cyan rounded-xl p-6 text-center shadow-lg">
-                  <h3 className="text-xl font-display font-bold text-white mb-4">Ready to Participate?</h3>
-                  <p className="text-white/90 mb-6">Join us for an exciting 48-hour hackathon and showcase your skills!</p>
+                <div className="bg-gradient-to-br from-isclub-teal to-isclub-cyan rounded-lg sm:rounded-xl p-4 sm:p-6 text-center shadow-lg">
+                  <h3 className="text-lg sm:text-xl font-display font-bold text-white mb-3 sm:mb-4">Ready to Participate?</h3>
+                  <p className="text-white/90 mb-4 sm:mb-6 text-sm sm:text-base leading-relaxed">Join us for an exciting 48-hour hackathon and showcase your skills!</p>
                   <Link 
                     to="/register"
-                    className="inline-flex items-center justify-center px-6 py-3 bg-white text-isclub-navy font-medium rounded-lg hover:bg-gray-100 transition-colors duration-200 shadow-md"
+                    className="inline-flex items-center justify-center px-4 sm:px-6 py-2 sm:py-3 bg-white text-isclub-navy font-medium rounded-lg hover:bg-gray-100 transition-colors duration-200 shadow-md text-sm sm:text-base w-full sm:w-auto"
                   >
                     <span>Register Now</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                     </svg>
                   </Link>
@@ -250,27 +262,6 @@ export default function EventDetail({ events }: EventDetailProps) {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
               {[
-                // {
-                //   name: 'TechCorp',
-                //   type: 'Title Sponsor',
-                //   description: 'Empowering innovation through cutting-edge technology solutions.',
-                //   logo: 'https://via.placeholder.com/300x150?text=TechCorp',
-                //   color: 'from-yellow-500 to-amber-500'
-                // },
-                // {
-                //   name: 'CodeMasters',
-                //   type: 'Gold Sponsor',
-                //   description: 'Mentoring the next generation of tech leaders.',
-                //   logo: 'https://via.placeholder.com/300x150?text=CodeMasters',
-                //   color: 'from-amber-400 to-yellow-300'
-                // },
-                // {
-                //   name: 'DevHive',
-                //   type: 'Gold Sponsor',
-                //   description: 'Building developer communities and fostering growth.',
-                //   logo: 'https://via.placeholder.com/300x150?text=DevHive',
-                //   color: 'from-blue-500 to-cyan-400'
-                // },
                 {
                   name: 'Singapore Beverages',
                   type: 'Refreshment Partner',
@@ -295,28 +286,6 @@ export default function EventDetail({ events }: EventDetailProps) {
                   color: 'from-orange-500 to-indigo-500',
                   website: 'https://www.instagram.com/oopsinnepal/?hl=en'
                 },
-                // {
-                //   name: 'SwagMasters',
-                //   type: 'Swag Partner',
-                //   description: 'Providing amazing swag to all participants.',
-                //   logo: 'https://via.placeholder.com/300x150?text=SwagMasters',
-                //   color: 'from-purple-500 to-pink-500'
-                // },
-                // {
-                //   name: 'SnapMagic',
-                //   type: 'Photography Partner',
-                //   description: 'Capturing every moment of the event.',
-                //   logo: 'https://via.placeholder.com/300x150?text=SnapMagic',
-                //   color: 'from-pink-500 to-red-500'
-                // },
-                // {
-                //   name: 'NetBlaze',
-                //   type: 'Internet Partner',
-                //   description: 'Providing high-speed internet for all participants.',
-                //   logo: 'https://via.placeholder.com/300x150?text=NetBlaze',
-                //   color: 'from-green-500 to-emerald-500',
-                //   website: 'https://netblaze.com'
-                // }
               ].map((sponsor, index) => (
                 <motion.div 
                   key={index}
