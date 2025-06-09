@@ -72,7 +72,7 @@ export type Database = {
           team_name: string
           team_size: number
           updated_at: string
-          vegetarian_count: number
+          vegetarian_count: number | null
         }
         Insert: {
           affiliated_university?: string
@@ -92,7 +92,7 @@ export type Database = {
           team_name: string
           team_size: number
           updated_at?: string
-          vegetarian_count?: number
+          vegetarian_count?: number | null
         }
         Update: {
           affiliated_university?: string
@@ -112,7 +112,7 @@ export type Database = {
           team_name?: string
           team_size?: number
           updated_at?: string
-          vegetarian_count?: number
+          vegetarian_count?: number | null
         }
         Relationships: []
       }

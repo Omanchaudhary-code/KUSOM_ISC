@@ -29,7 +29,7 @@ const registrationSchema = z.object({
   alternate_contact: z.string().min(10, 'Alternate contact number must be at least 10 digits'),
   team_size: z.number().min(1, 'Team must have at least 1 member').max(4, 'Team cannot exceed 4 members'),
   participants: z.array(participantSchema).min(0).max(3),
-  vegetarian_count: z.number().min(1, 'At least 1 vegetarian required').max(4, 'Maximum 4 vegetarians allowed'),
+  vegetarian_count: z.number().min(0, 'Minimum 0 vegetarians').max(4, 'Maximum 4 vegetarians allowed'),
   project_idea: z.string().min(10, 'Project idea must be at least 10 characters'),
   payment_receipt: z.instanceof(File).optional(),
 });
@@ -55,7 +55,7 @@ export default function HackathonRegister() {
       leader_phone: '',
       team_size: 2,
       participants: [{ full_name: '' }],
-      vegetarian_count: 1,
+      vegetarian_count: 0,
       project_idea: '',
     },
   });
@@ -614,7 +614,7 @@ export default function HackathonRegister() {
                     name="vegetarian_count"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Number of Vegetarians in Team</FormLabel>
+                        <FormLabel>Number of Vegetarians in Your Team</FormLabel>
                         <Select 
                           onValueChange={(value) => field.onChange(parseInt(value))}
                           value={field.value.toString()}
@@ -625,7 +625,7 @@ export default function HackathonRegister() {
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
-                            {[1, 2, 3, 4].map((count) => (
+                            {[0, 1, 2, 3, 4].map((count) => (
                               <SelectItem key={count} value={count.toString()}>
                                 {count} {count === 1 ? 'vegetarian' : 'vegetarians'}
                               </SelectItem>
