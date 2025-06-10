@@ -262,6 +262,14 @@ export default function EventDetail({ events }: EventDetailProps) {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-14 md:mb-16">
               {[
+                 {
+                  name: 'Swiss Timepieces Nepal',
+                  type: 'Co-Sponsor',
+                  description: 'Your premier destination for authentic luxury watches, offering curated collections from the world\’s finest Swiss, German, and Japanese brands.',
+                  logo: 'https://i.imgur.com/r37nMQZ.jpeg',
+                  color: 'from-gray-700 to-black-500',
+                  website: 'https://swisstimepiecesnepal.com'
+                },
                 {
                   name: 'Singapore Beverages',
                   type: 'Refreshment Partner',
@@ -270,17 +278,10 @@ export default function EventDetail({ events }: EventDetailProps) {
                   color: 'from-gray-700 to-black-500',
                   website: 'https://singaporebeverage.com'
                 },
-                {
-                  name: 'Swiss Timepieces Nepal',
-                  type: 'Co-Sponsor',
-                  description: 'Your premier destination for authentic luxury watches, offering curated collections from the world\’s finest Swiss, German, and Japanese brands.',
-                  logo: 'https://i.imgur.com/r37nMQZ.jpeg',
-                  color: 'from-gray-700 to-black-500',
-                  website: 'https://swisstimepiecesnepal.com'
-                },
+               
                  {
                   name: 'Ather',
-                  type: 'Two Wheel Partner',
+                  type: 'Two Wheeler Partner',
                   description: 'Intelligent Electric, Effortless Ride.',
                   logo: 'https://i.imgur.com/I78eH4u.jpeg',
                   color: 'from-gray-700 to-black-500',
@@ -304,11 +305,11 @@ export default function EventDetail({ events }: EventDetailProps) {
                 },
                
                 {
-                  name: 'Luxora',
+                  name: 'Luxora Events',
                   type: 'Event Partner',
                   description: 'Crafting Unforgettable Experiences, From Concept to Capture.',
                   logo: 'https://i.imgur.com/CUJo2tR.jpeg',
-                  color: 'from-orange-500 to-indigo-500',
+                  color: 'from-amber-400 to-blue-900',
                   website: 'https://www.instagram.com/luxora_events?igsh=eHYzZDd1enRxNzNx'
                 },
               ].map((sponsor, index) => (
