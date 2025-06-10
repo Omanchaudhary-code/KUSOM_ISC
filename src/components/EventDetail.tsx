@@ -265,15 +265,31 @@ export default function EventDetail({ events }: EventDetailProps) {
                 {
                   name: 'Singapore Beverages',
                   type: 'Refreshment Partner',
-                  description: 'Providing delicious refreshments to keep you energized.',
+                  description: 'Elevating Nepali Craftsmanship, One Sip at a Time.',
                   logo: 'https://i.imgur.com/5GqQhSc.jpeg',
                   color: 'from-gray-700 to-black-500',
                   website: 'https://singaporebeverage.com'
                 },
                 {
+                  name: 'Swiss Timepieces Nepal',
+                  type: 'Co-Sponsor',
+                  description: 'Your premier destination for authentic luxury watches, offering curated collections from the world\’s finest Swiss, German, and Japanese brands.',
+                  logo: 'https://i.imgur.com/r37nMQZ.jpeg',
+                  color: 'from-gray-700 to-black-500',
+                  website: 'https://swisstimepiecesnepal.com'
+                },
+                 {
+                  name: 'Ather',
+                  type: 'Two Wheel Partner',
+                  description: 'Intelligent Electric, Effortless Ride.',
+                  logo: 'https://i.imgur.com/I78eH4u.jpeg',
+                  color: 'from-gray-700 to-black-500',
+                  website: 'https://www.atherenergy.com.np'
+                },
+                {
                   name: 'Hamro Patro',
                   type: 'Media Partner',
-                  description: 'Covering the event with live updates and insights.',
+                  description: 'The Heartbeat of Nepali Life',
                   logo: 'https://i.imgur.com/Jge1qVP.png',
                   color: 'from-red-500 to-maroon-500',
                   website: 'https://hamropatro.com'
@@ -281,10 +297,19 @@ export default function EventDetail({ events }: EventDetailProps) {
                 {
                   name: 'OOps Nepal',
                   type: 'Entertainment Partner',
-                  description: 'Bringing fun-filled energy and interactive experiences to the event.',
+                  description: 'Nepal\'s Ultimate Family Fun: 100+ Adventures Await!',
                   logo: 'https://i.imgur.com/0mlBZ8n.jpeg',
                   color: 'from-orange-500 to-indigo-500',
                   website: 'https://www.instagram.com/oopsinnepal/?hl=en'
+                },
+               
+                {
+                  name: 'Luxora',
+                  type: 'Event Partner',
+                  description: 'Crafting Unforgettable Experiences, From Concept to Capture.',
+                  logo: 'https://i.imgur.com/CUJo2tR.jpeg',
+                  color: 'from-orange-500 to-indigo-500',
+                  website: 'https://www.instagram.com/luxora_events?igsh=eHYzZDd1enRxNzNx'
                 },
               ].map((sponsor, index) => (
                 <motion.div 
