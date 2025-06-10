@@ -27,22 +27,11 @@ const events = [
     location: "Computer Lab, Block 10",
     description: "Learn the fundamentals of modern web development with HTML, CSS, and JavaScript.",
     imageUrl: "https://i.imgur.com/wMJkWRA.jpeg",
-    longDescription: `
-      Join us for an immersive workshop focused on modern web development technologies and best practices. 
+    longDescription: `Join us for an immersive workshop focused on modern web development technologies and best practices. 
       This hands-on session will guide you through the fundamentals of HTML, CSS, and JavaScript, 
       equipping you with the skills to build responsive and interactive websites.
-      
-      You'll learn how to structure content with semantic HTML, style your pages with CSS, and add 
-      interactivity with JavaScript. By the end of this workshop, you'll have built a fully functional 
-      website from scratch and gained valuable skills applicable to frontend development careers.
-    `,
-    targetAudience: "Students interested in web development, from beginners to those with some coding experience.",
-    prerequisites: [
-      "Basic computer knowledge",
-      "Laptop with a modern browser installed",
-      "Text editor (VS Code recommended)"
-    ],
-  
+      `,
+   
     speakers: [
       {
         name: "Oman Chaudhary",
