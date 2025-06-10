@@ -309,7 +309,7 @@ export default function EventDetail({ events }: EventDetailProps) {
                   type: 'Event Partner',
                   description: 'Crafting Unforgettable Experiences, From Concept to Capture.',
                   logo: 'https://i.imgur.com/CUJo2tR.jpeg',
-                  color: 'from-blue-500 to-amber-900',
+                  color: 'from-blue-700 to-amber-400',
                   website: 'https://www.instagram.com/luxora_events?igsh=eHYzZDd1enRxNzNx'
                 },
               ].map((sponsor, index) => (
