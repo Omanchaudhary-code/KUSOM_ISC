@@ -306,7 +306,7 @@ export default function EventDetail({ events }: EventDetailProps) {
                
                 {
                   name: 'Luxora Events',
-                  type: 'Event Partner',
+                  type: 'E Partner',
                   description: 'Crafting Unforgettable Experiences, From Concept to Capture.',
                   logo: 'https://i.imgur.com/CUJo2tR.jpeg',
                   color: 'from-amber-400 to-blue-900',
