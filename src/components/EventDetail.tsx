@@ -317,8 +317,8 @@ export default function EventDetail({ events }: EventDetailProps) {
                   name: 'CSIT(Association of Nepal)',
                   type: 'Community Partner',
                   description: 'Empowering Innovation and Collaboration in Nepal’s IT Community to Drive Business Solutions.',
-                  logo: 'https://i.imgur.com/UmWsNPX.jpeg',
-                  color: 'from-black via-red-600 to-sky-400',
+                  logo: 'https://i.imgur.com/mIxMhqK.png',
+                  color: 'bg-gradient-to-r from-white via-red-600 to-sky-400',
                   website: 'https://csitan.org.np'
                 },
               ].map((sponsor, index) => (
