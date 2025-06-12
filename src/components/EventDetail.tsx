@@ -312,6 +312,15 @@ export default function EventDetail({ events }: EventDetailProps) {
                   color: 'from-blue-700 to-amber-400',
                   website: 'https://www.instagram.com/luxora_events?igsh=eHYzZDd1enRxNzNx'
                 },
+               
+                {
+                  name: 'CSIT(Association of Nepal)',
+                  type: 'Community Partner',
+                  description: 'Empowering Innovation and Collaboration in Nepal’s IT Community to Drive Business Solutions.',
+                  logo: 'https://i.imgur.com/UmWsNPX.jpeg',
+                  color: 'from-black via-red-600 to-sky-400',
+                  website: 'https://csitan.org.np'
+                },
               ].map((sponsor, index) => (
                 <motion.div 
                   key={index}
