@@ -19,6 +19,8 @@ const participantSchema = z.object({
   full_name: z.string().min(2, 'Full name must be at least 2 characters'),
 });
 
+
+
 const registrationSchema = z.object({
   team_name: z.string().min(2, 'Team name must be at least 2 characters'),
   college_name: z.string().min(2, 'College name must be at least 2 characters'),
@@ -45,6 +47,8 @@ export default function HackathonRegister() {
   const [isLoading, setIsLoading] = useState(true);
   const { toast } = useToast();
   const navigate = useNavigate();
+  const [isTracksOpen, setIsTracksOpen] = useState(false);
+
 
   const form = useForm<RegistrationFormData>({
     resolver: zodResolver(registrationSchema),
@@ -403,6 +407,21 @@ export default function HackathonRegister() {
                 Hurry! Only {25 - teamCount} slots remaining!
               </p>
             </div> */}
+            {/* <div className="flex justify-center mb-6">
+          <Button onClick={() => setIsTracksOpen(true)} variant="outline">
+                 View Hackathon Tracks
+          </Button>
+          </div> */}
+          <div className="text-center mb-6">
+  <Button
+    onClick={() => setIsTracksOpen(true)}
+    className="bg-teal-500 hover:bg-teal-600 text-white"
+  >
+    View Hackathon Tracks
+  </Button>
+</div>
+
+
 
             <p className="text-lg text-isclub-gray max-w-2xl mx-auto">
               Register your team for the most exciting 48-hour hackathon focusing on innovative business solutions.
@@ -720,6 +739,60 @@ export default function HackathonRegister() {
         </div>
       </main>
       <Footer />
+      {isTracksOpen && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="bg-white rounded-xl shadow-2xl p-6 max-w-lg w-full relative mx-4">
+      {/* Close Button */}
+      <button
+        onClick={() => setIsTracksOpen(false)}
+        className="absolute top-2 right-3 text-gray-600 hover:text-gray-900 text-xl"
+        aria-label="Close"
+      >
+        ×
+      </button>
+
+      {/* Modal Content */}
+      <h2 className="text-lg font-semibold text-orange-700 mb-4">
+        📢 Hackathon Tracks — Choose Your Focus Area!
+      </h2>
+
+      <p className="text-gray-700 mb-3">
+        We’re excited to share the four main tracks for the hackathon. These are the focus areas where you can build your projects:
+      </p>
+
+      <ul className="list-disc list-inside text-gray-800 mb-3 space-y-1">
+        <li><strong>Artificial Intelligence and Machine Learning</strong></li>
+        <li><strong>Blockchain and Decentralized Applications</strong></li>
+        <li><strong>Sustainability and Green Technology</strong></li>
+        <li><strong>Open Innovation and Collaboration</strong></li>
+      </ul>
+
+      <p className="text-gray-700">
+        Let’s innovate and build something impactful together! 
+        <hr />
+      </p>
+
+      <p className="text-gray-700">
+        <pre>Best Regards,</pre>
+      </p>
+      <p className="text-gray-700">
+        <pre>
+        <strong>Hackathon Organizing Team</strong>
+          </pre>
+      </p>
+
+      <div className="text-right mt-4">
+        <button
+          onClick={() => setIsTracksOpen(false)}
+          className="text-sm text-blue-600 hover:underline"
+        >
+          [Hide Details]
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
     </div>
   );
 }
