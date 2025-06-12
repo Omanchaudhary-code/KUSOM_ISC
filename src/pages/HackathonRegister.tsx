@@ -398,11 +398,11 @@ export default function HackathonRegister() {
             </div>
             
             {/* Team slots remaining indicator */}
-            <div className="bg-gradient-to-r from-orange-100 to-red-100 border border-orange-200 rounded-lg p-4 mb-6 max-w-md mx-auto">
+            {/* <div className="bg-gradient-to-r from-orange-100 to-red-100 border border-orange-200 rounded-lg p-4 mb-6 max-w-md mx-auto">
               <p className="text-orange-800 font-semibold text-lg">
                 Hurry! Only {25 - teamCount} slots remaining!
               </p>
-            </div>
+            </div> */}
 
             <p className="text-lg text-isclub-gray max-w-2xl mx-auto">
               Register your team for the most exciting 48-hour hackathon focusing on innovative business solutions.
