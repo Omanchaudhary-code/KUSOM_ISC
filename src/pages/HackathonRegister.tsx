@@ -739,59 +739,49 @@ export default function HackathonRegister() {
         </div>
       </main>
       <Footer />
-      {isTracksOpen && (
-  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-    <div className="bg-white rounded-xl shadow-2xl p-6 max-w-lg w-full relative mx-4">
-      {/* Close Button */}
+     {isTracksOpen && (
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
+    <div className="bg-white rounded-xl shadow-lg max-w-md w-full p-6 relative">
       <button
         onClick={() => setIsTracksOpen(false)}
-        className="absolute top-2 right-3 text-gray-600 hover:text-gray-900 text-xl"
-        aria-label="Close"
+        className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-xl"
       >
-        ×
+        &times;
       </button>
-
-      {/* Modal Content */}
-      <h2 className="text-lg font-semibold text-orange-700 mb-4">
+      <h2 className="text-lg font-semibold text-orange-600 mb-4">
         📢 Hackathon Tracks — Choose Your Focus Area!
       </h2>
 
-      <p className="text-gray-700 mb-3">
+      <p className="text-gray-700 mb-4">
         We’re excited to share the four main tracks for the hackathon. These are the focus areas where you can build your projects:
       </p>
 
-      <ul className="list-disc list-inside text-gray-800 mb-3 space-y-1">
+      <ul className="list-disc list-outside pl-6 text-gray-800 text-sm mb-4">
         <li><strong>Artificial Intelligence and Machine Learning</strong></li>
         <li><strong>Blockchain and Decentralized Applications</strong></li>
         <li><strong>Sustainability and Green Technology</strong></li>
         <li><strong>Open Innovation and Collaboration</strong></li>
       </ul>
 
-      <p className="text-gray-700">
-        Let’s innovate and build something impactful together! 
-        <hr />
+      <p className="text-gray-700 text-sm">
+        Let’s innovate and build something impactful together!
       </p>
 
-      <p className="text-gray-700">
-        <pre>Best Regards,</pre>
-      </p>
-      <p className="text-gray-700">
-        <pre>
-        <strong>Hackathon Organizing Team</strong>
-          </pre>
-      </p>
-
-      <div className="text-right mt-4">
-        <button
-          onClick={() => setIsTracksOpen(false)}
-          className="text-sm text-blue-600 hover:underline"
-        >
-          [Hide Details]
-        </button>
+      <div className="border-t mt-4 pt-2 text-sm text-gray-600">
+        <p><code>Best Regards,</code></p>
+        <p className="font-semibold">Hackathon Organizing Team</p>
       </div>
+
+      <button
+        onClick={() => setIsTracksOpen(false)}
+        className="text-blue-600 hover:underline mt-4 text-sm"
+      >
+        [Hide Details]
+      </button>
     </div>
   </div>
 )}
+
 
     </div>
   );
