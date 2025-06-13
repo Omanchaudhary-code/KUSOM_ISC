@@ -686,7 +686,7 @@ export default function HackathonRegister() {
                         />
                       </div>
                       <p className="text-sm text-gray-700 font-medium">
-                        Scan to pay: Unique Poudel – 9741744983 (eSewa)
+                        Scan to pay(Rs.3500): Unique Poudel – 9741744983 (eSewa)
                       </p>
                     </div>
                   </div>
