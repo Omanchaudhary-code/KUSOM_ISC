@@ -407,11 +407,12 @@ export default function HackathonRegister() {
                 Hurry! Only {25 - teamCount} slots remaining!
               </p>
             </div> */}
-            {/* <div className="flex justify-center mb-6">
-          <Button onClick={() => setIsTracksOpen(true)} variant="outline">
-                 View Hackathon Tracks
-          </Button>
-          </div> */}
+            <div className="bg-gradient-to-r from-orange-100 to-red-100 border border-orange-200 rounded-lg p-4 mb-6 max-w-md mx-auto">
+              <p className="text-orange-800 font-semibold text-lg">
+              Good news! The deadline has been extended to June 18th.
+              </p>
+            </div>
+          
           <div className="text-center mb-6">
   <Button
     onClick={() => setIsTracksOpen(true)}
