@@ -274,7 +274,7 @@ export default function EventDetail({ events }: EventDetailProps) {
                   name: 'BAW Nepal',
                   type: 'Mobility Partner',
                   description: 'Powering Nepal\’s Sustainable Mobility with Innovation, Reliability, and a Vision for a Greener Future.',
-                  logo: 'https://i.imgur.com/iPEylPp.jpeg',
+                  logo: 'https://i.imgur.com/ZGFLnA1.jpeg',
                   color: 'from-red-800 to-red-950',
                   website: 'https://www.facebook.com/bawnepal/'
                 },
@@ -319,25 +319,7 @@ export default function EventDetail({ events }: EventDetailProps) {
                   logo: 'https://i.imgur.com/CUJo2tR.jpeg',
                   color: 'from-blue-700 to-amber-400',
                   website: 'https://www.instagram.com/luxora_events?igsh=eHYzZDd1enRxNzNx'
-                },
-               
-                {
-                  name: 'CSIT(Association of Nepal)',
-                  type: 'Community Partner',
-                  description: 'Empowering Innovation and Collaboration in Nepal\’s IT Community to Drive Business Solutions.',
-                  logo: 'https://i.imgur.com/mIxMhqK.png',
-                  color: 'bg-gradient-to-r from-white via-red-600 to-sky-400',
-                  website: 'https://csitan.org.np'
-                },
-               
-                {
-                  name: 'Code For Change',
-                  type: 'Community Partner',
-                  description: 'Driving Social Impact and Innovation through Technology and Collaboration in Nepal\'s Tech Community.',
-                  logo: 'https://i.imgur.com/t1PZIHS.png',
-                  color: 'bg-gradient-to-r from-white via-blue-600 to-blue-900',
-                  website: 'https://codeforchangenepal.com/'
-                },
+                }               
               ].map((sponsor, index) => (
                 <motion.div 
                   key={index}
@@ -375,6 +357,88 @@ export default function EventDetail({ events }: EventDetailProps) {
                 </motion.div>
               ))}
             </div>
+
+             <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.6 }}
+      className="mt-16 sm:mt-20 md:mt-24 tech-pattern py-12 sm:py-14 md:py-16"
+    >
+      <div className="text-center mb-8 sm:mb-10 md:mb-12">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-isclub-navy mb-3 sm:mb-4">
+          Our Community Partners
+        </h2>
+        <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
+          We’re grateful to our amazing community partners who foster innovation, collaboration, and knowledge-sharing across Nepal’s tech landscape.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-14 md:mb-16">
+        {[
+          {
+                      name: 'CSIT(Association of Nepal)',
+                      type: 'Community Partner',
+                      description: 'Empowering Innovation and Collaboration in Nepal\’s IT Community to Drive Business Solutions.',
+                      logo: 'https://i.imgur.com/mIxMhqK.png',
+                      color: 'bg-gradient-to-r from-white via-red-600 to-sky-400',
+                      website: 'https://csitan.org.np'
+                    },
+                  
+                    {
+                      name: 'Code For Change',
+                      type: 'Community Partner',
+                      description: 'Driving Social Impact and Innovation through Technology and Collaboration in Nepal\'s Tech Community.',
+                      logo: 'https://i.imgur.com/t1PZIHS.png',
+                      color: 'bg-gradient-to-r from-white via-blue-600 to-blue-900',
+                      website: 'https://codeforchangenepal.com/'
+                    },
+                    {
+                      name: 'KUAIC (Kathmandu University AI Club)',
+                      type: 'Community Partner',
+                      description: 'KUAIC is a student-led AI community at Kathmandu University, promoting innovation through projects, workshops, and events like Hack for Business.',
+                      logo: 'https://i.imgur.com/GnPaM0t.jpeg',
+                      color: 'bg-gradient-to-r from-[#B8E3DB] via-[#1C2F49] to-[#0F2740]',
+                      website: 'https://aiclub.ku.edu.np'
+                    }
+        ].map((partner, index) => (
+          <motion.div 
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            whileHover={{
+              scale: 1.02,
+              transition: { type: "spring", stiffness: 300, damping: 20 }
+            }}
+            className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-all duration-300 cursor-pointer"
+          >
+            <div className={`h-2 bg-gradient-to-r ${partner.color} transition-colors duration-300 hover:opacity-90`} />
+            <div className="p-4 sm:p-6">
+              <div className="h-20 sm:h-24 flex items-center justify-center mb-3 sm:mb-4">
+                <img 
+                  src={partner.logo} 
+                  alt={partner.name}
+                  className="max-h-full max-w-full object-contain transition-transform duration-300 hover:scale-110"
+                />
+              </div>
+              <a 
+                href={partner.website} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-lg sm:text-xl font-bold text-center text-isclub-navy mb-1 transition-colors duration-300 hover:text-isclub-cyan flex items-center justify-center gap-1"
+              >
+                {partner.name}
+                <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
+              </a>
+              <p className="text-xs sm:text-sm text-center text-amber-600 font-medium mb-2 sm:mb-3 transition-colors duration-300 hover:text-amber-700">{partner.type}</p>
+              <p className="text-gray-600 text-center text-xs sm:text-sm transition-colors duration-300 hover:text-gray-700">{partner.description}</p>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </motion.div>
+
 
             <motion.div 
               className="mb-8 sm:mb-10 md:mb-12"
