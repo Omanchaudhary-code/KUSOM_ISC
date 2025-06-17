@@ -413,16 +413,14 @@ export default function HackathonRegister() {
               </p>
             </div>
           
-          <div className="text-center mb-6">
-  <Button
-    onClick={() => setIsTracksOpen(true)}
-    className="bg-teal-500 hover:bg-teal-600 text-white"
-  >
-    View Hackathon Tracks
-  </Button>
-</div>
-
-
+            <div className="text-center mb-6">
+            <Button
+            onClick={() => setIsTracksOpen(true)}
+            className="bg-teal-500 hover:bg-teal-600 text-white"
+            >
+            View Hackathon Tracks
+           </Button>
+           </div>
 
             <p className="text-lg text-isclub-gray max-w-2xl mx-auto">
               Register your team for the most exciting 48-hour hackathon focusing on innovative business solutions.

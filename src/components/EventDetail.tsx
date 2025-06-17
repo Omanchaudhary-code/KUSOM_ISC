@@ -265,10 +265,18 @@ export default function EventDetail({ events }: EventDetailProps) {
                  {
                   name: 'Swiss Timepieces Nepal',
                   type: 'Co-Sponsor',
-                  description: 'Your premier destination for authentic luxury watches, offering curated collections from the world\’s finest Swiss, German, and Japanese brands.',
+                  description: 'Your premier destination for authentic luxury watches, offering curated collections from the world\s finest Swiss, German, and Japanese brands.',
                   logo: 'https://i.imgur.com/r37nMQZ.jpeg',
                   color: 'from-gray-700 to-black-500',
                   website: 'https://swisstimepiecesnepal.com'
+                },
+                 {
+                  name: 'BAW Nepal',
+                  type: 'Mobility Partner',
+                  description: 'Powering Nepal\’s Sustainable Mobility with Innovation, Reliability, and a Vision for a Greener Future.',
+                  logo: 'https://i.imgur.com/iPEylPp.jpeg',
+                  color: 'from-red-800 to-red-950',
+                  website: 'https://www.facebook.com/bawnepal/'
                 },
                 {
                   name: 'Singapore Beverages',
@@ -316,10 +324,19 @@ export default function EventDetail({ events }: EventDetailProps) {
                 {
                   name: 'CSIT(Association of Nepal)',
                   type: 'Community Partner',
-                  description: 'Empowering Innovation and Collaboration in Nepal’s IT Community to Drive Business Solutions.',
+                  description: 'Empowering Innovation and Collaboration in Nepal\’s IT Community to Drive Business Solutions.',
                   logo: 'https://i.imgur.com/mIxMhqK.png',
                   color: 'bg-gradient-to-r from-white via-red-600 to-sky-400',
                   website: 'https://csitan.org.np'
+                },
+               
+                {
+                  name: 'Code For Change',
+                  type: 'Community Partner',
+                  description: 'Driving Social Impact and Innovation through Technology and Collaboration in Nepal\'s Tech Community.',
+                  logo: 'https://i.imgur.com/t1PZIHS.png',
+                  color: 'bg-gradient-to-r from-white via-blue-600 to-blue-900',
+                  website: 'https://codeforchangenepal.com/'
                 },
               ].map((sponsor, index) => (
                 <motion.div 
