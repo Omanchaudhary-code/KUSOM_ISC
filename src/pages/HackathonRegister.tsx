@@ -51,13 +51,12 @@ export default function HackathonRegister() {
 const [isRegistrationClosed, setIsRegistrationClosed] = useState(false);
 
 useEffect(() => {
-  const deadline = new Date();
-  deadline.setDate(deadline.getDate() + 1);
-  deadline.setHours(12, 0, 0, 0); // Tomorrow at 12:00 PM
+  const deadline = new Date('2025-06-19T23:59:59');
 
   const interval = setInterval(() => {
     const now = new Date();
     const diff = deadline.getTime() - now.getTime();
+
 
     if (diff <= 0) {
       setIsRegistrationClosed(true);
