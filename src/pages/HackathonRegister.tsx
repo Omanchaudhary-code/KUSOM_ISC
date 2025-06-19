@@ -42,12 +42,37 @@ export default function HackathonRegister() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [paymentFile, setPaymentFile] = useState<File | null>(null);
   const [teamCount, setTeamCount] = useState<number>(0);
-  const [isRegistrationClosed, setIsRegistrationClosed] = useState(false);
   const [alreadyRegistered, setAlreadyRegistered] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const { toast } = useToast();
   const navigate = useNavigate();
   const [isTracksOpen, setIsTracksOpen] = useState(false);
+  const [timeLeft, setTimeLeft] = useState('');
+const [isRegistrationClosed, setIsRegistrationClosed] = useState(false);
+
+useEffect(() => {
+  const deadline = new Date('2025-06-19T23:59:59');
+
+  const interval = setInterval(() => {
+    const now = new Date();
+    const diff = deadline.getTime() - now.getTime();
+
+
+    if (diff <= 0) {
+      setIsRegistrationClosed(true);
+      setTimeLeft('0h 0m 0s');
+      clearInterval(interval);
+    } else {
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+      setTimeLeft(`${hours}h ${minutes}m ${seconds}s`);
+    }
+  }, 1000);
+
+  return () => clearInterval(interval);
+}, []);
+
 
 
   const form = useForm<RegistrationFormData>({
@@ -356,7 +381,10 @@ export default function HackathonRegister() {
                   Registrations Closed
                 </h1>
                 <p className="text-lg text-isclub-gray mb-4">
-                  Registrations are now closed. All 25 team slots have been filled.
+                  Registrations are now closed. All team slots have been filled.
+                </p>
+                <p className="text-lg text-isclub-gray mb-4">
+                  If you want to reach out. Please contact at: 9840037381
                 </p>
                 <p className="text-isclub-gray">
                   Thank you for your interest in Hack for Business hackathon!
@@ -407,11 +435,17 @@ export default function HackathonRegister() {
                 Hurry! Only {25 - teamCount} slots remaining!
               </p>
             </div> */}
-            <div className="bg-gradient-to-r from-orange-100 to-red-100 border border-orange-200 rounded-lg p-4 mb-6 max-w-md mx-auto">
-              <p className="text-orange-800 font-semibold text-lg">
-              Good news! The deadline has been extended to June 19th.
-              </p>
-            </div>
+           {!isRegistrationClosed && (
+  <div className="bg-gradient-to-r from-orange-100 to-red-100 border border-orange-200 rounded-lg p-4 mb-6 max-w-md mx-auto text-center">
+    <p className="text-orange-800 font-semibold text-lg mb-2">
+      📢 Final Call For Registration
+    </p>
+    <p className="text-orange-700 text-base">
+      Time left to register: <span className="font-mono">{timeLeft}</span>
+    </p>
+  </div>
+)}
+
           
             <div className="text-center mb-6">
             <Button

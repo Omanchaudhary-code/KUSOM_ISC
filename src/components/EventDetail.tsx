@@ -399,6 +399,14 @@ export default function EventDetail({ events }: EventDetailProps) {
                       logo: 'https://i.imgur.com/GnPaM0t.jpeg',
                       color: 'bg-gradient-to-r from-[#B8E3DB] via-[#1C2F49] to-[#0F2740]',
                       website: 'https://aiclub.ku.edu.np'
+                    },
+                    {
+                      name: 'NEC IT Club',
+                      type: 'Community Partner',
+                      description: 'NEC IT Club is dedicated to enhancing skills and empowering technology-driven decision-making.',
+                      logo: 'https://i.imgur.com/J9cjVkI.jpeg',
+                      color: 'bg-gradient-to-r from-white via-red-500 to-black',
+                      website: 'https://www.facebook.com/necITclub1/'
                     }
         ].map((partner, index) => (
           <motion.div 
