@@ -409,7 +409,7 @@ export default function HackathonRegister() {
             </div> */}
             <div className="bg-gradient-to-r from-orange-100 to-red-100 border border-orange-200 rounded-lg p-4 mb-6 max-w-md mx-auto">
               <p className="text-orange-800 font-semibold text-lg">
-              Good news! The deadline has been extended to June 18th.
+              Good news! The deadline has been extended to June 19th.
               </p>
             </div>
           
