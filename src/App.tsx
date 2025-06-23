@@ -15,7 +15,9 @@ import Contact from "./pages/Contact";
 import Register from "./pages/Register";
 import HackathonRegister from "./pages/HackathonRegister";
 import RegisterSuccess from "./pages/RegisterSuccess";
+import RegistrationPage from "./pages/RegistrationPage";
 import NotFound from "./pages/NotFound";
+import TeamSubmissionPage from "./pages/TeamSubmissionPage";
 
 const queryClient = new QueryClient();
 
@@ -48,7 +50,9 @@ const App = () => (
           <Route path="/team" element={<Team />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/register" element={<HackathonRegister />} />
+          <Route path="/register/participant" element={<RegistrationPage />} />
           <Route path="/register-success" element={<RegisterSuccess />} />
+          <Route path="/team-submission" element={<TeamSubmissionPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

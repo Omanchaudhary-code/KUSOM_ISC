@@ -1,16 +1,26 @@
-
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Terminal, Code, CircuitBoard, Cpu, Database, Zap, Rocket, Brain } from 'lucide-react';
+import { Terminal, Code, CircuitBoard, Cpu, Database, Zap, Rocket, Brain, Github } from 'lucide-react';
+import TeamSubmissionModal from './TeamSubmissionModal';
 import { cn } from '@/lib/utils';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import EventCountdown from './EventCountdown';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { supabase } from '@/integrations/supabase/client';
+
 
 export default function HeroSection() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   const navigate = useNavigate();
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 500], [0, 150]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+
+   
+
 
   // Tech particles data
   const techParticles = [
@@ -32,7 +42,11 @@ export default function HeroSection() {
     };
   }, []);
 
+
+  
+
   return (
+    
     <motion.section 
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 xl:px-12 pt-16 md:pt-20 pb-8"
       initial={{ opacity: 0, y: 100 }}
@@ -250,85 +264,38 @@ export default function HeroSection() {
             <EventCountdown />
           </motion.div>
 
-          {/* Enhanced Register Button - Made more prominent with improved mobile spacing */}
-          <motion.div
+          {/* Team Submission Button */}
+          <motion.div 
+            className="flex justify-center pt-8 md:pt-10"
             initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.6 }}
-            className="pt-8 md:pt-10"
           >
-            <motion.button
-              className={cn(
-                // "relative rounded-lg tech-gradient text-white font-bold",
-                // "transition-all duration-300 transform overflow-hidden",
-                // "shadow-2xl hover:shadow-3xl border border-white/30",
-                // "focus:outline-none focus:ring-4 focus:ring-isclub-teal/30",
-                // "backdrop-blur-sm px-10 py-5 sm:px-12 sm:py-6 md:px-16 md:py-7",
-                // "text-lg sm:text-xl md:text-2xl tracking-wide"
-              )}
-              whileHover={{ 
-                scale: 1.08,
-                y: -6,
-                boxShadow: "0 25px 50px rgba(20, 184, 166, 0.5)",
-                transition: { type: "spring", stiffness: 300, damping: 10 }
-              }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => navigate('/register')}
-            >
+            {/* Team Submission Button */}
+            <Link to="/team-submission" className="block">
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent"
-                animate={{
-                  x: ['-100%', '100%'],
+                className={cn(
+                  "relative rounded-lg px-6 py-4 text-lg font-medium cursor-pointer",
+                  "bg-white text-gray-800 border border-gray-200 hover:bg-gray-50",
+                  "shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
+                )}
+                whileHover={{ 
+                  scale: 1.02,
+                  y: -2,
+                  boxShadow: "0 15px 30px rgba(0, 0, 0, 0.1)",
                 }}
-                transition={{
-                  duration: 2.5,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-              />
-
-              
-              {/* Enhanced animated border */}
-              <motion.div
-                className="absolute inset-0 rounded-lg"
-                style={{
-                  background: 'linear-gradient(45deg, transparent, rgba(255,255,255,0.15), transparent)',
-                }}
-                animate={{
-                  rotate: [0, 360],
-                }}
-                transition={{
-                  duration: 6,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-              />
-            </motion.button>
+                whileTap={{ scale: 0.98 }}
+              >
+                <Github className="w-5 h-5" />
+                Team Submission
+              </motion.div>
+            </Link>
           </motion.div>
         </motion.div>
+
+        {/* Team Submission Modal */}
+        <TeamSubmissionModal isOpen={isModalOpen} onClose={closeModal} />
       </div>
-
-      {/* Enhanced scroll indicator - Hidden on mobile */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 hidden md:block"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 2.5, duration: 1 }}
-      >
-        <motion.div
-          animate={{
-            y: [0, 12, 0],
-          }}
-          transition={{
-            duration: 2.5,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="flex flex-col items-center space-y-2 text-isclub-gray/70"
-        >
-
-        </motion.div>
-      </motion.div>
     </motion.section>
   );
 }
