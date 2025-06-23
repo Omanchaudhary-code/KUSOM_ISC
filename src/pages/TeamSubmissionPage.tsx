@@ -39,7 +39,7 @@ export default function TeamSubmissionPage() {
   startTime.setHours(9, 30, 0, 0);
   
   const endTime = new Date();
-  endTime.setHours(10, 0, 0, 0);
+  endTime.setHours(10, 30, 0, 0);
 
   // Update current time every second
   useEffect(() => {
