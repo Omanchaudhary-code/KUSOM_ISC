@@ -1,19 +1,13 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Terminal, Code, CircuitBoard, Cpu, Database, Zap, Rocket, Brain, Github } from 'lucide-react';
-import TeamSubmissionModal from './TeamSubmissionModal';
+import { Terminal, Code, CircuitBoard, Cpu, Database, Zap, Rocket, Brain } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import EventCountdown from './EventCountdown';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 
 
 export default function HeroSection() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
-
   const navigate = useNavigate();
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 500], [0, 150]);
@@ -254,47 +248,9 @@ export default function HeroSection() {
             A hub for students eager to explore the vast world of computing, design, coding, and web development.
           </motion.p>
 
-          {/* Event Countdown with enhanced container and mobile spacing */}
-          <motion.div
-            initial={{ opacity: 0, y: 60 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 1.4 }}
-            className="py-6 sm:py-8 lg:py-10 mb-8 md:mb-10"
-          >
-            <EventCountdown />
-          </motion.div>
 
-          {/* Team Submission Button */}
-          <motion.div 
-            className="flex justify-center pt-8 md:pt-10"
-            initial={{ opacity: 0, y: 60 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 1.6 }}
-          >
-            {/* Team Submission Button */}
-            <Link to="/team-submission" className="block">
-              <motion.div
-                className={cn(
-                  "relative rounded-lg px-6 py-4 text-lg font-medium cursor-pointer",
-                  "bg-white text-gray-800 border border-gray-200 hover:bg-gray-50",
-                  "shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
-                )}
-                whileHover={{ 
-                  scale: 1.02,
-                  y: -2,
-                  boxShadow: "0 15px 30px rgba(0, 0, 0, 0.1)",
-                }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <Github className="w-5 h-5" />
-                Team Submission
-              </motion.div>
-            </Link>
-          </motion.div>
+
         </motion.div>
-
-        {/* Team Submission Modal */}
-        <TeamSubmissionModal isOpen={isModalOpen} onClose={closeModal} />
       </div>
     </motion.section>
   );
