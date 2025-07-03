@@ -5,6 +5,7 @@ import HeroSection from '@/components/HeroSection';
 import Footer from '@/components/Footer';
 import BriefAbout from '@/components/BriefAbout';
 import WorkshopHighlight from '@/components/WorkshopHighlight';
+import HackathonParticipants from '@/components/HackathonParticipants';
 
 const Index = () => {
   useEffect(() => {
@@ -21,6 +22,7 @@ const Index = () => {
         <HeroSection />
         <BriefAbout />
         <WorkshopHighlight />
+        <HackathonParticipants />
       </main>
       <Footer />
     </div>
