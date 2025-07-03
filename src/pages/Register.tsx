@@ -29,6 +29,11 @@ const registrationSchema = z.object({
   team_name: z.string().min(2, 'Team name must be at least 2 characters'),
   team_size: z.number().min(1).max(5, 'Team size must be between 1 and 5'),
   participants: z.array(participantSchema).min(1).max(5),
+  payment_receipt: z.instanceof(File, { message: 'Payment receipt is required' }),
+  project_idea: z.string().min(10, 'Project idea must be at least 10 characters'),
+  college_name: z.string().min(2, 'College name is required'),
+  affiliated_university: z.string().min(2, 'Affiliated university is required'),
+  alternate_contact: z.string().min(10, 'Alternate contact is required'),
 });
 
 type RegistrationFormData = z.infer<typeof registrationSchema>;
@@ -53,6 +58,10 @@ export default function Register() {
           dietary_preference: 'Vegetarian',
         },
       ],
+      project_idea: '',
+      college_name: '',
+      affiliated_university: '',
+      alternate_contact: '',
     },
   });
 
@@ -93,45 +102,64 @@ export default function Register() {
     console.log('Form Data:', data);
     
     try {
-      // First insert into teams table
-      const { data: team, error: teamError } = await supabase
-        .from('teams')
-        .insert([{ 
-          team_name: data.team_name, 
-          team_size: data.team_size 
-        }])
-        .select()
-        .single();
+      // Upload payment receipt first
+      const fileExt = data.payment_receipt.name.split('.').pop();
+      const fileName = `${data.team_name}-${Date.now()}.${fileExt}`;
+      
+      console.log('Uploading payment receipt:', fileName);
+      const { data: uploadData, error: uploadError } = await supabase.storage
+        .from('payment-receipts')
+        .upload(fileName, data.payment_receipt);
 
-      if (teamError) {
-        console.error('Team insertion error:', teamError);
-        throw new Error('Failed to create team');
+      if (uploadError) {
+        console.error('Upload error:', uploadError);
+        throw new Error(`Failed to upload payment receipt: ${uploadError.message}`);
       }
 
-      console.log('Team created:', team);
+      console.log('Payment receipt uploaded successfully:', uploadData);
 
-      // Insert participants with team_id
-      const participantsWithTeamId = data.participants.map(participant => ({
-        team_id: team.id,
-        full_name: participant.full_name,
-        email: participant.email,
-        phone: participant.phone,
-        college: participant.college,
-        year_of_study: participant.year_of_study,
-        major: participant.major,
-        dietary_preference: participant.dietary_preference,
-      }));
+      // Get the public URL for the uploaded file
+      const { data: { publicUrl } } = supabase.storage
+        .from('payment-receipts')
+        .getPublicUrl(fileName);
 
-      const { error: participantError } = await supabase
-        .from('participants')
-        .insert(participantsWithTeamId);
+      console.log('Payment receipt URL:', publicUrl);
 
-      if (participantError) {
-        console.error('Participant insertion error:', participantError);
-        throw new Error('Failed to register participants');
+      // Count vegetarian participants
+      const vegetarianCount = data.participants.filter(p => p.dietary_preference === 'Vegetarian').length;
+
+      // Prepare registration data for the registrations table
+      const leader = data.participants[0]; // First participant is the leader
+      const registrationData = {
+        team_name: data.team_name,
+        team_size: data.team_size,
+        leader_name: leader.full_name,
+        leader_email: leader.email,
+        leader_phone: leader.phone,
+        college_name: data.college_name,
+        affiliated_university: data.affiliated_university,
+        alternate_contact: data.alternate_contact,
+        project_idea: data.project_idea,
+        payment_receipt_url: publicUrl,
+        vegetarian_count: vegetarianCount > 0 ? vegetarianCount : null,
+        team_member_1: data.participants[1]?.full_name || null,
+        team_member_2: data.participants[2]?.full_name || null,
+        team_member_3: data.participants[3]?.full_name || null,
+      };
+
+      console.log('Inserting registration data:', registrationData);
+
+      // Insert registration data
+      const { error: registrationError } = await supabase
+        .from('registrations')
+        .insert([registrationData]);
+
+      if (registrationError) {
+        console.error('Registration insertion error:', registrationError);
+        throw new Error(`Failed to register team: ${registrationError.message}`);
       }
 
-      console.log('Participants registered successfully');
+      console.log('Registration completed successfully');
       
       toast({
         title: "Registration Successful!",
@@ -144,7 +172,7 @@ export default function Register() {
       console.error('Registration error:', error);
       toast({
         title: "Registration Failed",
-        description: "There was an error submitting your registration. Please try again.",
+        description: error instanceof Error ? error.message : "There was an error submitting your registration. Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -232,7 +260,89 @@ export default function Register() {
                         </FormItem>
                       )}
                     />
+
+                    <FormField
+                      control={form.control}
+                      name="college_name"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>College Name</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Enter college name" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="affiliated_university"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Affiliated University</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Enter affiliated university" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="alternate_contact"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Alternate Contact</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Enter alternate contact number" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="payment_receipt"
+                      render={({ field: { onChange, value, ...field } }) => (
+                        <FormItem>
+                          <FormLabel>Payment Receipt</FormLabel>
+                          <FormControl>
+                            <Input
+                              type="file"
+                              accept="image/*,application/pdf"
+                              onChange={(e) => {
+                                const file = e.target.files?.[0];
+                                if (file) onChange(file);
+                              }}
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
                   </div>
+
+                  <FormField
+                    control={form.control}
+                    name="project_idea"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Project Idea</FormLabel>
+                        <FormControl>
+                          <textarea
+                            className="w-full min-h-[100px] px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-isclub-teal"
+                            placeholder="Describe your project idea..."
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </div>
 
                 {/* Participants Section */}
