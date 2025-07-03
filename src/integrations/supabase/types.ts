@@ -11,47 +11,24 @@ export type Database = {
     Tables: {
       participants: {
         Row: {
-          college: string | null
-          dietary_preference: string | null
-          email: string | null
-          full_name: string | null
-          id: number
-          major: string | null
-          phone: string | null
-          team_id: number | null
-          year_of_study: string | null
+          created_at: string | null
+          github_repo: string | null
+          id: string
+          team_name: string | null
         }
         Insert: {
-          college?: string | null
-          dietary_preference?: string | null
-          email?: string | null
-          full_name?: string | null
-          id?: number
-          major?: string | null
-          phone?: string | null
-          team_id?: number | null
-          year_of_study?: string | null
+          created_at?: string | null
+          github_repo?: string | null
+          id?: string
+          team_name?: string | null
         }
         Update: {
-          college?: string | null
-          dietary_preference?: string | null
-          email?: string | null
-          full_name?: string | null
-          id?: number
-          major?: string | null
-          phone?: string | null
-          team_id?: number | null
-          year_of_study?: string | null
+          created_at?: string | null
+          github_repo?: string | null
+          id?: string
+          team_name?: string | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "participants_team_id_fkey"
-            columns: ["team_id"]
-            isOneToOne: false
-            referencedRelation: "teams"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
       registrations: {
         Row: {

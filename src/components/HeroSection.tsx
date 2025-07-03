@@ -1,10 +1,12 @@
+
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Terminal, Code, CircuitBoard, Cpu, Database, Zap, Rocket, Brain } from 'lucide-react';
+import { Terminal, Code, CircuitBoard, Cpu, Database, Zap, Rocket, Brain, ArrowRight, Calendar, Users } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useNavigate } from 'react-router-dom';
 import EventCountdown from './EventCountdown';
 import { useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
+import { Button } from '@/components/ui/button';
 
 export default function HeroSection() {
   const navigate = useNavigate();
@@ -126,54 +128,142 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Content wrapper — animated Y applied here instead of section */}
+      {/* Main Content Container with Glassmorphism */}
       <motion.div
-        className="container mx-auto max-w-7xl z-10 w-full text-center space-y-6 sm:space-y-8 lg:space-y-10"
+        className="container mx-auto max-w-6xl z-10 w-full"
         style={{ y, opacity }}
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.5, ease: "easeOut" }}
       >
-        <div className="space-y-4 md:space-y-6">
-          <motion.h1
-            className="font-display font-bold text-isclub-dark leading-tight"
-            style={{
-              fontSize: 'clamp(2.5rem, 8vw, 6rem)',
-              lineHeight: 'clamp(3rem, 9vw, 6.5rem)'
-            }}
-          >
-            <motion.span
-              className="block mb-2 sm:mb-4"
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
-            >
-              Explore. Create.
-            </motion.span>
-            <motion.span
-              className="bg-gradient-to-r from-isclub-teal to-isclub-cyan bg-clip-text text-transparent"
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 1, ease: "easeOut" }}
-              whileHover={{ scale: 1.02, transition: { type: "spring", stiffness: 300, damping: 10 } }}
-            >
-              Innovate.
-            </motion.span>
-          </motion.h1>
-        </div>
-
-        <motion.p
-          className="text-isclub-gray max-w-4xl mx-auto px-4 leading-relaxed mb-6 md:mb-8"
-          style={{
-            fontSize: 'clamp(1rem, 2.5vw, 1.25rem)',
-            lineHeight: 'clamp(1.5rem, 3vw, 1.75rem)'
-          }}
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1.2 }}
+        {/* Hero Content Card */}
+        <motion.div
+          className="relative backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl p-8 sm:p-12 lg:p-16 shadow-2xl"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.2, delay: 0.3 }}
         >
-          A hub for students eager to explore the vast world of computing, design, coding, and web development.
-        </motion.p>
+          {/* Subtle gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-isclub-teal/5 rounded-3xl"></div>
+          
+          {/* Content */}
+          <div className="relative z-10 text-center space-y-8">
+            {/* Main Headline */}
+            <div className="space-y-4 md:space-y-6">
+              <motion.h1
+                className="font-display font-bold text-isclub-dark leading-tight"
+                style={{
+                  fontSize: 'clamp(2.5rem, 8vw, 5.5rem)',
+                  lineHeight: 'clamp(3rem, 9vw, 6rem)'
+                }}
+              >
+                <motion.span
+                  className="block mb-2 sm:mb-4"
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
+                >
+                  Explore. Create.
+                </motion.span>
+                <motion.span
+                  className="bg-gradient-to-r from-isclub-teal to-isclub-cyan bg-clip-text text-transparent"
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1, delay: 1, ease: "easeOut" }}
+                  whileHover={{ scale: 1.02, transition: { type: "spring", stiffness: 300, damping: 10 } }}
+                >
+                  Innovate.
+                </motion.span>
+              </motion.h1>
+            </div>
+
+            {/* Subtitle */}
+            <motion.p
+              className="text-isclub-gray max-w-3xl mx-auto leading-relaxed"
+              style={{
+                fontSize: 'clamp(1.1rem, 2.5vw, 1.4rem)',
+                lineHeight: 'clamp(1.6rem, 3vw, 2rem)'
+              }}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 1.2 }}
+            >
+              A hub for students eager to explore the vast world of computing, design, coding, and web development.
+            </motion.p>
+
+            {/* CTA Buttons */}
+            <motion.div
+              className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mt-8"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 1.4 }}
+            >
+              {/* Primary CTA */}
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button
+                  onClick={() => navigate('/events')}
+                  className="group relative bg-gradient-to-r from-isclub-teal to-isclub-cyan hover:from-isclub-teal/90 hover:to-isclub-cyan/90 text-white font-semibold px-8 py-4 text-lg rounded-xl shadow-lg transition-all duration-300 overflow-hidden"
+                >
+                  <span className="relative z-10 flex items-center gap-2">
+                    <Calendar className="w-5 h-5" />
+                    Join Our Events
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </Button>
+              </motion.div>
+
+              {/* Secondary CTA */}
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button
+                  onClick={() => navigate('/about')}
+                  variant="outline"
+                  className="group bg-white/20 hover:bg-white/30 backdrop-blur-sm border-2 border-white/30 hover:border-white/50 text-isclub-dark font-semibold px-8 py-4 text-lg rounded-xl transition-all duration-300"
+                >
+                  <span className="flex items-center gap-2">
+                    <Users className="w-5 h-5" />
+                    Learn More
+                  </span>
+                </Button>
+              </motion.div>
+            </motion.div>
+
+            {/* Stats or Features */}
+            <motion.div
+              className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 mt-12 pt-8 border-t border-white/20"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 1.6 }}
+            >
+              {[
+                { icon: Code, label: "Coding Workshops", value: "Weekly" },
+                { icon: Users, label: "Active Members", value: "200+" },
+                { icon: Rocket, label: "Projects Built", value: "50+" }
+              ].map((stat, index) => (
+                <motion.div
+                  key={index}
+                  className="text-center space-y-2"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 10 }}
+                >
+                  <div className="flex justify-center">
+                    <div className="p-3 rounded-full bg-gradient-to-r from-isclub-teal/20 to-isclub-cyan/20 backdrop-blur-sm">
+                      <stat.icon className="w-6 h-6 text-isclub-teal" />
+                    </div>
+                  </div>
+                  <div className="text-2xl font-bold text-isclub-dark">{stat.value}</div>
+                  <div className="text-sm text-isclub-gray font-medium">{stat.label}</div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </motion.div>
       </motion.div>
     </section>
   );
