@@ -185,14 +185,14 @@ export default function HackathonParticipants() {
               <div className="mb-4">
                 <Sparkles className="w-8 h-8 mx-auto text-isclub-teal mb-3" />
                 <h3 className="text-xl sm:text-2xl font-bold text-isclub-navy mb-4 font-mono">
-                  🎉 Kudos to All Teams!
+                   Kudos to All Teams!
                 </h3>
               </div>
               <p className="text-gray-700 leading-relaxed max-w-4xl mx-auto text-sm sm:text-base lg:text-lg">
                 Your innovation and passion were inspiring throughout the <strong className="text-isclub-teal">Hack for Business</strong> event. 
                 Even if you didn't take home the trophy this time, you've already won experience and impact. 
                 Keep building, keep solving, and see you at the next hackathon!
-                <span className="font-semibold text-isclub-teal"> 💪🚀</span>
+                <span className="font-semibold text-isclub-teal"> </span>
               </p>
               <div className="mt-6 flex justify-center">
                 <Badge variant="outline" className="bg-white/50 text-isclub-navy border-isclub-teal/30 px-4 py-2 text-sm font-mono">

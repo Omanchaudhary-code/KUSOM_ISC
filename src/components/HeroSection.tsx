@@ -202,9 +202,9 @@ export default function HeroSection() {
             transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
           >
             {[
-              { icon: Code, label: "Coding Workshops", value: "Weekly" },
-              { icon: Users, label: "Active Members", value: "200+" },
-              { icon: Rocket, label: "Projects Built", value: "50+" }
+              { icon: Code, label: "Coding Workshops", value: "Monthly" },
+              { icon: Users, label: "Active Members", value: "20+" },
+              { icon: Rocket, label: "Events Planned", value: "10+" }
             ].map((stat, index) => (
               <div key={`stat-${index}`} className="text-center space-y-4">
                 <div className="flex justify-center">
