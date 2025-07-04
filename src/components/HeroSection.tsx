@@ -254,7 +254,7 @@ export default function HeroSection() {
               {[
                 { icon: Code, label: "Coding Workshops", value: "Monthly" },
                 { icon: Users, label: "Active Members", value: "20+" },
-                { icon: Rocket, label: "Planned Events for This Term", value: "10+" }
+                { icon: Rocket, label: "Planned Events", value: "10+" }
               ].map((stat, index) => (
                 <div key={`stat-desktop-${index}`} className="text-center space-y-4">
                   <div className="flex justify-center">
