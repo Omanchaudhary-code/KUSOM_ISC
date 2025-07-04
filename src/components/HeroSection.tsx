@@ -171,27 +171,52 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
           >
-            <Button
-              onClick={() => navigate('/events')}
-              className="group relative bg-gradient-to-r from-isclub-teal to-isclub-cyan hover:from-isclub-teal/90 hover:to-isclub-cyan/90 text-white font-semibold px-8 py-4 text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 border-0"
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
-              <span className="flex items-center gap-2">
-                <Calendar className="w-5 h-5" />
-                Join Our Events
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" />
-              </span>
-            </Button>
+              <Button
+                onClick={() => navigate('/events')}
+                className="group relative overflow-hidden bg-gradient-to-r from-isclub-teal via-isclub-cyan to-isclub-teal bg-size-200 hover:bg-pos-100 text-white font-bold px-10 py-5 text-lg rounded-2xl shadow-2xl hover:shadow-isclub-teal/30 transition-all duration-300 border-0 min-w-[200px]"
+                style={{
+                  backgroundSize: '200% 100%',
+                  backgroundPosition: '0% 0%'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundPosition = '100% 0%';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundPosition = '0% 0%';
+                }}
+              >
+                <span className="relative z-10 flex items-center gap-3">
+                  <Calendar className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
+                  Join Our Events
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+              </Button>
+            </motion.div>
 
-            <Button
-              onClick={() => navigate('/about')}
-              variant="outline"
-              className="bg-white/80 hover:bg-white/90 backdrop-blur-sm border-2 border-isclub-gray/20 hover:border-isclub-teal/30 text-isclub-dark font-semibold px-8 py-4 text-lg rounded-xl shadow-md hover:shadow-lg transition-all duration-200"
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
-              <span className="flex items-center gap-2">
-                <Users className="w-5 h-5" />
-                Learn More
-              </span>
-            </Button>
+              <Button
+                onClick={() => navigate('/about')}
+                variant="outline"
+                className="group relative overflow-hidden bg-white/95 hover:bg-white backdrop-blur-lg border-2 border-isclub-teal/30 hover:border-isclub-teal text-isclub-dark hover:text-isclub-teal font-bold px-10 py-5 text-lg rounded-2xl shadow-xl hover:shadow-2xl hover:shadow-isclub-teal/20 transition-all duration-300 min-w-[200px]"
+              >
+                <span className="relative z-10 flex items-center gap-3">
+                  <Users className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
+                  Learn More
+                  <ArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300" />
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-isclub-teal/0 via-isclub-teal/5 to-isclub-teal/0 translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300"></div>
+              </Button>
+            </motion.div>
           </motion.div>
 
           {/* Statistics Grid - Mobile Optimized */}
