@@ -176,29 +176,6 @@ export default function Navbar() {
                 </motion.div>
               ))}
               
-              {/* Mobile Register Link */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, delay: navItems.length * 0.1 }}
-              >
-                <button
-                  onClick={() => {
-                    navigate('/register');
-                    setIsOpen(false);
-                  }}
-                  className="w-full flex items-center space-x-3 p-3 sm:p-4 text-base font-semibold text-white bg-gradient-to-r from-isclub-teal to-isclub-cyan hover:from-isclub-teal/90 hover:to-isclub-cyan/90 transition-all duration-300 rounded-lg shadow-lg"
-                >
-                  <motion.span
-                    className="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/20 transition-all duration-300"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <UserPlus className="w-5 h-5" />
-                  </motion.span>
-                  <span className="font-semibold">Register for Event</span>
-                </button>
-              </motion.div>
             </div>
           </motion.div>
         )}

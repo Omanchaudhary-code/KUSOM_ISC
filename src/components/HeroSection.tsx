@@ -194,30 +194,56 @@ export default function HeroSection() {
             </Button>
           </motion.div>
 
-          {/* Statistics Grid */}
+          {/* Statistics Grid - Mobile Optimized */}
           <motion.div 
-            className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-12 mt-16 pt-12 border-t border-isclub-gray/20"
+            className="mt-12 pt-8 border-t border-isclub-gray/20"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
           >
-            {[
-              { icon: Code, label: "Coding Workshops", value: "Monthly" },
-              { icon: Users, label: "Active Members", value: "20+" },
-              { icon: Rocket, label: "Planned Events for This Term", value: "10+" }
-            ].map((stat, index) => (
-              <div key={`stat-${index}`} className="text-center space-y-4">
-                <div className="flex justify-center">
-                  <div className="p-4 rounded-2xl bg-gradient-to-br from-isclub-teal/10 to-isclub-cyan/10 border border-isclub-teal/20">
-                    <stat.icon className="w-8 h-8 text-isclub-teal" />
+            {/* Mobile: Horizontal scroll, Desktop: Grid */}
+            <div className="block sm:hidden">
+              <div className="flex gap-4 overflow-x-auto pb-4 px-2 snap-x snap-mandatory">
+                {[
+                  { icon: Code, label: "Coding Workshops", value: "Monthly" },
+                  { icon: Users, label: "Active Members", value: "20+" },
+                  { icon: Rocket, label: "Planned Events", value: "10+" }
+                ].map((stat, index) => (
+                  <div key={`stat-mobile-${index}`} className="flex-shrink-0 w-48 text-center space-y-3 snap-center">
+                    <div className="flex justify-center">
+                      <div className="p-3 rounded-xl bg-gradient-to-br from-isclub-teal/10 to-isclub-cyan/10 border border-isclub-teal/20">
+                        <stat.icon className="w-6 h-6 text-isclub-teal" />
+                      </div>
+                    </div>
+                    <div className="space-y-1">
+                      <div className="text-2xl font-bold text-isclub-dark">{stat.value}</div>
+                      <div className="text-sm text-isclub-gray font-medium leading-tight">{stat.label}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Desktop: Grid layout */}
+            <div className="hidden sm:grid grid-cols-3 gap-8 lg:gap-12">
+              {[
+                { icon: Code, label: "Coding Workshops", value: "Monthly" },
+                { icon: Users, label: "Active Members", value: "20+" },
+                { icon: Rocket, label: "Planned Events for This Term", value: "10+" }
+              ].map((stat, index) => (
+                <div key={`stat-desktop-${index}`} className="text-center space-y-4">
+                  <div className="flex justify-center">
+                    <div className="p-4 rounded-2xl bg-gradient-to-br from-isclub-teal/10 to-isclub-cyan/10 border border-isclub-teal/20">
+                      <stat.icon className="w-8 h-8 text-isclub-teal" />
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="text-3xl font-bold text-isclub-dark">{stat.value}</div>
+                    <div className="text-isclub-gray font-medium">{stat.label}</div>
                   </div>
                 </div>
-                <div className="space-y-2">
-                  <div className="text-3xl font-bold text-isclub-dark">{stat.value}</div>
-                  <div className="text-isclub-gray font-medium">{stat.label}</div>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </motion.div>
 
         </div>
